@@ -33,6 +33,7 @@ const Wrapper = styled.header<{ $superHeader: boolean }>`
 
   @media ${QUERIES.phoneAndSmaller} {
     --top: ${(props) => (props.$superHeader ? -42 + "px" : 0)};
+
     top: var(--top);
   }
 `;
