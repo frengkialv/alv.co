@@ -54,7 +54,7 @@ export const CLOTHINGS = [
     releaseDate: subDays(new Date(), 10),
   },
   {
-    slug: "gradient-graphic-t-shirt",
+    slug: "detail",
     name: "Gradient Graphic T-shirt",
     imgSrc: "/assets/gradient-graphic-t-shirt.png",
     price: 145,

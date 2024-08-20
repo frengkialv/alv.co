@@ -13,13 +13,13 @@ export default function Home() {
   const router = useRouter();
   return (
     <Wrapper>
-      <Header />
+      {/* <Header /> */}
       <MarketingContent />
       <LogoBrand />
       <NewArrival />
       <TopSelling />
       <Carousel />
-      <Footer />
+      {/* <Footer /> */}
     </Wrapper>
   );
 }
