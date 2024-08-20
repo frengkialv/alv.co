@@ -28,7 +28,7 @@ function NavigationContent() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>
             <WrapperShopLink href="/shop">
-              Shop <Icon id="chevron-down" strokeWidth={1.5} />
+              Shop <ChevronIcon id="chevron-down" strokeWidth={1.5} />
             </WrapperShopLink>
           </NavigationMenuTrigger>
 
@@ -96,11 +96,29 @@ const NavigationMenuItem = styled(NavigationMenu.Item)`
   position: relative;
 `;
 
+const ChevronIcon = styled(Icon)`
+  @media (prefers-reduced-motion: no-preference) {
+    transition: 300ms;
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    transition: none;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    transition: none;
+  }
+`;
+
 const NavigationMenuTrigger = styled(NavigationMenu.Trigger)`
   outline: none;
   border: none;
   user-select: none;
   background-color: transparent;
+
+  &[data-state="open"] ${ChevronIcon} {
+    transform: rotate(180deg);
+  }
 `;
 
 const NavigationMenuContent = styled(NavigationMenu.Content)`
@@ -137,6 +155,7 @@ const LinkDropdown = styled(Link)`
   color: var(--color-black);
   font-weight: ${WEIGHT.medium};
   text-decoration: none;
+  user-select: none;
 `;
 
 const LinkWrapper = styled(Link)`
@@ -144,6 +163,7 @@ const LinkWrapper = styled(Link)`
   font-weight: ${WEIGHT["medium"]};
   position: relative;
   transition: 0.4s;
+  user-select: none;
 
   @media (prefers-reduced-motion: no-preference) {
     &::after {
