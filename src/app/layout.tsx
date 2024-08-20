@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
+"use client";
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import StyledComponentsRegistry from "../components/StyledComponentRegisty";
 import "./globals.css";
+import Header from "../components/Header";
+import Footer from "@/components/Footer";
+import styled from "styled-components";
 
-export const metadata: Metadata = {
-  title: "Alv Shop",
-};
+// export const metadata: Metadata = {
+//   title: "Alv Shop",
+// };
 
 const satoshi = localFont({
   src: [
@@ -76,8 +80,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.className} ${integral_cf.variable}`}>
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <Wrapper>
+            <Header />
+            {children}
+            <Footer />
+          </Wrapper>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
 }
+
+const Wrapper = styled.div`
+  isolation: isolate;
+`;
