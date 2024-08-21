@@ -29,6 +29,7 @@ html {
   */
   --color-black: hsl(0, 0%, 0%);
   --color-white: hsl(0, 0%, 100%);
+  --color-white-blur: rgb(255 255 255 / 0.8);
   --color-snow-flake: hsl(0, 0%, 94.12%); /* #F0F0F0 */
   --color-pearls: hsl(330, 7%, 95%); /* #F2F0F1 */
   --color-perfect-white: hsl(20, 9%, 94%); /* #F0EEED */
@@ -37,7 +38,7 @@ html {
   --color-gray-400: hsl(0, 0%, 60%);
   --color-gray-600: hsl(0, 0%, 27%);
   --color-gray-900: hsl(0, 0%, 94%);
-  --color-backdrop: hsl(220deg 5% 40% / 0.9);
+  --color-backdrop: rgba(0, 0, 0, 0.3);
   --color-yellow: hsl(43, 100%, 60%);
   --color-red: hsl(0, 100%, 60%);
   --color-soft-pink: hsl(0, 100%, 96%);

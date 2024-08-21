@@ -4,6 +4,11 @@ export interface SVGProps {
   color?: string;
 }
 
+export interface OptionsType {
+  value: string;
+  label: string;
+}
+
 export enum Size {
   SMALL = "Small",
   MEDIUM = "Medium",

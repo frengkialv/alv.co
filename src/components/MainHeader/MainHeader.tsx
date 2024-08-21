@@ -50,7 +50,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 40px;
-  background-color: var(--color-white);
+  background-color: var(--color-white-blur);
+  backdrop-filter: blur(4px);
   padding: 20px clamp(1rem, 14vw - 5rem, 6.25rem);
 
   @media ${QUERIES.phoneAndSmaller} {

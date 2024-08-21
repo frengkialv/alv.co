@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Mail,
   Twitter,
+  Scissors,
 } from "react-feather";
 
 const icons = {
@@ -26,6 +27,7 @@ const icons = {
   "arrow-right": ArrowRight,
   email: Mail,
   twitter: Twitter,
+  scissors: Scissors,
 };
 
 function Icon({

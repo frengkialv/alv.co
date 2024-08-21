@@ -13,7 +13,7 @@ function SuperHeader({ handleShowSuperHeader }: SuperHeaderProps) {
     <Wrapper>
       <Filler />
       <MarketingMassage>
-        Sign up and get 20% off to your first order. <Link>Sign Up Now</Link>
+        Extra 20% Off + 5% Cashback to Your First Order.
       </MarketingMassage>
 
       <WrapperButton>
@@ -70,6 +70,8 @@ const Wrapper = styled.div`
 `;
 
 const MarketingMassage = styled.div`
+  user-select: none;
+
   @media ${QUERIES.phoneAndSmaller} {
     font-size: 12px;
   }
