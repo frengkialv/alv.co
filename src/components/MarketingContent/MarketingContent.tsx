@@ -56,12 +56,4 @@ const ImageWrapper = styled(Image)`
   object-position: center top;
 `;
 
-const WrapperTriangle = styled.div`
-  display: none;
-  @media ${QUERIES.phoneAndSmaller} {
-    display: revert;
-    position: absolute;
-  }
-`;
-
 export default MarketingContent;

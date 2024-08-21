@@ -34,7 +34,7 @@ function BreadCrumbs() {
 }
 
 const BreadcrumbList = styled.ol`
-  padding: 20px 0;
+  padding: 20px 0 30px 0;
   margin: 0;
   list-style-type: none;
   border-top: 1px solid #dad8d8;

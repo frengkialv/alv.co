@@ -7,74 +7,71 @@ import FooterInformation from "../FooterInformation";
 import ReservedFooter from "../ReservedFooter";
 
 function Footer() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [subscriberWrapperHeight, setSubscriberWrapperHeight] = useState<
-    number | undefined
-  >(undefined);
-
-  const handlerSubscriberWrapperHeightt = () => {
-    if (ref.current) {
-      setSubscriberWrapperHeight(ref.current.offsetHeight);
-    }
-  };
+  const [subscriberWrapperHeight, setSubscriberWrapperHeight] =
+    useState<number>(0);
 
   useEffect(() => {
     // Call handler right away so state gets updated with initial window size
     handlerSubscriberWrapperHeightt();
 
+    function handlerSubscriberWrapperHeightt() {
+      const displayHeight =
+        document.querySelector(".subscribe-wrapper")?.clientHeight;
+
+      if (displayHeight && !isNaN(displayHeight)) {
+        setSubscriberWrapperHeight(displayHeight);
+      }
+    }
     // Add event listener
-    window.addEventListener("sizeHeight", handlerSubscriberWrapperHeightt);
+    window.addEventListener("resize", handlerSubscriberWrapperHeightt);
 
     // Remove event listener on cleanup
-    return () =>
-      window.removeEventListener("sizeHeight", handlerSubscriberWrapperHeightt);
-  });
+    return () => {
+      window.removeEventListener("resize", handlerSubscriberWrapperHeightt);
+    };
+  }, []);
 
   return (
-    <>
-      <Spacer size={180} />
-      <Wrapper $height={subscriberWrapperHeight}>
-        <SubscribeWrapper ref={ref}>
-          <SubscribeText>STAY UP TO DATE ABOUT OUR LATEST OFFERS</SubscribeText>
+    <Wrapper $height={subscriberWrapperHeight}>
+      <SubscribeWrapper className="subscribe-wrapper">
+        <SubscribeText>STAY UP TO DATE ABOUT OUR LATEST OFFERS</SubscribeText>
 
-          <FillerDekstop />
+        <FillerDekstop />
 
-          <SubscribeInputWrapper>
-            <SubscribeInputinnerWrapper>
-              <SubscribeInput
-                placeholder="Enter your email address"
-                type="email"
-              />
+        <SubscribeInputWrapper>
+          <SubscribeInputinnerWrapper>
+            <SubscribeInput
+              placeholder="Enter your email address"
+              type="email"
+            />
 
-              <IconEmailDekstop
-                id="email"
-                strokeWidth={3}
-                color="#999999"
-                size={20}
-              />
+            <IconEmailDekstop
+              id="email"
+              strokeWidth={3}
+              color="#999999"
+              size={20}
+            />
 
-              <IconEmailTablet
-                id="email"
-                strokeWidth={2}
-                color="#999999"
-                size={16}
-              />
-            </SubscribeInputinnerWrapper>
-            <SubscribeButton>Subscribe to Newsletter</SubscribeButton>
-          </SubscribeInputWrapper>
-        </SubscribeWrapper>
+            <IconEmailTablet
+              id="email"
+              strokeWidth={2}
+              color="#999999"
+              size={16}
+            />
+          </SubscribeInputinnerWrapper>
+          <SubscribeButton>Subscribe to Newsletter</SubscribeButton>
+        </SubscribeInputWrapper>
+      </SubscribeWrapper>
 
-        <FooterInformation />
+      <FooterInformation />
 
-        <ReservedFooter />
-      </Wrapper>
-    </>
+      <ReservedFooter />
+    </Wrapper>
   );
 }
 
-const Wrapper = styled.div<{ $height: number | undefined }>`
-  --top: ${(props) =>
-    props.$height ? "-" + props.$height / 2 + "px" : "-50%"};
+const Wrapper = styled.div<{ $height: number }>`
+  --top: ${(props) => "-" + props.$height / 2 + "px"};
   --padding-top: ${(props) =>
     props.$height ? props.$height / 2 + 40 + "px" : "190px"};
   position: relative;
@@ -82,11 +79,8 @@ const Wrapper = styled.div<{ $height: number | undefined }>`
   padding-bottom: 40px;
   padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
   padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
+  margin-top: ${(props) => props.$height / 2 + 50 + "px"};
   background-color: var(--color-gray-900);
-
-  @media ${QUERIES.phoneAndSmaller} {
-    padding-top: var(--padding-top);
-  }
 `;
 
 const SubscribeWrapper = styled.div`
