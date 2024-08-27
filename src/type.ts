@@ -1,7 +1,16 @@
+export interface ChildrenProps {
+  children: React.ReactNode;
+}
+
 export interface SVGProps {
   width?: string;
   height?: string;
   color?: string;
+}
+
+export interface OptionsType {
+  value: string;
+  label: string;
 }
 
 export enum Size {

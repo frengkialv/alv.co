@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
@@ -6,15 +8,19 @@ import styled from "styled-components";
 import UnstyledButton from "../UnstyledButton";
 import SearchInput from "../SearchInput";
 import { WEIGHT } from "@/constants";
+import { HeaderContext } from "../Provider/HeaderProvider";
 
 interface SearchModal {
   open: boolean | undefined;
   handleShowSearchModal: (val: boolean) => void;
 }
 
-function SearchModal({ open, handleShowSearchModal }: SearchModal) {
+function SearchModal() {
+  const { showSearchModal, setShowSearchModal } =
+    React.useContext(HeaderContext);
+
   return (
-    <Wrapper open={open} onOpenChange={handleShowSearchModal}>
+    <Wrapper open={showSearchModal} onOpenChange={setShowSearchModal}>
       <Dialog.Portal>
         <Backdrop />
         <Content aria-describedby={undefined}>

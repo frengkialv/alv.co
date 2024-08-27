@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
@@ -38,7 +39,7 @@ function NavigationContent() {
                 <ShirtLogo />
                 Clothing
               </ListItem>
-              <ListItem href="/shop/shoes">
+              <ListItem href="/shoes">
                 <ShoesLogo />
                 Shoes
               </ListItem>
@@ -63,14 +64,6 @@ function NavigationContent() {
     </Wrapper>
   );
 }
-
-const Test = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 0;
-  background-color: black;
-  color: white;
-`;
 
 const Wrapper = styled(NavigationMenu.Root)`
   @media ${QUERIES.tabletAndSmaller} {

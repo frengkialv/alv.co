@@ -16,3 +16,26 @@ export const QUERIES = {
   tabletAndSmaller: `(max-width: ${BREAKPOINTS.tablet / 16}rem)`,
   laptopAndSmaller: `(max-width: ${BREAKPOINTS.laptop / 16}rem)`,
 };
+
+export const SortOptions = [
+  {
+    value: "popularity",
+    label: "Popularity",
+  },
+  {
+    value: "newest-arrival",
+    label: "Newest Arrival",
+  },
+  {
+    value: "latest-arrival",
+    label: "Latest Arrival",
+  },
+  {
+    value: "price-high-to-low",
+    label: "Price High To Low",
+  },
+  {
+    value: "price-low-to-high",
+    label: "Price Low To High",
+  },
+];

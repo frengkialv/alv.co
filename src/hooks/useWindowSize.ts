@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 interface WindowSize {
-  width: number | undefined;
-  height: number | undefined;
+  width: number;
+  height: number;
 }
 
-const useWindowSize = (): WindowSize => {
+export const useWindowSize = (): WindowSize => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: undefined,
-    height: undefined,
+    width: 0,
+    height: 0,
   });
 
   // Function to handle window resize
@@ -32,5 +33,3 @@ const useWindowSize = (): WindowSize => {
 
   return windowSize;
 };
-
-export default useWindowSize;

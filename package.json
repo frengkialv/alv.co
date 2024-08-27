@@ -9,17 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plaiceholder/next": "^3.0.0",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-popover": "1.1.1",
+    "@radix-ui/react-radio-group": "^1.2.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@radix-ui/react-visually-hidden": "^1.1.0",
     "axios": "^1.7.4",
     "date-fns": "^3.6.0",
     "new-component": "^5.0.2",
     "next": "14.2.5",
+    "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-fast-marquee": "^1.6.5",
     "react-feather": "^2.0.10",
     "react-multi-carousel": "^2.8.5",
     "styled-components": "^6.1.12"
@@ -28,6 +32,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "babel-plugin-styled-components": "^2.1.4",
     "typescript": "^5"
   }
 }
