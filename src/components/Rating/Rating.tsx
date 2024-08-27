@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styled from "styled-components";
 import StarFullFill from "../SVG/StarFullFill";
@@ -7,7 +8,7 @@ import { ratingCalculation } from "@/utils";
 
 interface RatingProps {
   rating: number;
-  size: Size;
+  size?: Size;
 }
 
 const StarFill = ({ rating, width }: { rating: number; width: string }) => {

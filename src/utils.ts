@@ -1,4 +1,4 @@
-const { differenceInDays } = require("date-fns");
+import { differenceInDays } from "date-fns";
 
 export function ratingCalculation(rating: number) {
   const result = [];

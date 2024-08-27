@@ -1,47 +1,73 @@
+"use client";
 import React from "react";
-import Image from "next/image";
 import styled from "styled-components";
+import { QUERIES } from "@/constants";
+import Marquee from "react-fast-marquee";
 import VersaceLogo from "../SVG/VersaceLogo";
 import ZaraLogo from "../SVG/ZaraLogo";
 import GucciLogo from "../SVG/GucciLogo";
 import PradaLogo from "../SVG/PradaLogo";
 import CKLogo from "../SVG/CKLogo";
-import { QUERIES } from "@/constants";
+import StussyLogo from "../SVG/StussyLogo";
+import ChampionLogo from "../SVG/ChampionLogo";
+import ObeyLogo from "../SVG/ObeyLogo";
 
 function LogoBrand() {
   return (
     <Wrapper>
-      <VersaceLogo width="var(--versace-logo-width)" />
-      <ZaraLogo width="var(--zara-logo-width)" />
-      <GucciLogo width="var(--gucci-logo-width)" />
-      <PradaLogo width="var(--prada-logo-width)" />
-      <CKLogo width="var(--ck-logo-width)" />
+      <Marquee gradient={true} gradientWidth={150} gradientColor="rgb(0, 0, 0)">
+        <LogoWrapper>
+          <VersaceLogo width="var(--versace-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <StussyLogo width="var(--stussy-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <ZaraLogo width="var(--zara-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <GucciLogo width="var(--gucci-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <ObeyLogo width="var(--obey-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <PradaLogo width="var(--prada-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper style={{ marginTop: "10px" }}>
+          <ChampionLogo width="var(--champion-logo-width)" />
+        </LogoWrapper>
+        <LogoWrapper>
+          <CKLogo width="var(--ck-logo-width)" />
+        </LogoWrapper>
+      </Marquee>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   --versace-logo-width: 160px;
+  --stussy-logo-width: 70px;
+  --champion-logo-width: 170px;
+  --obey-logo-width: 100px;
   --zara-logo-width: 80px;
   --gucci-logo-width: 160px;
   --prada-logo-width: 180px;
   --ck-logo-width: 200px;
 
-  display: flex;
-  justify-content: space-between;
-  padding: clamp(1.2rem, 2.2vw + 0.5rem, 2.5rem)
-    clamp(1rem, 14vw - 5rem, 6.25rem);
-  gap: 40px;
+  padding-top: clamp(1rem, 2.2vw + 0.5rem, 1.4rem);
+  padding-bottom: clamp(1rem, 2.2vw + 0.5rem, 1.4rem);
   background-color: var(--color-black);
+  isolation: isolate;
 
   @media ${QUERIES.phoneAndSmaller} {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    padding-top: 39px;
-    padding-bottom: 39px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     --versace-logo-width: 116px;
+    --stussy-logo-width: 50px;
+    --champion-logo-width: 120px;
+    --obey-logo-width: 70px;
     --zara-logo-width: 64px;
     --gucci-logo-width: 110px;
     --prada-logo-width: 127px;
@@ -49,6 +75,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const LogoWrapper = styled(Image)``;
-
+const LogoWrapper = styled.div`
+  margin-left: 70px;
+  margin-right: 70px;
+`;
 export default LogoBrand;

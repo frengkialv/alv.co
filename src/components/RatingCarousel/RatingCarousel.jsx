@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styled from "styled-components";
@@ -11,6 +12,7 @@ import VerifiedLogo from "../SVG/VerifiedLogo";
 import { Size } from "@/type";
 import { QUERIES } from "@/constants";
 import { TESTIMONIALS } from "@/data";
+import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 
 const responsive = {
   desktop: {
@@ -32,7 +34,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
   const {
     carouselState: { currentSlide },
   } = rest;
-  // <ButtonOne className={currentSlide === 0 ? 'disable' : ''} />
+
   return (
     <ArrowWrapper>
       <UnstyledButton onClick={() => previous()}>
@@ -45,20 +47,23 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
   );
 };
 
-function Test() {
+function RatingCarousel() {
+  const { width } = useContext(MainWrapperContext);
+
   return (
     <Wrapper>
       <Header>OUR HAPPY CUSTOMERS</Header>
-      <Spacer size={20} />
+      {width <= 675 && <Spacer size={25} />}
+      {width > 675 && <Spacer size={35} />}
+
       <InnerWrapper>
         <Carousel
           responsive={responsive}
           additionalTransfrom={0}
-          autoPlay={true}
+          autoPlay={false}
           swipeable={true}
           draggable={true}
           infinite={true}
-          autoPlaySpeed={3000}
           containerClass={styles.container}
           customButtonGroup={<ButtonGroup />}
           arrows={false}
@@ -84,15 +89,22 @@ function Test() {
 const Wrapper = styled.div`
   padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
   padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
+  margin-top: 40px;
 `;
 
 const Header = styled.h1`
   font-family: var(--integral-cf);
   font-size: ${48 / 16}rem;
+  line-height: 45px;
   max-width: 80%;
 
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: ${36 / 16}rem;
+    line-height: 35px;
+  }
+
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${28 / 16}rem;
+    font-size: ${32 / 16}rem;
     line-height: 35px;
   }
 `;
@@ -105,7 +117,7 @@ const ArrowWrapper = styled.div`
   display: flex;
   position: absolute;
   gap: 12px;
-  top: -65px;
+  top: -47px;
   right: 0;
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -160,4 +172,4 @@ const Testimonoal = styled.p`
   }
 `;
 
-export default Test;
+export default RatingCarousel;

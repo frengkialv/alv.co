@@ -1,38 +1,35 @@
+"use client";
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import UnstyledBotton from "../UnstyledButton";
+import { QUERIES } from "@/constants";
 import Icon from "../Icon";
-import { QUERIES, WEIGHT } from "@/constants";
+import UnstyledBotton from "../UnstyledButton";
+import { HeaderContext } from "../Provider/HeaderProvider";
 
-interface SuperHeaderProps {
-  handleShowSuperHeader: (val: boolean) => void;
-}
+function SuperHeader() {
+  const { showSuperHeader, setShowSuperHeader } =
+    React.useContext(HeaderContext);
 
-function SuperHeader({ handleShowSuperHeader }: SuperHeaderProps) {
+  if (!showSuperHeader) {
+    return null;
+  }
   return (
-    <Wrapper>
+    <SuperHeaderWrapper>
       <Filler />
-      <MarketingMassage>
-        Extra 20% Off + 5% Cashback to Your First Order.
-      </MarketingMassage>
+      {showSuperHeader && (
+        <MarketingMassage>
+          Extra 20% Off + 5% Cashback For Your First Order.
+        </MarketingMassage>
+      )}
 
       <WrapperButton>
-        <UnstyledBotton onClick={() => handleShowSuperHeader(false)}>
+        <UnstyledBotton onClick={() => setShowSuperHeader(false)}>
           <Icon id="close" strokeWidth={2} color="white" />
         </UnstyledBotton>
       </WrapperButton>
-    </Wrapper>
+    </SuperHeaderWrapper>
   );
 }
-
-const fadeOut = keyframes`
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0;
-  }
-`;
 
 const dropIn = keyframes`
   from {
@@ -43,16 +40,9 @@ const dropIn = keyframes`
   to {
     transform: translateY(0%);
   }
-
 `;
 
-const Filler = styled.div`
-  @media ${QUERIES.phoneAndSmaller} {
-    display: none;
-  }
-`;
-
-const Wrapper = styled.div`
+const SuperHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -69,18 +59,18 @@ const Wrapper = styled.div`
   }
 `;
 
+const Filler = styled.div`
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
+  }
+`;
+
 const MarketingMassage = styled.div`
   user-select: none;
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: 12px;
   }
-`;
-
-const Link = styled.a`
-  text-decoration: underline;
-  font-weight: ${WEIGHT.medium};
-  cursor: pointer;
 `;
 
 const WrapperButton = styled.div`

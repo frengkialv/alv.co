@@ -1,4 +1,19 @@
-const { subDays } = require("date-fns");
+import { subDays } from "date-fns";
+import { isNewClothing } from "./utils";
+
+export const getNewestData = (amount) => {
+  const datas = CLOTHINGS.filter((clothing) => {
+    return isNewClothing(clothing.releaseDate);
+  }).slice(0, amount);
+
+  return datas;
+};
+
+export const getTopSellingData = (amount) => {
+  const datas = CLOTHINGS.sort((a, b) => b.sold - a.sold).slice(0, amount);
+
+  return datas;
+};
 
 export const CLOTHINGS = [
   {

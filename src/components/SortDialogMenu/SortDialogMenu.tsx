@@ -1,11 +1,11 @@
+"use client";
 import React from "react";
+import styled, { keyframes } from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import Icon from "../Icon";
-import styled, { keyframes } from "styled-components";
-import { WEIGHT } from "@/constants";
-import styles from "./styles.module.css";
+import { QUERIES, WEIGHT } from "@/constants";
 import { OptionsType } from "@/type";
 
 interface Props {
@@ -120,6 +120,10 @@ const Content = styled(Dialog.Content)`
   animation: ${slideIn} 0.3s ease-out;
   animation-fill-mode: backwards;
   will-change: transform;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 70%;
+  }
 `;
 
 const InnerWrapper = styled.div``;
@@ -153,7 +157,7 @@ const FormRadioGroup = styled.form`
 const RadioGroupRoot = styled(RadioGroup.Root)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 `;
 
 const RadioGroupWrapper = styled.div`
@@ -169,8 +173,6 @@ const RadioGroupItem = styled(RadioGroup.Item)`
   border: 1px solid var(--color-black);
   border-radius: 100%;
   outline-offset: 2px;
-  box-shadow: 0px 2px 8px hsl(0deg 0% 0% / 0.1),
-    0px 4px 16px hsl(0deg 0% 0% / 0.1), 0px 8px 32px hsl(0deg 0% 0% / 0.1);
 `;
 
 const RadioGroupIndicator = styled(RadioGroup.Indicator)`
@@ -196,6 +198,7 @@ const LabelItem = styled.label`
   color: var(--color-black);
   text-transform: capitalize;
   line-height: 1;
+  user-select: none;
   cursor: pointer;
 `;
 export default SortDialogMenu;
