@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <MarketingContent />
-      <LogoBrand />
+      {/* <LogoBrand /> */}
       <NewArrival />
       <TopSelling />
       {/* <BannerCarousel /> */}
