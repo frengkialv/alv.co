@@ -78,5 +78,10 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
   margin-left: 70px;
   margin-right: 70px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
 `;
 export default LogoBrand;
