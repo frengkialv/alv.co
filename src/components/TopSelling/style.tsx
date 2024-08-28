@@ -18,8 +18,8 @@ export const SpacerTopSelling = () => {
 };
 
 export const Wrapper = styled.div`
-  padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
-  padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
+  padding-right: var(--padding-horizontal-wrapper);
+  padding-left: var(--padding-horizontal-wrapper);
 `;
 
 export const HeaderTitle = styled.h1`

@@ -6,10 +6,15 @@ import { CardWrapper, Wrapper } from "./style";
 import RatingAndDiscountTabWrapper from "@/components/RatingAndDiscountTabWrapper";
 import SuggestionProduct from "@/components/SuggestionProduct";
 
-function Detail() {
+function DetailPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Detail", href: "/detail" },
+  ];
+
   return (
     <Wrapper>
-      <Breadcrumbs />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
 
       <CardWrapper>
         <ProductImage />
@@ -23,4 +28,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default DetailPage;

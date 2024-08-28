@@ -28,26 +28,26 @@ function NavigationContent() {
       <Nav>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            <WrapperShopLink href="/shop">
-              Shop <ChevronIcon id="chevron-down" strokeWidth={1.5} />
+            <WrapperShopLink>
+              Shop <ChevronIcon id="chevron-down" strokeWidth={2} size={20} />
             </WrapperShopLink>
           </NavigationMenuTrigger>
 
           <NavigationMenuContent>
             <ListItemWrapper>
-              <ListItem href="/shop/clothing">
+              <ListItem href="/t-shirts">
                 <ShirtLogo />
-                Clothing
+                T-Shirts
               </ListItem>
               <ListItem href="/shoes">
                 <ShoesLogo />
                 Shoes
               </ListItem>
-              <ListItem href="/shop/accessories">
+              <ListItem href="/accessories">
                 <AccessoriesLogo />
                 Accessories
               </ListItem>
-              <ListItem href="/shop/sport">
+              <ListItem href="/sport">
                 <SportLogo />
                 Sport
               </ListItem>
@@ -57,9 +57,9 @@ function NavigationContent() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <LinkWrapper href="/sale">On Sale</LinkWrapper>
+        <LinkWrapper href="/on-sale">On Sale</LinkWrapper>
         <LinkWrapper href="/new-arrivals">New Arrivals</LinkWrapper>
-        <LinkWrapper href="/brand">Brands</LinkWrapper>
+        <LinkWrapper href="/brands">Brands</LinkWrapper>
       </Nav>
     </Wrapper>
   );
@@ -93,14 +93,6 @@ const ChevronIcon = styled(Icon)`
   @media (prefers-reduced-motion: no-preference) {
     transition: 300ms;
   }
-
-  @media ${QUERIES.tabletAndSmaller} {
-    transition: none;
-  }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    transition: none;
-  }
 `;
 
 const NavigationMenuTrigger = styled(NavigationMenu.Trigger)`
@@ -117,7 +109,8 @@ const NavigationMenuTrigger = styled(NavigationMenu.Trigger)`
 const NavigationMenuContent = styled(NavigationMenu.Content)`
   position: absolute;
   top: 35px;
-  left: -60px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 15px;
   padding: 20px 30px;
   background-color: var(--color-white);
@@ -143,12 +136,13 @@ const Arrow = styled.div`
 
 const LinkDropdown = styled(Link)`
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   color: var(--color-black);
   font-weight: ${WEIGHT.medium};
   text-decoration: none;
   user-select: none;
+  white-space: nowrap;
 `;
 
 const LinkWrapper = styled(Link)`
@@ -178,9 +172,10 @@ const LinkWrapper = styled(Link)`
   }
 `;
 
-const WrapperShopLink = styled(Link)`
+const WrapperShopLink = styled.span`
   display: flex;
   gap: 4px;
+  align-items: center;
   color: var(--color-black);
   font-weight: ${WEIGHT["medium"]};
   cursor: pointer;

@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
-import styled from "styled-components";
-import { BreadcrumbList, CrumbLink, CrumbWrapper } from "./style";
+import { BreadcrumbList, CrumbLink, CrumbText, CrumbWrapper } from "./style";
+
+interface Breadcrumb {
+  label: string;
+  href: string;
+}
+
+interface BreadcrumbsProps {
+  breadcrumbs: Breadcrumb[];
+}
 
 function Crumb({
   href,
@@ -14,22 +22,25 @@ function Crumb({
 }) {
   return (
     <CrumbWrapper>
-      <CrumbLink href={href} isCurrentPage={isCurrentPage}>
-        {children}
-      </CrumbLink>
+      {!isCurrentPage && <CrumbLink href={href}>{children}</CrumbLink>}
+
+      {isCurrentPage && <CrumbText>{children}</CrumbText>}
     </CrumbWrapper>
   );
 }
 
-function BreadCrumbs() {
+function BreadCrumbs({ breadcrumbs }: BreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb">
       <BreadcrumbList>
-        <Crumb href="/">Home</Crumb>
-        <Crumb href="/living">Detail</Crumb>
-        <Crumb href="/living/couch" isCurrentPage={true}>
-          T-shirts
-        </Crumb>
+        {breadcrumbs.map((crumb, index) => {
+          const isCurrentPage = breadcrumbs.length - 1 === index;
+          return (
+            <Crumb href={crumb.href} isCurrentPage={isCurrentPage} key={index}>
+              {crumb.label}
+            </Crumb>
+          );
+        })}
       </BreadcrumbList>
     </nav>
   );

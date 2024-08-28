@@ -1,0 +1,53 @@
+.accordionHeader {
+  margin: 0;
+}
+
+.accordionTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  padding-bottom: 12px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.chevronIcon {
+  transition: transform 0.3s ease;
+}
+
+[aria-expanded="true"] .chevronIcon {
+  transform: rotate(180deg);
+}
+
+.accordionContent {
+  padding: 12px 0;
+
+  &[data-state="open"] {
+    animation: slideDown 100ms linear;
+  }
+  &[data-state="closed"] {
+    animation: slideUp 100ms linear;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

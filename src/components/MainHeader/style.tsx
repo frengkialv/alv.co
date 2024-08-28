@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   gap: 40px;
   background-color: var(--color-white-blur);
   backdrop-filter: blur(4px);
-  padding: 20px clamp(1rem, 14vw - 5rem, 6.25rem);
+  padding: 20px var(--padding-horizontal-wrapper);
 
   @media ${QUERIES.phoneAndSmaller} {
     gap: 16px;

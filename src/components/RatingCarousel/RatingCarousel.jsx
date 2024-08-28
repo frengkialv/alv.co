@@ -87,8 +87,8 @@ function RatingCarousel() {
 }
 
 const Wrapper = styled.div`
-  padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
-  padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
+  padding-right: var(--padding-horizontal-wrapper);
+  padding-left: var(--padding-horizontal-wrapper);
   margin-top: 40px;
 `;
 
@@ -117,8 +117,12 @@ const ArrowWrapper = styled.div`
   display: flex;
   position: absolute;
   gap: 12px;
-  top: -47px;
+  top: -68px;
   right: 0;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    top: -60px;
+  }
 
   @media ${QUERIES.phoneAndSmaller} {
     top: -53px;
