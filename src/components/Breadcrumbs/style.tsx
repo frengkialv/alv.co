@@ -5,20 +5,11 @@ import styled from "styled-components";
 export const CrumbLink = ({
   children,
   href,
-  isCurrentPage,
 }: {
   children: React.ReactNode;
   href: string;
-  isCurrentPage?: boolean;
 }) => {
-  return (
-    <CrumbLinkStyle
-      href={href}
-      aria-current={isCurrentPage ? "page" : undefined}
-    >
-      {children}
-    </CrumbLinkStyle>
-  );
+  return <CrumbLinkStyle href={href}>{children}</CrumbLinkStyle>;
 };
 
 export const BreadcrumbList = styled.ol`
@@ -32,7 +23,7 @@ export const CrumbWrapper = styled.li`
   display: inline;
   --spacing: 8px;
 
-  &:not(:first-of-type) {
+  &:not(:first-child) {
     &:before {
       content: ">";
       font-size: 20px;
@@ -45,8 +36,9 @@ export const CrumbWrapper = styled.li`
 `;
 
 const CrumbLinkStyle = styled.a`
-  color: #817f7f;
+  color: var(--color-gray-500);
   text-decoration: none;
+  font-weight: 500;
 
   &[aria-current] {
     color: var(--color-black);
@@ -55,4 +47,9 @@ const CrumbLinkStyle = styled.a`
   &:hover {
     text-decoration: revert;
   }
+`;
+
+export const CrumbText = styled.span`
+  color: var(--color-black);
+  font-weight: 500;
 `;

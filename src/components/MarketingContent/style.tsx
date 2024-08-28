@@ -20,13 +20,13 @@ export const ImageWrapper = () => {
 export const Wrapper = styled.div`
   display: flex;
   gap: 20px;
-  padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
+  padding-left: var(--padding-horizontal-wrapper);
   padding-right: 50px;
   background-color: var(--color-pearls);
 
   @media ${QUERIES.tabletAndSmaller} {
     flex-direction: column;
-    padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
+    padding-right: var(--padding-horizontal-wrapper);
   }
 `;
 

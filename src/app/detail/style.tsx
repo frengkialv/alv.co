@@ -5,11 +5,10 @@ import { ChildrenProps } from "@/type";
 import { QUERIES } from "@/constants";
 
 export const Wrapper = styled.div`
-  --padding-horizontal: clamp(1rem, 14vw - 5rem, 6.25rem);
   display: flex;
   flex-direction: column;
-  padding-right: var(--padding-horizontal);
-  padding-left: var(--padding-horizontal);
+  padding-right: var(--padding-horizontal-wrapper);
+  padding-left: var(--padding-horizontal-wrapper);
 `;
 
 export const CardWrapper = styled.div`

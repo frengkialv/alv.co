@@ -53,8 +53,8 @@ const WrapperStyle = styled.div<{ $subscriberHeight: number }>`
   position: relative;
   padding-top: var(--padding-top);
   padding-bottom: 40px;
-  padding-left: clamp(1rem, 14vw - 5rem, 6.25rem);
-  padding-right: clamp(1rem, 14vw - 5rem, 6.25rem);
+  padding-left: var(--padding-horizontal-wrapper);
+  padding-right: var(--padding-horizontal-wrapper);
   margin-top: ${(props) => props.$subscriberHeight / 2 + 50 + "px"};
   background-color: var(--color-gray-900);
 `;
@@ -70,7 +70,7 @@ export const SubscribeWrapper = styled.div`
   left: 0;
   right: 0;
   padding: 36px 64px;
-  width: calc(100% - (clamp(1rem, 14vw - 5rem, 6.25rem) * 2));
+  width: calc(100% - (var(--padding-horizontal-wrapper) * 2));
   background-color: var(--color-black);
   border-radius: 20px;
 

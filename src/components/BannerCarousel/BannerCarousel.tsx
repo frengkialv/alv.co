@@ -62,10 +62,9 @@ function BannerCarousel() {
 }
 
 const Wrapper = styled.div`
-  --padding-horizontal: clamp(1rem, 14vw - 5rem, 6.25rem);
-  padding-right: var(--padding-horizontal);
-  padding-left: var(--padding-horizontal);
-  padding-bottom: var(--padding-horizontal);
+  padding-right: var(--padding-horizontal-wrapper);
+  padding-left: var(--padding-horizontal-wrapper);
+  padding-bottom: var(--padding-horizontal-wrapper);
 `;
 
 const RowImage = styled.div`
