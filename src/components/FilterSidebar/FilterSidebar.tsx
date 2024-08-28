@@ -3,6 +3,7 @@ import SortIcon from "../SVG/SortIcon";
 import { Column, ContentWrapper, Header, Wrapper } from "./style";
 import Accordion from "../Accordion";
 import Slider from "../Slider";
+import ColorFilter from "../ColorFilter";
 
 function FilterSidebar() {
   const accordionItems = [
@@ -31,10 +32,21 @@ function FilterSidebar() {
       </Header>
       <ContentWrapper>
         <Column>
-          <Accordion value="item-3" header="Price" children={<Slider />} />
+          <Accordion value="item-1" header="Price" children={<Slider />} />
         </Column>
         <Column>
-          <Accordion value="item-3" header="Price" children={<Slider />} />
+          <Accordion
+            value="item-2"
+            header="Colors"
+            children={<ColorFilter />}
+          />
+        </Column>
+        <Column>
+          <Accordion
+            value="item-2"
+            header="Colors"
+            children={<ColorFilter />}
+          />
         </Column>
       </ContentWrapper>
     </Wrapper>

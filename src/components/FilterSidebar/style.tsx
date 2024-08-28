@@ -23,12 +23,12 @@ export const ContentWrapper = styled.div`
 
 export const Column = styled.div`
   padding-top: 18px;
-  padding-bottom: 18px;
 
   &:first-child {
-    margin-bottom: -12px;
+    padding-bottom: 6px;
   }
   &:not(&:last-child) {
+    padding-bottom: 9px;
     border-bottom: 1px solid var(--color-gray-200);
   }
 `;

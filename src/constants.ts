@@ -39,3 +39,46 @@ export const SortOptions = [
     label: "Price Low To High",
   },
 ];
+
+export const COLORSFILTER = [
+  {
+    color: "#00c12b",
+    border: "#26a943",
+  },
+  {
+    color: "#F50606",
+    border: "#c40505",
+  },
+  {
+    color: "#F5DD06",
+    border: "#c4b105",
+  },
+  {
+    color: "#F57906",
+    border: "#c46105",
+  },
+  {
+    color: "#06CAF5",
+    border: "#05a2c4",
+  },
+  {
+    color: "#063AF5",
+    border: "#052ec4",
+  },
+  {
+    color: "#7D06F5",
+    border: "#6405c4",
+  },
+  {
+    color: "#F506A4",
+    border: "#c40583",
+  },
+  {
+    color: "#000000",
+    border: "#000000",
+  },
+  {
+    color: "#FFFFFF",
+    border: "#CCCCCC  ",
+  },
+];
