@@ -19,6 +19,7 @@ export const Header = styled.h5`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 24px;
 `;
 
 export const Column = styled.div`

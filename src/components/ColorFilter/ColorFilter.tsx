@@ -4,10 +4,20 @@ import styled from "styled-components";
 import { COLORSFILTER } from "@/constants";
 
 function ColorFilter() {
-  const [colorSelected, setcolorSelected] = React.useState<string>(
-    COLORSFILTER[0].color
-  );
+  const [colorsSelected, setcolorsSelected] = React.useState<string[]>([]);
 
+  const handleChangeSize = (val: string) => {
+    if (colorsSelected.includes(val)) {
+      const nextSizeSelected = colorsSelected.filter(
+        (sizeSelected) => sizeSelected !== val
+      );
+      setcolorsSelected(nextSizeSelected);
+    } else {
+      const nextSizeSelected = [...colorsSelected];
+      nextSizeSelected.push(val);
+      setcolorsSelected(nextSizeSelected);
+    }
+  };
   return (
     <Wrapper>
       {COLORSFILTER.map((color, index) => (
@@ -15,9 +25,9 @@ function ColorFilter() {
           key={index}
           $color={color.color}
           $border={color.border}
-          onClick={() => setcolorSelected(color.color)}
+          onClick={() => handleChangeSize(color.color)}
         >
-          {colorSelected === color.color && <>&#10004;</>}
+          {colorsSelected.includes(color.color) && <>&#10004;</>}
         </Row>
       ))}
     </Wrapper>

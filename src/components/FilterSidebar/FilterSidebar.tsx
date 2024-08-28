@@ -1,29 +1,13 @@
 import React from "react";
 import SortIcon from "../SVG/SortIcon";
-import { Column, ContentWrapper, Header, Wrapper } from "./style";
 import Accordion from "../Accordion";
 import Slider from "../Slider";
 import ColorFilter from "../ColorFilter";
+import SizeFilter from "../SizeFilter";
+import { Column, ContentWrapper, Header, Wrapper } from "./style";
+import Button from "../Button";
 
 function FilterSidebar() {
-  const accordionItems = [
-    {
-      value: "item-1",
-      header: "Accordion Item 1",
-      children: <div>This is the content of the first item.</div>,
-    },
-    {
-      value: "item-2",
-      header: "Accordion Item 2",
-      children: <div>This is the content of the second item.</div>,
-    },
-    {
-      value: "item-3",
-      header: "Accordion Item 3",
-      children: <div>This is the content of the third item.</div>,
-    },
-  ];
-
   return (
     <Wrapper>
       <Header>
@@ -42,13 +26,11 @@ function FilterSidebar() {
           />
         </Column>
         <Column>
-          <Accordion
-            value="item-2"
-            header="Colors"
-            children={<ColorFilter />}
-          />
+          <Accordion value="item-3" header="Size" children={<SizeFilter />} />
         </Column>
       </ContentWrapper>
+
+      <Button size="grow">Apply Filter</Button>
     </Wrapper>
   );
 }
