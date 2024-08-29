@@ -1,4 +1,7 @@
 import React from "react";
+import { ProductGridProps } from "@/type";
+import { formatDiscountPrice } from "@/utils";
+import DynamicImage from "../DynamicImage";
 import {
   DiscountFlag,
   ImageWrapper,
@@ -12,11 +15,8 @@ import {
   RatingWrapper,
   Row,
 } from "./style";
-import { formatDiscountPrice } from "@/utils";
-import { ProductGridProps } from "@/type";
-import DynamicImage from "../DynamicImage";
 
-function ProductList({
+function MainProductList({
   slug,
   name,
   imgSrc,
@@ -59,4 +59,4 @@ function ProductList({
   );
 }
 
-export default ProductList;
+export default MainProductList;

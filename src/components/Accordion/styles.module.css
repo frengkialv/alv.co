@@ -25,6 +25,7 @@
 
 .accordionContent {
   padding: 12px 0;
+  will-change: transform;
 
   &[data-state="open"] {
     animation: slideDown 100ms linear;

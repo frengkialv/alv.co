@@ -59,12 +59,12 @@ export const Row = styled.div`
   gap: 4px;
 `;
 
-export const Name = styled.p`
+export const Name = styled.div`
   font-size: ${20 / 16}rem;
   font-weight: 700;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: ${16 / 16}rem;

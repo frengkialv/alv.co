@@ -19,7 +19,6 @@ export const ReservedText = styled.span`
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
   user-select: none;
-  filter: drop-shadow(1px 1px 4px hsl(0deg 0% 0% / 0.4));
 `;
 
 export const PaymentLogoWrapper = styled.div`

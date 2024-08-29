@@ -5,7 +5,6 @@ import { QUERIES } from "@/constants";
 export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
-  justify-items: center;
   gap: 30px 20px;
   padding-top: 40px;
   padding-bottom: 46px;

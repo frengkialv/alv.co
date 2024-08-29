@@ -55,12 +55,12 @@ function Button({
 }: ButtonProps) {
   return (
     <Wrapper
-      variant={variant}
-      size={size}
-      type={type}
-      {...delegated}
+      $variant={variant}
+      $size={size}
       onClick={onClick}
+      type={type}
       disabled={disabled}
+      {...delegated}
     >
       {children}
     </Wrapper>
@@ -68,14 +68,14 @@ function Button({
 }
 
 const Wrapper = styled.button<{
-  variant: "primary" | "secondary" | "light";
-  size: "small" | "medium" | "large" | "grow";
+  $variant: "primary" | "secondary" | "light";
+  $size: "small" | "medium" | "large" | "grow";
   disabled?: boolean;
 }>`
   display: flex;
   gap: 8px;
   justify-content: center;
-  width: ${(props) => (props.size === "grow" ? "100%" : "fit-content")};
+  width: ${(props) => (props.$size === "grow" ? "100%" : "fit-content")};
   border-radius: 60px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   opacity: ${(props) => (props.disabled ? 0.6 : 1)};
@@ -84,8 +84,8 @@ const Wrapper = styled.button<{
   white-space: nowrap;
   transition: background-color 0.3s ease;
 
-  ${(props) => sizes[props.size]}
-  ${(props) => variants[props.variant]}
+  ${(props) => sizes[props.$size]}
+  ${(props) => variants[props.$variant]}
 `;
 
 export default Button;

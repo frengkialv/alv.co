@@ -1,13 +1,13 @@
 import React from "react";
-import ProductList from "../ProductList";
+import MainProductList from "../MainProductList";
 import { ClothingsType } from "@/type";
 import { Wrapper } from "./style";
 
-function ProductGrid({ datas }: { datas: ClothingsType[] }) {
+function MainGrid({ datas }: { datas: ClothingsType[] }) {
   return (
     <Wrapper>
       {datas.map((data) => (
-        <ProductList
+        <MainProductList
           key={data.slug}
           slug={data.slug}
           name={data.name}
@@ -21,4 +21,4 @@ function ProductGrid({ datas }: { datas: ClothingsType[] }) {
   );
 }
 
-export default ProductGrid;
+export default MainGrid;

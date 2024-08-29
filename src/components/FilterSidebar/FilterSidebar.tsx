@@ -4,12 +4,13 @@ import Accordion from "../Accordion";
 import Slider from "../Slider";
 import ColorFilter from "../ColorFilter";
 import SizeFilter from "../SizeFilter";
-import { Column, ContentWrapper, Header, Wrapper } from "./style";
+import { Column, ContentWrapper, Header } from "./style";
 import Button from "../Button";
+import FilterSidebarWrapper from "../FilterSidebarWrapper";
 
 function FilterSidebar() {
   return (
-    <Wrapper>
+    <FilterSidebarWrapper>
       <Header>
         Filters
         <SortIcon color="#999999" />
@@ -31,7 +32,7 @@ function FilterSidebar() {
       </ContentWrapper>
 
       <Button size="grow">Apply Filter</Button>
-    </Wrapper>
+    </FilterSidebarWrapper>
   );
 }
 

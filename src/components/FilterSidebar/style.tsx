@@ -1,13 +1,6 @@
 "use client";
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  flex: 1;
-  padding: 20px 24px;
-  border: 1px solid var(--color-gray-100);
-  border-radius: 20px;
-`;
-
 export const Header = styled.h5`
   display: flex;
   justify-content: space-between;
