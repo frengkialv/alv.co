@@ -2,8 +2,16 @@ import * as React from "react";
 import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import FilterSidebar from "@/components/FilterSidebar";
 import MainGrid from "@/components/MainGrid";
+import PaginationWrapperCategoryPage from "@/components/PaginationWrapperCategoryPage";
 import { CLOTHINGS } from "@/data";
-import { ContentWrapper, HeaderWrapper, Title, Wrapper } from "./style";
+import {
+  ContentWrapper,
+  HeaderWrapper,
+  SortWrapper,
+  Text,
+  Title,
+  Wrapper,
+} from "./style";
 
 interface PageProps {
   params: {
@@ -40,9 +48,13 @@ function CategoryPage({ params }: PageProps) {
         <div style={{ flex: 4 }}>
           <HeaderWrapper>
             <Title>{PARAMSLABEL[params.category]}</Title>
-            <div>Showing 1-10 of 100 Products</div>
+            <SortWrapper>
+              <Text>Showing 1-10 of 100 Products</Text>
+              Sort by:
+            </SortWrapper>
           </HeaderWrapper>
           <MainGrid datas={datas} />
+          <PaginationWrapperCategoryPage datas={datas} />
         </div>
       </ContentWrapper>
     </Wrapper>

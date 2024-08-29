@@ -24,3 +24,12 @@ export const Title = styled.h1`
   font-weight: ${WEIGHT.bold};
   line-height: 27px;
 `;
+
+export const SortWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const Text = styled.span`
+  color: var(--color-gray-600);
+`;

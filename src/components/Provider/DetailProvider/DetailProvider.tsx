@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { ChildrenProps, OptionsType } from "@/type";
-import { SortOptions } from "@/constants";
+import { ChildrenProps } from "@/type";
 
 interface DetailCentextValue {
   selectedImageId: number;
