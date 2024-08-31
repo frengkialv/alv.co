@@ -1,6 +1,5 @@
 import React from "react";
 import ProductList from "../ProductList";
-import { getNewestData } from "@/data";
 import { ClothingsType } from "@/type";
 import { Wrapper } from "./style";
 

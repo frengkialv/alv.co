@@ -151,6 +151,7 @@ const LinkWrapper = styled(Link)`
   position: relative;
   transition: 0.4s;
   user-select: none;
+  white-space: nowrap;
 
   @media (prefers-reduced-motion: no-preference) {
     &::after {

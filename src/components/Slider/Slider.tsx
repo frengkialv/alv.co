@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 const SliderDemo = () => {
   const [value, setValue] = React.useState<number[]>([50, 200]);
   const handleChange = (val: number[]) => {
-    console.log("🚀 ~ handleChange ~ val:", val);
     setValue(val);
   };
 

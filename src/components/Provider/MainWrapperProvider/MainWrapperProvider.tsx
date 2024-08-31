@@ -5,6 +5,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 
 interface MainWrapperContextValue {
   width: number;
+  height: number;
 }
 
 export const MainWrapperContext = React.createContext<MainWrapperContextValue>(
@@ -12,10 +13,11 @@ export const MainWrapperContext = React.createContext<MainWrapperContextValue>(
 );
 
 function MainWrapperProvider({ children }: ChildrenProps) {
-  const { width } = useWindowSize();
+  const { width, height } = useWindowSize();
 
   const value = {
     width,
+    height,
   };
 
   return (

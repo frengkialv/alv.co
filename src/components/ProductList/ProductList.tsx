@@ -12,20 +12,9 @@ import {
   RatingWrapper,
   Row,
 } from "./style";
-import { ClothingsType, Size } from "@/type";
-import Rating from "../Rating";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { formatDiscountPrice } from "@/utils";
+import { ProductGridProps } from "@/type";
 import DynamicImage from "../DynamicImage";
-
-interface ProductGridProps {
-  slug: string;
-  name: string;
-  imgSrc: string;
-  rating: number;
-  discountByPercent: number | null;
-  price: number;
-}
 
 function ProductList({
   slug,

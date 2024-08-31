@@ -17,6 +17,7 @@ export const SpacerNewArrival = () => {
 };
 
 export const Wrapper = styled.div`
+  margin-top: 10px;
   padding-right: var(--padding-horizontal-wrapper);
   padding-left: var(--padding-horizontal-wrapper);
 `;

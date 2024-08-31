@@ -17,6 +17,11 @@ export const QUERIES = {
   laptopAndSmaller: `(max-width: ${BREAKPOINTS.laptop / 16}rem)`,
 };
 
+export enum SortRating {
+  ASCENDING = "ascending",
+  DESCENDING = "descending",
+}
+
 export const SortOptions = [
   {
     value: "popularity",

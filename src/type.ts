@@ -32,3 +32,12 @@ export interface ClothingsType {
   colors: string[];
   releaseDate: Date;
 }
+
+export interface ProductGridProps {
+  slug: string;
+  name: string;
+  imgSrc: string;
+  rating: number;
+  discountByPercent: number | null;
+  price: number;
+}
