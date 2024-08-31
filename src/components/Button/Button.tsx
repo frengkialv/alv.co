@@ -4,10 +4,11 @@ import styled, { css } from "styled-components";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "light";
-  size?: "small" | "medium" | "large" | "grow";
+  size?: "small" | "medium" | "large";
   type?: "button" | "submit" | "reset";
   children: React.ReactNode;
   disabled?: boolean;
+  grow?: boolean;
   onClick?: () => void;
 }
 
@@ -23,9 +24,6 @@ const sizes = {
   large: css`
     padding: 15px 30px;
     font-size: 18px;
-  `,
-  grow: css`
-    padding: 12px 25px;
   `,
 };
 
@@ -50,6 +48,7 @@ function Button({
   type = "button",
   children,
   disabled = false,
+  grow,
   onClick,
   ...delegated
 }: ButtonProps) {
@@ -57,6 +56,7 @@ function Button({
     <Wrapper
       $variant={variant}
       $size={size}
+      $grow={grow}
       onClick={onClick}
       type={type}
       disabled={disabled}
@@ -69,13 +69,14 @@ function Button({
 
 const Wrapper = styled.button<{
   $variant: "primary" | "secondary" | "light";
-  $size: "small" | "medium" | "large" | "grow";
+  $size: "small" | "medium" | "large";
+  $grow?: boolean;
   disabled?: boolean;
 }>`
   display: flex;
   gap: 8px;
   justify-content: center;
-  width: ${(props) => (props.$size === "grow" ? "100%" : "fit-content")};
+  width: ${(props) => (props.$grow ? "100%" : undefined)};
   border-radius: 60px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   opacity: ${(props) => (props.disabled ? 0.6 : 1)};

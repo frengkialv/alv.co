@@ -223,6 +223,16 @@ select {
   font: inherit;
 }
 
+button,
+span,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
 /*
   8. Avoid text overflows
 */

@@ -1,7 +1,12 @@
-"use client";
 import React from "react";
 import Icon from "../Icon";
-import { Button, NumberButton, Wrapper, WrapperPage } from "./styles";
+import {
+  ButtonDekstop,
+  ButtonMobile,
+  NumberButton,
+  Wrapper,
+  WrapperPage,
+} from "./styles";
 import usePagination from "@/hooks/usePagination";
 
 interface PaginationProps {
@@ -16,7 +21,7 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
 
   return (
     <Wrapper>
-      <Button
+      <ButtonDekstop
         $disabled={page === 1}
         onClick={() => {
           if (page === 1) {
@@ -27,7 +32,18 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
       >
         <Icon id="arrow-left" size={20} strokeWidth={1.8} />
         Previous
-      </Button>
+      </ButtonDekstop>
+      <ButtonMobile
+        $disabled={page === 1}
+        onClick={() => {
+          if (page === 1) {
+            return;
+          }
+          onChange(Number(page - 1));
+        }}
+      >
+        <Icon id="chevron-left" size={20} strokeWidth={1.8} />
+      </ButtonMobile>
       <WrapperPage>
         {rowButton.map((pageNumber, index) => (
           <NumberButton
@@ -41,7 +57,7 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
           </NumberButton>
         ))}
       </WrapperPage>
-      <Button
+      <ButtonDekstop
         $disabled={page === totalPage}
         onClick={() => {
           if (page === totalPage) {
@@ -52,7 +68,18 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
       >
         Next
         <Icon id="arrow-right" size={20} strokeWidth={1.8} />
-      </Button>
+      </ButtonDekstop>
+      <ButtonMobile
+        $disabled={page === totalPage}
+        onClick={() => {
+          if (page === totalPage) {
+            return;
+          }
+          onChange(Number(page + 1));
+        }}
+      >
+        <Icon id="chevron-right" size={20} strokeWidth={1.8} />
+      </ButtonMobile>
     </Wrapper>
   );
 }

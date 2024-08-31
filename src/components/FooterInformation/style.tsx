@@ -130,8 +130,9 @@ export const Detail = styled.div`
 export const Text = styled.span`
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
-  cursor: pointer;
   white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;

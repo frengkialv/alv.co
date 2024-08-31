@@ -20,6 +20,10 @@ const Wrapper = styled.h1`
   font-size: var(--font-size);
   font-weight: ${WEIGHT["bold"]};
   font-family: var(--integral-cf);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    line-height: 27px;
+  }
 `;
 
 export default Logo;

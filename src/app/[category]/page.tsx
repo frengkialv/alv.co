@@ -1,17 +1,21 @@
 import * as React from "react";
+import { CLOTHINGS } from "@/data";
 import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import FilterSidebar from "@/components/FilterSidebar";
+import FilterSidebarDekstop from "@/components/FilterSidebarDekstop";
 import MainGrid from "@/components/MainGrid";
 import PaginationWrapperCategoryPage from "@/components/PaginationWrapperCategoryPage";
-import { CLOTHINGS } from "@/data";
+import SortWrapperCategoryPage from "@/components/SortWrapperCategoryPage";
+import FilterSidebarTablet from "@/components/FilterSidebarTablet";
 import {
+  ButtonWrapper,
   ContentWrapper,
   HeaderWrapper,
-  SortWrapper,
-  Text,
   Title,
   Wrapper,
+  WrapperFilterSidebarMobile,
+  WrapperFilterSidebarTablet,
 } from "./style";
+import FilterSidebarMobile from "@/components/FilterSidebarMobile";
 
 interface PageProps {
   params: {
@@ -28,6 +32,7 @@ const PARAMSLABEL: PARAMSLABELPROPS = {
   shoes: "Shoes",
   accessories: "Accessories",
   sport: "Sport",
+  "on-sale": "On Sale",
   "new-arrivals": "New Arrivals",
 };
 
@@ -44,14 +49,21 @@ function CategoryPage({ params }: PageProps) {
     <Wrapper>
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <ContentWrapper>
-        <FilterSidebar />
+        <FilterSidebarDekstop />
         <div style={{ flex: 4 }}>
           <HeaderWrapper>
             <Title>{PARAMSLABEL[params.category]}</Title>
-            <SortWrapper>
-              <Text>Showing 1-10 of 100 Products</Text>
-              Sort by:
-            </SortWrapper>
+            <ButtonWrapper>
+              <WrapperFilterSidebarTablet>
+                <FilterSidebarTablet />
+              </WrapperFilterSidebarTablet>
+
+              <WrapperFilterSidebarMobile>
+                <FilterSidebarMobile />
+              </WrapperFilterSidebarMobile>
+
+              <SortWrapperCategoryPage />
+            </ButtonWrapper>
           </HeaderWrapper>
           <MainGrid datas={datas} />
           <PaginationWrapperCategoryPage datas={datas} />

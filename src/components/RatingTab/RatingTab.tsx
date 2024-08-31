@@ -1,6 +1,5 @@
 import React from "react";
-import SortMenuDetailPage from "../SortMenuDetailPage";
-import SortButton from "../SortButton";
+import SortButtonRating from "../SortButtonRating";
 import RatingCard from "../RatingCard";
 import { HeaderTitle, HeaderWrapper, RatingContent, Wrapper } from "./style";
 
@@ -9,7 +8,7 @@ function RatingTab() {
     <Wrapper>
       <HeaderWrapper>
         <HeaderTitle>All Reviews</HeaderTitle>
-        <SortButton />
+        <SortButtonRating />
       </HeaderWrapper>
 
       <RatingContent>
@@ -17,8 +16,6 @@ function RatingTab() {
           <RatingCard key={val} />
         ))}
       </RatingContent>
-
-      <SortMenuDetailPage />
     </Wrapper>
   );
 }

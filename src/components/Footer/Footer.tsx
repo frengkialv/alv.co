@@ -10,6 +10,7 @@ import {
   SubscribeWrapper,
   Wrapper,
 } from "./style";
+import React from "react";
 
 function Footer() {
   return (
@@ -36,4 +37,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);

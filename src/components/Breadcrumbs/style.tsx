@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import { QUERIES } from "@/constants";
 
 export const CrumbLink = ({
   children,
@@ -33,6 +34,19 @@ export const CrumbWrapper = styled.li`
       margin-right: 12px;
     }
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    &:not(:first-child) {
+      &:before {
+        content: ">";
+        font-size: 18px;
+        color: var(--color-gray-600);
+        font-family: monospace;
+        margin-left: var(--spacing);
+        margin-right: 12px;
+      }
+    }
+  }
 `;
 
 const CrumbLinkStyle = styled.a`
@@ -47,9 +61,17 @@ const CrumbLinkStyle = styled.a`
   &:hover {
     text-decoration: revert;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 export const CrumbText = styled.span`
   color: var(--color-black);
   font-weight: 500;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;

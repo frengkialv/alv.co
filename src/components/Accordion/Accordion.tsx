@@ -5,7 +5,7 @@ import Icon from "../Icon";
 
 type AccordionProps = {
   value: string;
-  header: string;
+  header: string | React.ReactNode;
   children: React.ReactNode;
 };
 

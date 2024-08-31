@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { ChildrenProps } from "@/type";
+import { SortRating } from "@/constants";
 
 interface DetailCentextValue {
   selectedImageId: number;
@@ -13,11 +14,8 @@ interface DetailCentextValue {
   sizeOptions: string[];
   amountOrder: number;
   setAmountOrder: (val: number) => void;
-  showShowDialogMenu: boolean;
-  setShowSortDialogMenu: (val: boolean) => void;
-  handleSortChange: (val: string) => void;
-  sort: string;
-  setSort: (val: string) => void;
+  sortRating: SortRating;
+  setSortRating: (val: SortRating) => void;
 }
 
 export const DetailContext = React.createContext<DetailCentextValue>(null!);
@@ -41,9 +39,9 @@ function DetailProvider({ children }: ChildrenProps) {
   );
   const [amountOrder, setAmountOrder] = React.useState<number>(1);
 
-  const [showShowDialogMenu, setShowSortDialogMenu] =
-    React.useState<boolean>(false);
-  const [sort, setSort] = React.useState<string>("popularity");
+  const [sortRating, setSortRating] = React.useState<SortRating>(
+    SortRating.ASCENDING
+  );
 
   React.useEffect(() => {
     slideImage();
@@ -70,14 +68,6 @@ function DetailProvider({ children }: ChildrenProps) {
     };
   }, [selectedImageId]);
 
-  const handleSortChange = (val: string) => {
-    console.log("🚀 ~ handleSortChange ~ val:", val);
-    setSort(val);
-    setTimeout(() => {
-      setShowSortDialogMenu(false);
-    }, 500);
-  };
-
   const value = {
     selectedImageId,
     setSelectedImageId,
@@ -89,11 +79,8 @@ function DetailProvider({ children }: ChildrenProps) {
     sizeOptions,
     amountOrder,
     setAmountOrder,
-    showShowDialogMenu,
-    setShowSortDialogMenu,
-    handleSortChange,
-    sort,
-    setSort,
+    sortRating,
+    setSortRating,
   };
 
   return (

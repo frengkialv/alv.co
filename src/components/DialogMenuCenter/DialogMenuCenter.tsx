@@ -25,13 +25,12 @@ function DialogMenu({ title, open, onOpenChange, children }: Props) {
             </VisuallyHidden.Root>
             <InnerWrapper>
               <Header>
+                <HeaderTitle>{title}</HeaderTitle>
                 <Dialog.Close asChild>
                   <CloseButton className="IconButton" aria-label="Close">
                     <Icon id="close" strokeWidth={1.5} />
                   </CloseButton>
                 </Dialog.Close>
-
-                <HeaderTitle>{title}</HeaderTitle>
               </Header>
 
               <MainContent>{children}</MainContent>
@@ -55,11 +54,11 @@ from {
 
 const slideIn = keyframes`
   from {
-    right: -400px;
+    bottom: -90%;
   }
 
   to {
-    right: 0;
+    bottom: 0;
   }
 `;
 
@@ -68,7 +67,6 @@ const Backdrop = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
   animation: ${fadeIn} 0.3s linear;
-  overflow-y: auto;
   will-change: transform;
 `;
 
@@ -77,21 +75,15 @@ const Content = styled(Dialog.Content)`
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
-  top: 0;
   bottom: 0;
   right: 0;
-  width: 400px;
-  min-height: 100%;
-  height: max-content;
+  left: 0;
+  height: 85%;
   border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 1rem;
   animation: ${slideIn} 0.3s ease-out;
   animation-fill-mode: backwards;
   will-change: transform;
-
-  @media ${QUERIES.phoneAndSmaller} {
-    width: 70%;
-  }
 `;
 
 const InnerWrapper = styled.div``;
@@ -99,8 +91,9 @@ const InnerWrapper = styled.div``;
 const Header = styled.div`
   display: flex;
   gap: 16px;
+  justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 18px 20px 10px 20px;
   border-bottom: 1px solid var(--color-gray-200);
 `;
 
@@ -114,12 +107,14 @@ const CloseButton = styled.button`
 
 const HeaderTitle = styled.span`
   font-size: ${18 / 16}rem;
-  font-weight: ${WEIGHT.medium};
+  font-weight: 600;
 `;
 
 const MainContent = styled.div`
   padding: 25px;
   padding-top: 30px;
+  height: calc(85vh - 63.8px);
+  overflow-y: auto;
 `;
 
 export default DialogMenu;
