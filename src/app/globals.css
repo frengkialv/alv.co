@@ -229,7 +229,9 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
+button,
+a {
+  outline-offset: 4px;
   cursor: pointer;
 }
 

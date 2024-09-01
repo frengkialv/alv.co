@@ -30,6 +30,8 @@ export const ImageSelect = styled.div`
 
 export const ImageItem = styled.div`
   height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
 
   @media ${QUERIES.tabletAndSmaller} {
     height: auto;
