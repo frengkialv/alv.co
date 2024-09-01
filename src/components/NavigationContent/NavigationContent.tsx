@@ -4,11 +4,11 @@ import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import styled from "styled-components";
 import Icon from "../Icon";
-import { QUERIES, WEIGHT } from "@/constants";
+import AccessoriesLogo from "../SVG/AccessoriesLogo";
 import ShirtLogo from "../SVG/ShirtLogo";
 import ShoesLogo from "../SVG/ShoesLogo";
-import AccessoriesLogo from "../SVG/AccessoriesLogo";
 import SportLogo from "../SVG/SportLogo";
+import { QUERIES, WEIGHT } from "@/constants";
 
 interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   href: string;
@@ -29,7 +29,8 @@ function NavigationContent() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>
             <WrapperShopLink>
-              Shop <ChevronIcon id="chevron-down" strokeWidth={2} size={20} />
+              Shop
+              <ChevronIcon id="chevron-down" strokeWidth={2} size={20} />
             </WrapperShopLink>
           </NavigationMenuTrigger>
 

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { QUERIES } from "@/constants";
-import { ChildrenProps } from "@/type";
 
 export const ImageWrapper = () => {
   return (

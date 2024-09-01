@@ -1,11 +1,16 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import UnstyledButton from "../UnstyledButton";
-import { QUERIES } from "@/constants";
-import Tooltip from "../Tooltip";
-import Icon from "../Icon";
 import { HeaderContext } from "../Provider/HeaderProvider";
+import Icon from "../Icon";
+import Tooltip from "../Tooltip";
+import UnstyledButton from "../UnstyledButton";
+import HoverCard from "../HoverCard";
+import { QUERIES } from "@/constants";
+import ProfileDropdownContent, {
+  AvatarPofile,
+} from "../ProfileDropdownContent";
+import CartContent, { CartIconTrigger } from "../CartContent";
 
 function ActionHeader() {
   const { setShowSearchModal } = React.useContext(HeaderContext);
@@ -17,27 +22,35 @@ function ActionHeader() {
           <Icon id="search" strokeWidth={2.5} size={24} />
         </SearchButton>
       </Tooltip>
-      <Tooltip text="Shopping Cart">
-        <UnstyledButton>
-          <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
-        </UnstyledButton>
-      </Tooltip>
-      <Tooltip text="Profile">
-        <UnstyledButton>
-          <Icon id="user" strokeWidth={2.5} size={22} />
-        </UnstyledButton>
-      </Tooltip>
+      <HoverCard trigger={<CartIconTrigger />} sideOffsite={10}>
+        <CartContent />
+      </HoverCard>
+
+      <WrapperProfileDropdownDekstop>
+        <HoverCard trigger={<AvatarPofile />}>
+          <ProfileDropdownContent />
+        </HoverCard>
+      </WrapperProfileDropdownDekstop>
+
+      <WrapperProfileDropdownTablet href="/profile">
+        <AvatarPofile />
+      </WrapperProfileDropdownTablet>
     </ActionWrapper>
   );
 }
 
 const ActionWrapper = styled.div`
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 22px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    gap: 18px;
+  }
 
   @media ${QUERIES.phoneAndSmaller} {
     margin-left: auto;
-    gap: 12px;
+    gap: 16px;
   }
 `;
 
@@ -47,6 +60,23 @@ const SearchButton = styled(UnstyledButton)`
 
   @media ${QUERIES.tabletAndSmaller} {
     display: block;
+    margin-right: -5px;
+  }
+`;
+
+const WrapperProfileDropdownDekstop = styled.div`
+  display: block;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
+`;
+
+const WrapperProfileDropdownTablet = styled.a`
+  display: none;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: revert;
   }
 `;
 
