@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 import localFont from "next/font/local";
+import "./globals.css";
 import StyledComponentsRegistry from "../components/StyledComponentRegisty";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
-
 export const metadata: Metadata = {
   title: "Alv.co",
 };
@@ -79,6 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.className} ${integral_cf.variable}`}>
       <body>
+        <NextTopLoader color="#000000" height={2} showSpinner={false} />
         <Provider>
           <StyledComponentsRegistry>
             <div style={{ isolation: "isolate" }}>
