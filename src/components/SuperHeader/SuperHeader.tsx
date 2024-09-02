@@ -15,18 +15,18 @@ function SuperHeader() {
   }
   return (
     <SuperHeaderWrapper>
-      <Filler />
+      {/* <Filler /> */}
       {showSuperHeader && (
         <MarketingMassage>
           Extra 20% Off + 5% Cashback For Your First Order.
         </MarketingMassage>
       )}
 
-      <WrapperButton>
+      {/* <WrapperButton>
         <UnstyledBotton onClick={() => setShowSuperHeader(false)}>
           <Icon id="close" strokeWidth={2} color="white" />
         </UnstyledBotton>
-      </WrapperButton>
+      </WrapperButton> */}
     </SuperHeaderWrapper>
   );
 }
@@ -44,7 +44,7 @@ const dropIn = keyframes`
 
 const SuperHeaderWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   font-size: 14px;
   color: var(--color-white);
   background-color: var(--color-black);

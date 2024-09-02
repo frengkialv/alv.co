@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
 export enum SizeProps {
-  SIZE = "small",
+  SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
 }

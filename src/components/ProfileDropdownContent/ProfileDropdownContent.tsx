@@ -9,10 +9,7 @@ import UpgradeLogo from "../UpgradeLogo";
 import SignOutLogo from "../SVG/SignOutLogo";
 import WalletIcon from "../SVG/WalletIcon";
 
-const src =
-  "https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg";
-
-export function AvatarPofile() {
+export function AvatarPofile({ src }: { src: string }) {
   return (
     <AvaatarWrapper>
       <Avatar src={src} />
@@ -20,7 +17,7 @@ export function AvatarPofile() {
   );
 }
 
-function ProfileDropdownContent() {
+function ProfileDropdownContent({ src }: { src: string }) {
   return (
     <Wrapper>
       <Header>

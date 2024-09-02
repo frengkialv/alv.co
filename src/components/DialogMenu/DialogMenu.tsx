@@ -20,7 +20,7 @@ function DialogMenu({ title, open, onOpenChange, children }: Props) {
         <Backdrop>
           <Content aria-describedby={undefined}>
             <VisuallyHidden.Root>
-              <Dialog.Title>Navigation Modal</Dialog.Title>
+              <Dialog.Title>{title}</Dialog.Title>
               <Dialog.Description />
             </VisuallyHidden.Root>
             <InnerWrapper>

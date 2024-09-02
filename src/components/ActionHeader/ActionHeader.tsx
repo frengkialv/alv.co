@@ -11,9 +11,12 @@ import ProfileDropdownContent, {
   AvatarPofile,
 } from "../ProfileDropdownContent";
 import CartContent, { CartIconTrigger } from "../CartContent";
+import ProfileDetailTablet from "../ProfileDetailTablet";
 
 function ActionHeader() {
   const { setShowSearchModal } = React.useContext(HeaderContext);
+  const src =
+    "https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg";
 
   return (
     <ActionWrapper>
@@ -27,13 +30,13 @@ function ActionHeader() {
       </HoverCard>
 
       <WrapperProfileDropdownDekstop>
-        <HoverCard trigger={<AvatarPofile />}>
-          <ProfileDropdownContent />
+        <HoverCard trigger={<AvatarPofile src={src} />}>
+          <ProfileDropdownContent src={src} />
         </HoverCard>
       </WrapperProfileDropdownDekstop>
 
-      <WrapperProfileDropdownTablet href="/profile">
-        <AvatarPofile />
+      <WrapperProfileDropdownTablet>
+        <ProfileDetailTablet src={src} />
       </WrapperProfileDropdownTablet>
     </ActionWrapper>
   );
@@ -72,7 +75,7 @@ const WrapperProfileDropdownDekstop = styled.div`
   }
 `;
 
-const WrapperProfileDropdownTablet = styled.a`
+const WrapperProfileDropdownTablet = styled.div`
   display: none;
 
   @media ${QUERIES.tabletAndSmaller} {
