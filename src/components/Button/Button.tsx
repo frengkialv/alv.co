@@ -57,9 +57,9 @@ function Button({
       $variant={variant}
       $size={size}
       $grow={grow}
-      onClick={onClick}
       type={type}
       disabled={disabled}
+      onClick={onClick}
       {...delegated}
     >
       {children}

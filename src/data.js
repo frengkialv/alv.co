@@ -15,6 +15,49 @@ export const getTopSellingData = (amount) => {
   return datas;
 };
 
+export const CLOTHING_ORDERS = [
+  {
+    slug: "t-shirt-with-tape",
+    name: "T-shirt With Tape Details",
+    imgSrc: "/assets/t-shirt-with-tape.png",
+    price: 120,
+    discountByPercent: 20,
+    quantity: 2,
+    size: "Small",
+    colors: "Brown",
+  },
+  {
+    slug: "skinny-fit-jeans",
+    name: "Skinny Fit Jeans",
+    imgSrc: "/assets/skinny-fit-jeans.png",
+    price: 235,
+    discountByPercent: null,
+    quantity: 1,
+    size: "Large",
+    colors: "Blue",
+  },
+  {
+    slug: "sleeve-striped-t-shirt",
+    name: "Sleeve Striped T-shirt",
+    imgSrc: "/assets/sleeve-striped-t-shirt.png",
+    price: 160,
+    discountByPercent: 10,
+    quantity: 1,
+    size: "X-Large",
+    colors: "Orange",
+  },
+  {
+    slug: "detail",
+    name: "Gradient Graphic T-shirt",
+    imgSrc: "/assets/gradient-graphic-t-shirt.png",
+    price: 145,
+    discountByPercent: null,
+    quantity: 3,
+    size: "Small",
+    colors: "Black",
+  },
+];
+
 export const CLOTHINGS = [
   {
     slug: "t-shirt-with-tape",

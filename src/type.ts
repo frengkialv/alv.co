@@ -41,3 +41,14 @@ export interface ProductGridProps {
   discountByPercent: number | null;
   price: number;
 }
+
+export interface ClothingOrdersProps {
+  slug: string;
+  name: string;
+  imgSrc: string;
+  price: number;
+  discountByPercent: number | null;
+  quantity: number;
+  size: Size;
+  colors: string;
+}
