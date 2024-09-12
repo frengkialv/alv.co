@@ -11,12 +11,12 @@ import usePagination from "@/hooks/usePagination";
 
 interface PaginationProps {
   page: number;
-  totalPage: number;
+  totalPages: number;
   onChange: (val: number) => void;
 }
 
-function Pagination({ page, totalPage, onChange }: PaginationProps) {
-  const rowButton = usePagination(page, totalPage);
+function Pagination({ page, totalPages, onChange }: PaginationProps) {
+  const rowButton = usePagination(page, totalPages);
   const dot = "...";
 
   return (
@@ -58,9 +58,9 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
         ))}
       </WrapperPage>
       <ButtonDekstop
-        $disabled={page === totalPage}
+        $disabled={page === totalPages}
         onClick={() => {
-          if (page === totalPage) {
+          if (page === totalPages) {
             return;
           }
           onChange(Number(page + 1));
@@ -70,9 +70,9 @@ function Pagination({ page, totalPage, onChange }: PaginationProps) {
         <Icon id="arrow-right" size={20} strokeWidth={1.8} />
       </ButtonDekstop>
       <ButtonMobile
-        $disabled={page === totalPage}
+        $disabled={page === totalPages}
         onClick={() => {
-          if (page === totalPage) {
+          if (page === totalPages) {
             return;
           }
           onChange(Number(page + 1));

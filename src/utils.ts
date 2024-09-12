@@ -25,3 +25,7 @@ export function formatDiscountPrice(price: number, discountPercent: number) {
 export function isNewClothing(releaseDate: Date) {
   return differenceInDays(new Date(), releaseDate) < 30;
 }
+
+export function formatPrice(price: number) {
+  return new Intl.NumberFormat().format(price);
+}

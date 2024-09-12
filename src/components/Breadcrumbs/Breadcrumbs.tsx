@@ -31,7 +31,12 @@ function Crumb({
 
 function BreadCrumbs({ breadcrumbs }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb">
+    <nav
+      aria-label="Breadcrumb"
+      style={{
+        borderTop: "1px solid #dad8d8",
+      }}
+    >
       <BreadcrumbList>
         {breadcrumbs.map((crumb, index) => {
           const isCurrentPage = breadcrumbs.length - 1 === index;

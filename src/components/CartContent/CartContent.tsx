@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
@@ -40,6 +41,7 @@ function EmptyCart() {
 }
 
 function ListCart({ datas }: { datas: ClothingOrdersProps[] }) {
+  const router = useRouter();
   const [totalPrice, setTotalPrice] = React.useState<number>(0);
 
   React.useEffect(() => {
@@ -99,7 +101,7 @@ function ListCart({ datas }: { datas: ClothingOrdersProps[] }) {
         <Price>{totalPrice}</Price>
       </TotalPriceWrapper>
 
-      <Button size="small" grow={true}>
+      <Button size="small" grow={true} onClick={() => router.push("/cart")}>
         Go To Bag
       </Button>
     </ListCartWrapper>

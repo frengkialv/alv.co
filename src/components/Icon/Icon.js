@@ -16,6 +16,7 @@ import {
   ShoppingBag,
   ShoppingCart,
   Tag,
+  Trash2,
   Twitter,
   User,
   X,
@@ -37,6 +38,7 @@ const icons = {
   "shopping-bag": ShoppingBag,
   "shopping-cart": ShoppingCart,
   tag: Tag,
+  trash2: Trash2,
   twitter: Twitter,
   user: User,
 };
