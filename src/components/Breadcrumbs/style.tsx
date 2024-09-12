@@ -17,7 +17,6 @@ export const BreadcrumbList = styled.ol`
   padding: 16px 0;
   margin: 0;
   list-style-type: none;
-  border-top: 1px solid #dad8d8;
 `;
 
 export const CrumbWrapper = styled.li`

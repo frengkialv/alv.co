@@ -56,18 +56,34 @@ export const ImageWrapper = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
 `;
 
-export const Name = styled.div`
-  font-size: ${20 / 16}rem;
+export const Title = styled.div`
+  font-size: ${18 / 16}rem;
   font-weight: 700;
+  line-height: 1.2;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  text-transform: capitalize;
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${14 / 16}rem;
+  }
+`;
+
+export const Name = styled.div`
+  font-size: ${16 / 16}rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: capitalize;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${12 / 16}rem;
   }
 `;
 
@@ -87,28 +103,28 @@ export const PriceWrapper = styled.div`
 `;
 
 export const PriceDiscount = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: 700;
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 
 const PriceStyle = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: 700;
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 

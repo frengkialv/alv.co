@@ -4,16 +4,20 @@ import Pagination from "../Pagination/Pagination";
 import { ClothingsType } from "@/type";
 import styled from "styled-components";
 
-function PaginationWrapperCategoryPage({ datas }: { datas: ClothingsType[] }) {
-  const [page, setPage] = React.useState<number>(1);
+interface Props {
+  page: number;
+  totalPages: number;
+  onPageChange: (val: number) => void;
+}
 
-  const handleChange = (val: number) => {
-    setPage(val);
-  };
-
+function PaginationWrapperCategoryPage({
+  page,
+  totalPages,
+  onPageChange,
+}: Props) {
   return (
     <Wrapper>
-      <Pagination page={page} totalPage={9} onChange={handleChange} />
+      <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />
     </Wrapper>
   );
 }

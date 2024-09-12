@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../Button";
+import { SIZES_FILTER } from "@/constants";
 
 const Sizes = [
   "XX-Small",
@@ -13,32 +14,37 @@ const Sizes = [
   "XX-Large",
 ];
 
-function SizeFilter() {
-  const [sizesSelected, setSizesSelected] = React.useState<string[]>([]);
+interface Props {
+  value: string[];
+  onValueChange: (val: string[]) => void;
+}
 
+function SizeFilter({ value, onValueChange }: Props) {
   const handleChangeSize = (val: string) => {
-    if (sizesSelected.includes(val)) {
-      const nextSizeSelected = sizesSelected.filter(
+    if (value.includes(val)) {
+      const nextSizeSelected = value.filter(
         (sizeSelected) => sizeSelected !== val
       );
-      setSizesSelected(nextSizeSelected);
+
+      onValueChange(nextSizeSelected);
     } else {
-      const nextSizeSelected = [...sizesSelected];
+      const nextSizeSelected = [...value];
       nextSizeSelected.push(val);
-      setSizesSelected(nextSizeSelected);
+
+      onValueChange(nextSizeSelected);
     }
   };
 
   return (
     <Wrapper>
-      {Sizes.map((size) => (
+      {SIZES_FILTER.map((size) => (
         <Button
-          key={size}
+          key={size.value}
           size="small"
-          variant={sizesSelected.includes(size) ? "primary" : "secondary"}
-          onClick={() => handleChangeSize(size)}
+          variant={value.includes(size.value) ? "primary" : "secondary"}
+          onClick={() => handleChangeSize(size.value)}
         >
-          {size}
+          {size.label}
         </Button>
       ))}
     </Wrapper>

@@ -8,6 +8,11 @@ import UnstyledButton from "../UnstyledButton";
 import SortIcon from "../SVG/SortIcon";
 import { QUERIES, SortOptions, WEIGHT } from "@/constants";
 
+interface SortProps {
+  value: string;
+  onValueChange: (val: string) => void;
+}
+
 const FormRadioGroup = ({
   sort,
   setSort,
@@ -46,23 +51,25 @@ const FormRadioGroup = ({
   );
 };
 
-function SortWrapperCategoryPage() {
-  const [sort, setSort] = React.useState<string>(SortOptions[0].value);
+function SortWrapperCategoryPage({ value, onValueChange }: SortProps) {
   const [showDialogMenu, setShowDialogMenu] = React.useState<boolean>(false);
 
   const handleChangeSort = (val: string) => {
-    setSort(val);
+    onValueChange(val);
 
     setTimeout(() => {
       setShowDialogMenu(false);
     }, 1000);
   };
+
+  const sortSelected = SortOptions.filter((sort) => sort.value === value);
+
   return (
     <Wrapper>
       <ButtonDekstopWrapper>
         Sort by:
         <ButtonDekstop onClick={() => setShowDialogMenu(true)}>
-          {sort}
+          {sortSelected[0].label}
           <Icon id="chevron-down" size={18} strokeWidth={2} />
         </ButtonDekstop>
       </ButtonDekstopWrapper>
@@ -76,7 +83,7 @@ function SortWrapperCategoryPage() {
         title="Sort"
         open={showDialogMenu}
         onOpenChange={setShowDialogMenu}
-        children={<FormRadioGroup sort={sort} setSort={handleChangeSort} />}
+        children={<FormRadioGroup sort={value} setSort={handleChangeSort} />}
       />
     </Wrapper>
   );

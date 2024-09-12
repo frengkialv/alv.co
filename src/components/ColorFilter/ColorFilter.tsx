@@ -1,33 +1,39 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { COLORSFILTER } from "@/constants";
+import { COLORS_FILTER } from "@/constants";
 
-function ColorFilter() {
-  const [colorsSelected, setcolorsSelected] = React.useState<string[]>([]);
+interface Props {
+  value: string[];
+  onValueChange: (val: string[]) => void;
+}
 
+function ColorFilter({ value, onValueChange }: Props) {
   const handleChangeSize = (val: string) => {
-    if (colorsSelected.includes(val)) {
-      const nextSizeSelected = colorsSelected.filter(
-        (sizeSelected) => sizeSelected !== val
+    if (value.includes(val)) {
+      const nextColorsSelected = value.filter(
+        (colorSelected) => colorSelected !== val
       );
-      setcolorsSelected(nextSizeSelected);
+
+      onValueChange(nextColorsSelected);
     } else {
-      const nextSizeSelected = [...colorsSelected];
-      nextSizeSelected.push(val);
-      setcolorsSelected(nextSizeSelected);
+      const nextColorsSelected = [...value];
+      nextColorsSelected.push(val);
+
+      onValueChange(nextColorsSelected);
     }
   };
+
   return (
     <Wrapper>
-      {COLORSFILTER.map((color, index) => (
+      {COLORS_FILTER.map((color, index) => (
         <Row
           key={index}
           $color={color.color}
           $border={color.border}
-          onClick={() => handleChangeSize(color.color)}
+          onClick={() => handleChangeSize(color.name)}
         >
-          {colorsSelected.includes(color.color) && <>&#10004;</>}
+          {value.includes(color.name) && <>&#10004;</>}
         </Row>
       ))}
     </Wrapper>
@@ -54,6 +60,7 @@ const Row = styled.div<{ $color: string; $border: string }>`
   border: 1.5px solid ${(props) => props.$border};
   border-radius: 50%;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 export default ColorFilter;
