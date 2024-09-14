@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import localFont from "next/font/local";
-import "./globals.css";
 import StyledComponentsRegistry from "../components/StyledComponentRegisty";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
+import "./globals.css";
+
 export const metadata: Metadata = {
   title: "Alv.co",
 };

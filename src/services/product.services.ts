@@ -1,7 +1,7 @@
 import { PaginationDtoOut, ProductsType, Size } from "@/type";
 import { BaseHttpInstance } from "./base.service";
 
-interface QueryProps {
+interface QueryPropsGetProduct {
   page: number;
   price: string;
   productSize: string[];
@@ -17,7 +17,7 @@ export async function getProduct({
   color,
   category,
   sort,
-}: QueryProps): Promise<PaginationDtoOut<ProductsType[]>> {
+}: QueryPropsGetProduct): Promise<PaginationDtoOut<ProductsType[]>> {
   let url = `/product?page=${page}&size=10&price=${price}&sort=${sort}&category=${category}`;
 
   if (color.length > 0) {

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 import { AvatarPofile } from "../ProfileDropdownContent";
 import Avatar, { SizeProps } from "../Avatar";
 import DialogMenu from "../DialogMenu";
@@ -9,70 +10,208 @@ import WalletIcon from "../SVG/WalletIcon";
 import QuestionLogo from "../SVG/QuestionLogo";
 import UpgradeLogo from "../UpgradeLogo";
 import SignOutLogo from "../SVG/SignOutLogo";
-import { WEIGHT } from "@/constants";
 import UnstyledButton from "../UnstyledButton";
 import Icon from "../Icon";
+import { WEIGHT } from "@/constants";
+import { FindUserDtoOut } from "@/type";
+import Link from "next/link";
+import { deleteCookie } from "cookies-next";
 
-function Content({ src }: { src: string }) {
+function Content({
+  user,
+  dialogHandle,
+}: {
+  user: FindUserDtoOut;
+  dialogHandle: (val: boolean) => void;
+}) {
+  const router = useRouter();
+  const [initialName, setinitialName] = React.useState<string>("");
+
+  React.useEffect(() => {
+    getInitials(user.name);
+  }, []);
+
+  const getInitials = (name: string) => {
+    const firstLetter = name.charAt(0).toUpperCase();
+
+    // Find first letter
+    const spaceIndex = name.indexOf(" ");
+
+    // Find second letter
+    const secondLetter =
+      spaceIndex !== -1 ? name.charAt(spaceIndex + 1).toUpperCase() : "";
+
+    // Join first latter and second letter
+    const result = firstLetter + secondLetter;
+
+    setinitialName(result);
+  };
+
+  const handleSignOut = () => {
+    deleteCookie("access_token");
+    dialogHandle(false);
+
+    // for hard reload
+    window.location.href = "/login";
+  };
   return (
     <ContentWrapper>
       <Header>
-        <Avatar src={src} size={SizeProps.LARGE} />
+        <Avatar src={""} size={SizeProps.LARGE} name={initialName} />
         <DetailUser>
-          <Name>Ragnar Oeramsey</Name>
-          <Email>ragnar.oeramsey@gmail.com</Email>
+          <Name>{user.name}</Name>
+          <Email>{user.email}</Email>
         </DetailUser>
       </Header>
-      <Row href="/setting">
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/");
+        }}
+      >
         <SettingLogo />
         Profile Settings
-        <UnstyledButton style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} />
-        </UnstyledButton>
+        </div>
       </Row>
-      <Row href="/wallet">
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/");
+        }}
+      >
         <WalletIcon />
         My Wallet
-        <UnstyledButton style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} />
-        </UnstyledButton>
+        </div>
       </Row>
-      <Row href="/help-center">
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/");
+        }}
+      >
         <QuestionLogo />
         Help Center
-        <UnstyledButton style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} />
-        </UnstyledButton>
+        </div>
       </Row>
-      <Row href="/upgrade-plan">
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/");
+        }}
+      >
         <UpgradeLogo />
         Upgrade Plan
-        <UnstyledButton style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} />
-        </UnstyledButton>
+        </div>
       </Row>
-      <Row>
+      <LogoutButton onClick={() => handleSignOut()}>
         <SignOutLogo />
         Sign Out
-        <UnstyledButton style={{ marginLeft: "auto" }}>
+        <div style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} color="red" />
-        </UnstyledButton>
+        </div>
+      </LogoutButton>
+    </ContentWrapper>
+  );
+}
+
+function EmptyContent({
+  dialogHandle,
+}: {
+  dialogHandle: (val: boolean) => void;
+}) {
+  const router = useRouter();
+
+  return (
+    <ContentWrapper>
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/login");
+        }}
+      >
+        <Icon id="login" size={18} strokeWidth={2} />
+        <EmptyDropdownLink>Login</EmptyDropdownLink>
+        <IconWrapper style={{ marginLeft: "auto" }}>
+          <Icon id="chevron-right" strokeWidth={1.5} />
+        </IconWrapper>
+      </Row>
+
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/login");
+        }}
+      >
+        <SettingLogo />
+        Profile Settings
+        <IconWrapper style={{ marginLeft: "auto" }}>
+          <Icon id="chevron-right" strokeWidth={1.5} />
+        </IconWrapper>
+      </Row>
+
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/login");
+        }}
+      >
+        <WalletIcon />
+        My Wallet
+        <IconWrapper style={{ marginLeft: "auto" }}>
+          <Icon id="chevron-right" strokeWidth={1.5} />
+        </IconWrapper>
+      </Row>
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/login");
+        }}
+      >
+        <QuestionLogo />
+        Help Center
+        <IconWrapper style={{ marginLeft: "auto" }}>
+          <Icon id="chevron-right" strokeWidth={1.5} />
+        </IconWrapper>
+      </Row>
+      <Row
+        onClick={() => {
+          dialogHandle(false);
+          router.push("/login");
+        }}
+      >
+        <UpgradeLogo />
+        Upgrade Plan
+        <IconWrapper style={{ marginLeft: "auto" }}>
+          <Icon id="chevron-right" strokeWidth={1.5} />
+        </IconWrapper>
       </Row>
     </ContentWrapper>
   );
 }
 
-function ProfileDetailTablet({ src }: { src: string }) {
+function ProfileDetailTablet({ user }: { user: FindUserDtoOut | undefined }) {
   const [showDialogMenu, setshowDialogMenu] = React.useState<boolean>(false);
 
   return (
     <Wrapper>
       <UnstyledButton onClick={() => setshowDialogMenu(true)}>
-        <AvatarPofile src={src} />
+        <AvatarPofile />
       </UnstyledButton>
 
       <DialogMenu open={showDialogMenu} onOpenChange={setshowDialogMenu}>
-        <Content src={src} />
+        {user ? (
+          <Content user={user} dialogHandle={setshowDialogMenu} />
+        ) : (
+          <EmptyContent dialogHandle={setshowDialogMenu} />
+        )}
       </DialogMenu>
     </Wrapper>
   );
@@ -103,6 +242,7 @@ const Name = styled.span`
   font-size: ${18 / 16}rem;
   font-weight: ${WEIGHT.medium};
   white-space: nowrap;
+  text-transform: capitalize;
 `;
 
 const Email = styled.span`
@@ -112,7 +252,7 @@ const Email = styled.span`
   white-space: nowrap;
 `;
 
-const Row = styled.a`
+const Row = styled(UnstyledButton)`
   display: flex;
   gap: 12px;
   align-items: center;
@@ -122,9 +262,35 @@ const Row = styled.a`
   font-weight: ${WEIGHT.medium};
   border-top: 0.7px solid var(--color-gray-200);
 
-  &:last-child {
-    color: red;
+  &:first-child {
+    border: none;
   }
+`;
+
+const LogoutButton = styled(UnstyledButton)`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 15px 4px;
+  color: red;
+  font-size: ${18 / 16}rem;
+  font-weight: ${WEIGHT.medium};
+  border-top: 0.7px solid var(--color-gray-200);
+`;
+
+const EmptyDropdownLink = styled.div`
+  text-decoration: none;
+  color: var(--color-black);
+  line-height: 1.2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const IconWrapper = styled.div`
+  position: relative;
+  min-width: 35px;
 `;
 
 export default ProfileDetailTablet;

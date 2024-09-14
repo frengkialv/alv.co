@@ -225,7 +225,8 @@ select {
 
 button,
 span,
-a {
+a,
+div {
   -webkit-tap-highlight-color: transparent;
 }
 
