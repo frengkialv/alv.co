@@ -23,7 +23,14 @@ interface Props {
 
 function AccordionHeader() {
   return (
-    <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "14px",
+        alignItems: "center",
+        fontWeight: 500,
+      }}
+    >
       <Icon id="shopping-bag" size={18} strokeWidth={2} />
       Shop
     </div>
@@ -163,7 +170,7 @@ const Content = styled(Dialog.Content)`
   will-change: transform;
 
   @media ${QUERIES.phoneAndSmaller} {
-    width: 70%;
+    width: 80%;
   }
 `;
 
@@ -206,7 +213,7 @@ const LinkWrapper = styled(Link)`
   gap: 14px;
   align-items: center;
   color: var(--color-black);
-  font-weight: 600;
+  font-weight: ${WEIGHT.medium};
   text-decoration: none;
   user-select: none;
   white-space: nowrap;

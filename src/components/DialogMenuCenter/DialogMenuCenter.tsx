@@ -13,7 +13,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function DialogMenu({ title, open, onOpenChange, children }: Props) {
+function DialogMenuCenter({ title, open, onOpenChange, children }: Props) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
@@ -117,4 +117,4 @@ const MainContent = styled.div`
   overflow-y: auto;
 `;
 
-export default DialogMenu;
+export default DialogMenuCenter;

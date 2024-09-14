@@ -90,7 +90,7 @@ const Content = styled(Dialog.Content)`
   will-change: transform;
 
   @media ${QUERIES.phoneAndSmaller} {
-    width: 70%;
+    width: 80%;
   }
 `;
 
