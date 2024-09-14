@@ -1,6 +1,6 @@
 import React from "react";
 import MainProductList from "../MainProductList";
-import { ClothingsType, ProductsType } from "@/type";
+import { ProductsType } from "@/type";
 import { Wrapper } from "./style";
 
 function MainGrid({ datas }: { datas: ProductsType[] }) {

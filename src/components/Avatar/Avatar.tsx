@@ -26,15 +26,17 @@ const SIZE = {
 function Avatar({
   src,
   size = SizeProps.MEDIUM,
+  name,
 }: {
-  src: string;
+  src?: string;
   size?: SizeProps;
+  name?: string;
 }) {
   return (
     <div style={{ display: "flex", gap: 20 }}>
       <Root $size={size}>
         <Image src={src} alt="Display Picture" />
-        <Fallback delayMs={600}>FA</Fallback>
+        <Fallback delayMs={600}>{name}</Fallback>
       </Root>
     </div>
   );
@@ -47,6 +49,7 @@ const Root = styled(AvatarPrimitive.Root)<{ $size: SizeProps }>`
   vertical-align: middle;
   overflow: hidden;
   user-select: none;
+  border: 2px solid var(--color-black);
   border-radius: 100%;
   cursor: pointer;
 
@@ -70,7 +73,7 @@ const Fallback = styled(AvatarPrimitive.Fallback)`
   color: var(--violet-11);
   font-size: 15px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 export default Avatar;

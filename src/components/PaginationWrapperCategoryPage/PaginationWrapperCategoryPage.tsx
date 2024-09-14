@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Pagination from "../Pagination/Pagination";
-import { ClothingsType } from "@/type";
 import styled from "styled-components";
 
 interface Props {

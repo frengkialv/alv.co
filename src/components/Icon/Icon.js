@@ -20,6 +20,9 @@ import {
   Twitter,
   User,
   X,
+  Eye,
+  EyeOff,
+  LogIn,
 } from "react-feather";
 
 const icons = {
@@ -31,7 +34,10 @@ const icons = {
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
   email: Mail,
+  eye: Eye,
+  "eye-off": EyeOff,
   home: Home,
+  login: LogIn,
   menu: Menu,
   scissors: Scissors,
   search: Search,
@@ -59,7 +65,7 @@ function Icon({
   return (
     <Wrapper
       strokeWidth={strokeWidth}
-      style={{ "--min-width": "22px" }}
+      // style={{ "--min-width": "22px" }}
       {...delegated}
     >
       <Component color={color} size={size} />
@@ -69,6 +75,7 @@ function Icon({
 
 const Wrapper = styled.div`
   min-width: var(--min-width);
+
   & > svg {
     display: block;
     stroke-width: ${(p) =>

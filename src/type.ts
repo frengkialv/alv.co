@@ -113,3 +113,19 @@ export interface CommonApiResponse<T> {
   message: string;
   data: T;
 }
+
+export interface LoginProps {
+  email: string;
+  password: string;
+}
+
+export interface LoginDtoOut {
+  access_token: string;
+}
+
+export interface FindUserDtoOut {
+  email: string;
+  id: string;
+  name: string;
+  username: string;
+}

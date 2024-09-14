@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { HeaderContext } from "../Provider/HeaderProvider";
 import Icon from "../Icon";
@@ -10,18 +11,39 @@ import HoverCard from "../HoverCard";
 import { QUERIES } from "@/constants";
 import ProfileDropdownContent, {
   AvatarPofile,
+  ProfileDropdownContentEmpty,
 } from "../ProfileDropdownContent";
 import { CLOTHING_ORDERS } from "@/data";
 import CartContent, { CartIconTrigger } from "../CartContent";
 import ProfileDetailTablet from "../ProfileDetailTablet";
 import BadgeNotification from "../BadgeNotification";
+import { findUser } from "@/services/user.service";
+import { FindUserDtoOut } from "@/type";
+
+const SRC_IMAGE =
+  "https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png";
 
 function ActionHeader() {
   const router = useRouter();
-
+  const accessToken = getCookie("access_token");
   const { setShowSearchModal } = React.useContext(HeaderContext);
-  const src =
-    "https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg";
+  const [user, setUser] = React.useState<FindUserDtoOut>();
+
+  React.useEffect(() => {
+    if (accessToken) {
+      findUserHandler();
+    }
+  }, []);
+
+  const findUserHandler = async () => {
+    try {
+      const { data } = await findUser();
+
+      setUser(data);
+    } catch (error) {
+      console.log("🚀 ~ findUserHandler ~ error:", error);
+    }
+  };
 
   return (
     <ActionWrapper>
@@ -46,13 +68,17 @@ function ActionHeader() {
       </WrapperCartDropdownTablet>
 
       <WrapperProfileDropdownDekstop>
-        <HoverCard trigger={<AvatarPofile src={src} />}>
-          <ProfileDropdownContent src={src} />
+        <HoverCard trigger={<AvatarPofile />}>
+          {accessToken ? (
+            <ProfileDropdownContent user={user} />
+          ) : (
+            <ProfileDropdownContentEmpty />
+          )}
         </HoverCard>
       </WrapperProfileDropdownDekstop>
 
       <WrapperProfileDropdownTablet>
-        <ProfileDetailTablet src={src} />
+        <ProfileDetailTablet user={user} />
       </WrapperProfileDropdownTablet>
     </ActionWrapper>
   );
