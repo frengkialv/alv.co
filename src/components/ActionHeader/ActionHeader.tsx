@@ -20,9 +20,6 @@ import BadgeNotification from "../BadgeNotification";
 import { findUser } from "@/services/user.service";
 import { FindUserDtoOut } from "@/type";
 
-const SRC_IMAGE =
-  "https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png";
-
 function ActionHeader() {
   const router = useRouter();
   const accessToken = getCookie("access_token");

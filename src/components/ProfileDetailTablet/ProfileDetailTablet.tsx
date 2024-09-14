@@ -14,7 +14,6 @@ import UnstyledButton from "../UnstyledButton";
 import Icon from "../Icon";
 import { WEIGHT } from "@/constants";
 import { FindUserDtoOut } from "@/type";
-import Link from "next/link";
 import { deleteCookie } from "cookies-next";
 
 function Content({
@@ -138,7 +137,7 @@ function EmptyContent({
         }}
       >
         <Icon id="login" size={18} strokeWidth={2} />
-        <EmptyDropdownLink>Login</EmptyDropdownLink>
+        Login
         <IconWrapper style={{ marginLeft: "auto" }}>
           <Icon id="chevron-right" strokeWidth={1.5} />
         </IconWrapper>
@@ -222,7 +221,7 @@ const Wrapper = styled.div``;
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  margin-top: -15px;
 `;
 
 const Header = styled.div`
@@ -258,13 +257,8 @@ const Row = styled(UnstyledButton)`
   align-items: center;
   padding: 15px 4px;
   color: var(--color-black);
-  font-size: ${18 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.medium};
-  border-top: 0.7px solid var(--color-gray-200);
-
-  &:first-child {
-    border: none;
-  }
 `;
 
 const LogoutButton = styled(UnstyledButton)`
