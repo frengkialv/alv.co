@@ -47,7 +47,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
 };
 
 function RatingCarousel() {
-  const { width } = Reaact.useContext(MainWrapperContext);
+  const { width } = React.useContext(MainWrapperContext);
 
   return (
     <Wrapper>
