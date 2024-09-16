@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ChildrenProps } from "@/type";
+import { ChildrenProps } from "@/types/common";
 
 interface CategoryContextValue {
   showFilterTablet: boolean;

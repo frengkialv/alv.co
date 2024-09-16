@@ -23,6 +23,7 @@ import {
   Eye,
   EyeOff,
   LogIn,
+  AlertCircle,
 } from "react-feather";
 
 const icons = {
@@ -47,6 +48,7 @@ const icons = {
   trash2: Trash2,
   twitter: Twitter,
   user: User,
+  warning: AlertCircle,
 };
 
 function Icon({

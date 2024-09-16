@@ -2,10 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { ChildrenProps, Size } from "@/type";
-import Image from "next/image";
+import Rating, { RatingSize } from "../Rating";
 import { QUERIES } from "@/constants";
-import Rating from "../Rating";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 
 interface PriceProps {
@@ -38,7 +36,10 @@ export const RatingDuplicate = ({ rating }: { rating: number }) => {
   const { width } = React.useContext(MainWrapperContext);
 
   return (
-    <Rating rating={rating} size={width > 675 ? Size.MEDIUM : Size.SMALL} />
+    <Rating
+      rating={rating}
+      size={width > 675 ? RatingSize.MEDIUM : RatingSize.SMALL}
+    />
   );
 };
 
@@ -57,6 +58,10 @@ export const Row = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 7px;
+  }
 `;
 
 export const Title = styled.div`
@@ -129,11 +134,19 @@ const PriceStyle = styled.span`
 `;
 
 export const DiscountFlag = styled.span`
-  font-size: ${12 / 16}rem;
+  font-size: ${13 / 16}rem;
   font-weight: 500;
   color: var(--color-red);
   background-color: var(--color-soft-pink);
-  padding: 6px 16px;
+  padding: 6px 12px;
   text-align: center;
   border-radius: 40px;
+
+  &::before {
+    content: "-";
+  }
+
+  &::after {
+    content: "%";
+  }
 `;

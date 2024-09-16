@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "@/type";
 import { DetailContext } from "../Provider/DetailProvider";
 
 function ImageLink({
@@ -23,6 +22,8 @@ function ImageLink({
 const ImageLinkWrapper = styled.a`
   position: relative;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
 
   &:hover {
     opacity: 0.8;

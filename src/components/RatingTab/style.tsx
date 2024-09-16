@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "@/type";
 import { QUERIES, WEIGHT } from "@/constants";
+import { ChildrenProps } from "@/types/common";
 
 export const Wrapper = ({ children }: ChildrenProps) => {
   return <WrapperStyle>{children}</WrapperStyle>;

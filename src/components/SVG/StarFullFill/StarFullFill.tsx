@@ -1,6 +1,6 @@
 import * as React from "react";
-import { SVGProps } from "@/type";
 import styled from "styled-components";
+import { SVGProps } from "@/types/common";
 
 const StarBorderIcon = ({ width = "18px", height, ...props }: SVGProps) => {
   return (

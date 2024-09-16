@@ -2,19 +2,19 @@
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
-import { AvatarPofile } from "../ProfileDropdownContent";
 import Avatar, { SizeProps } from "../Avatar";
 import DialogMenu from "../DialogMenu";
+import Icon from "../Icon";
 import SettingLogo from "../SVG/SettingLogo";
 import WalletIcon from "../SVG/WalletIcon";
 import QuestionLogo from "../SVG/QuestionLogo";
-import UpgradeLogo from "../UpgradeLogo";
+import UpgradeLogo from "../SVG/UpgradeLogo";
 import SignOutLogo from "../SVG/SignOutLogo";
 import UnstyledButton from "../UnstyledButton";
-import Icon from "../Icon";
+import { AvatarPofile } from "../ProfileDropdownContent";
 import { WEIGHT } from "@/constants";
-import { FindUserDtoOut } from "@/type";
 import { deleteCookie } from "cookies-next";
+import { FindUserDtoOut } from "@/services/user.service";
 
 function Content({
   user,
@@ -131,6 +131,9 @@ function EmptyContent({
   return (
     <ContentWrapper>
       <Row
+        style={{
+          paddingTop: 0,
+        }}
         onClick={() => {
           dialogHandle(false);
           router.push("/login");
@@ -221,7 +224,6 @@ const Wrapper = styled.div``;
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: -15px;
 `;
 
 const Header = styled.div`

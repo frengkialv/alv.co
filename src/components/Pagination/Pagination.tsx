@@ -1,5 +1,6 @@
 import React from "react";
 import Icon from "../Icon";
+import usePagination from "@/hooks/usePagination";
 import {
   ButtonDekstop,
   ButtonMobile,
@@ -7,7 +8,6 @@ import {
   Wrapper,
   WrapperPage,
 } from "./styles";
-import usePagination from "@/hooks/usePagination";
 
 interface PaginationProps {
   page: number;

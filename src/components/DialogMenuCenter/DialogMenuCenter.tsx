@@ -4,7 +4,6 @@ import styled, { keyframes } from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import Icon from "../Icon";
-import { QUERIES, WEIGHT } from "@/constants";
 
 interface Props {
   title?: string;

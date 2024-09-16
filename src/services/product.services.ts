@@ -1,5 +1,6 @@
-import { PaginationDtoOut, ProductsType, Size } from "@/type";
 import { BaseHttpInstance } from "./base.service";
+import { ProductsType } from "@/types/product";
+import { CommonApiResponse, PaginationDtoOut } from "@/types/common";
 
 interface QueryPropsGetProduct {
   page: number;
@@ -37,6 +38,16 @@ export async function getProduct({
 
     url += productSizeUrl;
   }
+
+  const { data: resp } = await BaseHttpInstance.get(url);
+
+  return resp;
+}
+
+export async function getProductByName(
+  name: string
+): Promise<CommonApiResponse<ProductsType>> {
+  const url = `product/detail/name/${name}`;
 
   const { data: resp } = await BaseHttpInstance.get(url);
 

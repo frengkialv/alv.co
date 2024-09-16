@@ -1,7 +1,7 @@
 import React from "react";
 import MainProductList from "../MainProductList";
-import { ProductsType } from "@/type";
 import { Wrapper } from "./style";
+import { ProductsType } from "@/types/product";
 
 function MainGrid({ datas }: { datas: ProductsType[] }) {
   return (
@@ -19,6 +19,7 @@ function MainGrid({ datas }: { datas: ProductsType[] }) {
             rating={5}
             discountByPercent={data.discountByPercent}
             price={data.price}
+            categoryProduct={data.categoryProduct.name}
           />
         );
       })}

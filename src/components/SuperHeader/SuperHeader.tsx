@@ -2,8 +2,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { QUERIES } from "@/constants";
-import Icon from "../Icon";
-import UnstyledBotton from "../UnstyledButton";
 import { HeaderContext } from "../Provider/HeaderProvider";
 
 function SuperHeader() {

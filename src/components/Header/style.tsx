@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { QUERIES } from "@/constants";
 import { HeaderContext } from "@/components/Provider/HeaderProvider";
-import { ChildrenProps } from "@/type";
+import { ChildrenProps } from "@/types/common";
 
 export const HeaderWrapper = ({ children }: ChildrenProps) => {
   const { showSuperHeader } = React.useContext(HeaderContext);

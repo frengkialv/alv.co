@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { SVGProps } from "@/type";
+import { SVGProps } from "@/types/common";
 
 const VersaceLogo = ({
   width = "165px",

@@ -106,7 +106,7 @@ export const Value = styled.span`
   font-weight: 700;
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -115,12 +115,12 @@ export const Value = styled.span`
 `;
 
 export const DiscountValue = styled.span`
-  font-size: ${18 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: 700;
   color: var(--color-red);
 
   &::before {
-    content: "-$";
+    content: "-$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { QUERIES } from "@/constants";
 import Marquee from "react-fast-marquee";
 import VersaceLogo from "../SVG/VersaceLogo";
 import ZaraLogo from "../SVG/ZaraLogo";
@@ -11,6 +10,7 @@ import CKLogo from "../SVG/CKLogo";
 import StussyLogo from "../SVG/StussyLogo";
 import ChampionLogo from "../SVG/ChampionLogo";
 import ObeyLogo from "../SVG/ObeyLogo";
+import { QUERIES } from "@/constants";
 
 function LogoBrand() {
   return (

@@ -1,6 +1,6 @@
+import { SVGProps } from "@/types/common";
 import * as React from "react";
 import styled from "styled-components";
-import { SVGProps } from "@/type";
 
 const GucciLogo = ({
   width = "160px",

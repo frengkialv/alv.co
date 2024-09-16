@@ -39,6 +39,9 @@ export const ImageItem = styled.div`
 `;
 
 export const RowImageDisplay = styled.div`
+  position: "relative";
+  width: "100%";
+  height: "100%";
   min-height: 100%;
   min-width: 100%;
 `;

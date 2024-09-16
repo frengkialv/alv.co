@@ -1,6 +1,6 @@
-import { SVGProps } from "@/type";
 import * as React from "react";
 import styled from "styled-components";
+import { SVGProps } from "@/types/common";
 
 const SVGComponent = ({
   width = "120px",

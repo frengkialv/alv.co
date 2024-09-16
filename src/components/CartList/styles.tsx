@@ -18,31 +18,48 @@ export const Row = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  width: 125px;
+  flex: 1;
+  position: relative;
+  min-width: 125px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
 export const DetailWrapper = styled.div`
-  flex: 1;
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  height: auto;
 `;
 
 export const ProductNameWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2px;
 `;
 
 export const ProductName = styled.h6`
-  font-size: ${20 / 16}rem;
+  font-size: ${16 / 16}rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 85%;
   line-height: 1;
+  text-transform: capitalize;
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${14 / 16}rem;
   }
+`;
+
+export const EntityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 
 export const ProductAttributesWrapper = styled.div`
@@ -62,14 +79,110 @@ export const ProductValue = styled.span`
 `;
 
 export const ProductPrice = styled.h5`
-  font-size: ${20 / 16}rem;
-  margin-top: 4px;
+  font-size: ${15 / 16}rem;
 
   &::before {
     content: "$";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${13 / 16}rem;
   }
+`;
+
+export const PriceWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
+
+export const DiscountFlag = styled.span`
+  font-size: ${12 / 16}rem;
+  font-weight: 500;
+  color: var(--color-red);
+  background-color: var(--color-soft-pink);
+  padding: 6px 14px;
+  text-align: center;
+  border-radius: 40px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding: 4px 12px;
+  }
+`;
+
+export const BottomContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const QuantitiOrderButtonWrapper = styled.div`
+  display: flex;
+`;
+
+export const SubtractionButton = styled.button`
+  font-family: "Times New Roman", Times, serif;
+  font-size: ${16 / 16}rem;
+  font-weight: 800;
+  line-height: 0;
+  padding: 10px;
+  padding-left: 20px;
+  color: var(--color-black);
+  border: none;
+  border-top-left-radius: 60px 60px;
+  border-bottom-left-radius: 60px;
+  outline: none;
+  cursor: pointer;
+`;
+
+export const QuantitiInput = styled.input`
+  font-weight: ${WEIGHT.medium};
+  text-align: center;
+  font-size: ${14 / 16}rem;
+  width: 30px;
+  padding: 8px 0;
+  color: var(--color-black);
+  background-color: var(--color-snow-flake);
+  border: none;
+  outline: none;
+  user-select: none;
+
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+    margin: 0;
+  }
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 15px;
+    font-size: ${12 / 16}rem;
+  }
+`;
+
+export const AdditionButton = styled.button`
+  font-family: "Times New Roman", Times, serif;
+  font-size: ${16 / 16}rem;
+  font-weight: 800;
+  line-height: 0;
+  padding: 10px;
+  padding-right: 20px;
+  color: var(--color-black);
+  border: none;
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
+  outline: none;
+  cursor: pointer;
 `;

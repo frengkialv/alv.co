@@ -15,6 +15,7 @@ function ProductGrid({ datas }: { datas: ClothingsType[] }) {
           rating={data.rating}
           discountByPercent={data.discountByPercent}
           price={data.price}
+          categoryProduct={"need to fix"}
         />
       ))}
     </Wrapper>

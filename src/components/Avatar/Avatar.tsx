@@ -8,7 +8,7 @@ export enum SizeProps {
   LARGE = "large",
 }
 
-const SIZE = {
+const AVATAR_SIZE = {
   small: css`
     width: 28px;
     height: 28px;
@@ -53,7 +53,7 @@ const Root = styled(AvatarPrimitive.Root)<{ $size: SizeProps }>`
   border-radius: 100%;
   cursor: pointer;
 
-  ${(props) => SIZE[props.$size]}
+  ${(props) => AVATAR_SIZE[props.$size]}
 `;
 
 const Image = styled(AvatarPrimitive.Image)`

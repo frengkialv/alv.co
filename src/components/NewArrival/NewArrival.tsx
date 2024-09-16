@@ -1,6 +1,6 @@
 import React from "react";
-import { getNewestData } from "@/data";
 import ProductGrid from "../ProductGrid";
+import { getNewestData } from "@/data";
 import {
   Button,
   ButtonWrapper,

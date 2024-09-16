@@ -1,6 +1,6 @@
 import React from "react";
-import { ProductGridProps } from "@/type";
-import { formatDiscountPrice } from "@/utils";
+import Image from "next/image";
+import { formatDiscountPrice, formatPrice } from "@/utils";
 import {
   DiscountFlag,
   ImageWrapper,
@@ -15,7 +15,7 @@ import {
   Row,
   Title,
 } from "./style";
-import Image from "next/image";
+import { ProductGridProps } from "@/types/product";
 
 function MainProductList({
   slug,
@@ -25,9 +25,12 @@ function MainProductList({
   rating,
   discountByPercent,
   price,
+  categoryProduct,
 }: ProductGridProps) {
+  const linkProduct = `/detail/${categoryProduct}/${slug.replaceAll(" ", "+")}`;
+
   return (
-    <ProductListWrapper slug={slug}>
+    <ProductListWrapper slug={linkProduct}>
       <ImageWrapper>
         <div
           style={{
@@ -66,7 +69,7 @@ function MainProductList({
         <PriceWrapper>
           {discountByPercent && (
             <PriceDiscount>
-              {formatDiscountPrice(price, discountByPercent)}
+              {formatPrice(formatDiscountPrice(price, discountByPercent))}
             </PriceDiscount>
           )}
 
@@ -74,11 +77,11 @@ function MainProductList({
             color={discountByPercent ? "#999999" : undefined}
             lineDecoration={discountByPercent ? "line-through" : undefined}
           >
-            {price}
+            {formatPrice(price)}
           </Price>
 
           {discountByPercent && (
-            <DiscountFlag>{discountByPercent}%</DiscountFlag>
+            <DiscountFlag>{discountByPercent}</DiscountFlag>
           )}
         </PriceWrapper>
       </Row>

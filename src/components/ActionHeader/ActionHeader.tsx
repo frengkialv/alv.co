@@ -1,34 +1,38 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { HeaderContext } from "../Provider/HeaderProvider";
 import Icon from "../Icon";
 import Tooltip from "../Tooltip";
 import UnstyledButton from "../UnstyledButton";
 import HoverCard from "../HoverCard";
+import ProfileDetailTablet from "../ProfileDetailTablet";
+import BadgeNotification from "../BadgeNotification";
+import CartContent, { CartIconTrigger } from "../CartContent";
+import { getCookie } from "cookies-next";
+import { usePathname, useRouter } from "next/navigation";
+import { HeaderContext } from "../Provider/HeaderProvider";
 import { QUERIES } from "@/constants";
+import { findUser, FindUserDtoOut } from "@/services/user.service";
+import { CartType } from "@/types/cart";
+import { getCart } from "@/services/cart.service";
 import ProfileDropdownContent, {
   AvatarPofile,
   ProfileDropdownContentEmpty,
 } from "../ProfileDropdownContent";
-import { CLOTHING_ORDERS } from "@/data";
-import CartContent, { CartIconTrigger } from "../CartContent";
-import ProfileDetailTablet from "../ProfileDetailTablet";
-import BadgeNotification from "../BadgeNotification";
-import { findUser } from "@/services/user.service";
-import { FindUserDtoOut } from "@/type";
 
 function ActionHeader() {
   const router = useRouter();
+  const pathname = usePathname();
+
   const accessToken = getCookie("access_token");
   const { setShowSearchModal } = React.useContext(HeaderContext);
   const [user, setUser] = React.useState<FindUserDtoOut>();
+  const [carts, setCarts] = React.useState<CartType[]>([]);
 
   React.useEffect(() => {
     if (accessToken) {
       findUserHandler();
+      findCartHandler();
     }
   }, []);
 
@@ -42,6 +46,16 @@ function ActionHeader() {
     }
   };
 
+  const findCartHandler = async () => {
+    try {
+      const { data } = await getCart();
+
+      setCarts(data);
+    } catch (error) {
+      console.log("🚀 ~ findCartHandler ~ error:", error);
+    }
+  };
+
   return (
     <ActionWrapper>
       <Tooltip text="Search">
@@ -50,22 +64,29 @@ function ActionHeader() {
         </SearchButton>
       </Tooltip>
 
-      <WrapperCartDropdownDekstop>
-        <HoverCard trigger={<CartIconTrigger />} sideOffsite={10}>
-          <CartContent />
-        </HoverCard>
-      </WrapperCartDropdownDekstop>
+      {pathname !== "/cart" && (
+        <WrapperCartDropdownDekstop>
+          <HoverCard
+            trigger={<CartIconTrigger badgeNumber={carts.length} />}
+            sideOffsite={10}
+          >
+            <CartContent carts={carts} />
+          </HoverCard>
+        </WrapperCartDropdownDekstop>
+      )}
 
-      <WrapperCartDropdownTablet>
-        <BadgeNotification badgeNumber={CLOTHING_ORDERS.length}>
-          <UnstyledButton onClick={() => router.push("/cart")}>
-            <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
-          </UnstyledButton>
-        </BadgeNotification>
-      </WrapperCartDropdownTablet>
+      {pathname !== "/cart" && (
+        <WrapperCartDropdownTablet>
+          <BadgeNotification badgeNumber={carts.length}>
+            <UnstyledButton onClick={() => router.push("/cart")}>
+              <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
+            </UnstyledButton>
+          </BadgeNotification>
+        </WrapperCartDropdownTablet>
+      )}
 
       <WrapperProfileDropdownDekstop>
-        <HoverCard trigger={<AvatarPofile />}>
+        <HoverCard trigger={<AvatarPofile />} sideOffsite={7}>
           {accessToken ? (
             <ProfileDropdownContent user={user} />
           ) : (

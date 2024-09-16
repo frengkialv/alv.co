@@ -2,10 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { ChildrenProps, Size } from "@/type";
-import Image from "next/image";
 import { QUERIES } from "@/constants";
-import Rating from "../Rating";
+import Rating, { RatingSize } from "../Rating";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 
 interface PriceProps {
@@ -38,7 +36,10 @@ export const RatingDuplicate = ({ rating }: { rating: number }) => {
   const { width } = React.useContext(MainWrapperContext);
 
   return (
-    <Rating rating={rating} size={width > 675 ? Size.MEDIUM : Size.SMALL} />
+    <Rating
+      rating={rating}
+      size={width > 675 ? RatingSize.MEDIUM : RatingSize.SMALL}
+    />
   );
 };
 

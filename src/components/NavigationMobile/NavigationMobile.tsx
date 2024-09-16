@@ -5,7 +5,6 @@ import styled, { keyframes } from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import Icon from "../Icon";
-import { QUERIES, WEIGHT } from "@/constants";
 import Accordion from "../Accordion";
 import ShirtLogo from "../SVG/ShirtLogo";
 import ShoesLogo from "../SVG/ShoesLogo";
@@ -13,8 +12,9 @@ import AccessoriesLogo from "../SVG/AccessoriesLogo";
 import SportLogo from "../SVG/SportLogo";
 import HangerLogo from "../SVG/HangerLogo";
 import SaleIcon from "../SVG/SaleIcon";
-import { LogoWrapper } from "../MainHeader/style";
 import Logo from "../Logo";
+import { LogoWrapper } from "../MainHeader/style";
+import { QUERIES, WEIGHT } from "@/constants";
 
 interface Props {
   open: boolean | undefined;

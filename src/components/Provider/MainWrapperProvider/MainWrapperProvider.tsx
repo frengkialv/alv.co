@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { ChildrenProps } from "@/type";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { ChildrenProps } from "@/types/common";
 
 interface MainWrapperContextValue {
   width: number;

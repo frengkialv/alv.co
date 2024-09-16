@@ -6,8 +6,8 @@ const MachineWashLogo = (props: SVGProps<SVGSVGElement>) => (
     id="Uploaded to svgrepo.com"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width="25px"
-    height="25px"
+    width="21px"
+    height="21px"
     viewBox="0 0 32 32"
     xmlSpace="preserve"
     {...props}

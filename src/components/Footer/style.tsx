@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Icon from "../Icon";
 import { FooterContext } from "../Provider/FooterProvider";
-import { ChildrenProps } from "@/type";
 import { QUERIES, WEIGHT } from "@/constants";
+import { ChildrenProps } from "@/types/common";
 
 export const Wrapper = ({ children }: ChildrenProps) => {
   const { subscriberWrapperHeight } = useContext(FooterContext);

@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import styled from "styled-components";
-import { SVGProps } from "@/type";
+import { SVGProps } from "@/types/common";
 
 const PradaLogo = ({
   width = "195px",

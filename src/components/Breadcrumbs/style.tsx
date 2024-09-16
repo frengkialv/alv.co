@@ -52,6 +52,9 @@ const CrumbLinkStyle = styled.a`
   color: var(--color-gray-500);
   text-decoration: none;
   font-weight: 500;
+  text-transform: capitalize;
+  font-size: ${14 / 16}rem;
+  user-select: none;
 
   &[aria-current] {
     color: var(--color-black);
@@ -62,15 +65,18 @@ const CrumbLinkStyle = styled.a`
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 
 export const CrumbText = styled.span`
   color: var(--color-black);
   font-weight: 500;
+  text-transform: capitalize;
+  font-size: ${14 / 16}rem;
+  user-select: none;
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;

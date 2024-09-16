@@ -1,14 +1,18 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps, Size } from "@/type";
-import { QUERIES, WEIGHT } from "@/constants";
+import Rating, { RatingSize } from "../Rating";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
-import Rating from "../Rating";
+import { QUERIES, WEIGHT } from "@/constants";
 
 export const RatingComponent = () => {
   const { width } = React.useContext(MainWrapperContext);
-  return <Rating rating={4.5} size={width > 1300 ? Size.LARGE : Size.MEDIUM} />;
+  return (
+    <Rating
+      rating={4.5}
+      size={width > 1300 ? RatingSize.MEDIUM : RatingSize.SMALL}
+    />
+  );
 };
 
 export const Wrapper = styled.div`
@@ -33,11 +37,27 @@ export const Column = styled.div`
   }
 `;
 
-export const ProductName = styled.h1`
-  font-size: clamp(1.5rem, 9vw - 5rem, 2rem);
+export const ProductBrand = styled.h1`
+  font-size: ${20 / 16}rem;
   font-weight: ${WEIGHT.black};
-  line-height: 36px;
+  line-height: 1;
   text-transform: uppercase;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${18 / 16}rem;
+  }
+`;
+
+export const ProductName = styled.span`
+  font-size: ${16 / 16}rem;
+  font-weight: ${WEIGHT.medium};
+  color: var(--color-gray-600);
+  line-height: 1;
+  text-transform: capitalize;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 export const ProductPrice = styled.div`
@@ -47,11 +67,11 @@ export const ProductPrice = styled.div`
 `;
 
 export const PriceDiscount = styled.span`
-  font-size: ${22 / 16}rem;
+  font-size: ${18 / 16}rem;
   font-weight: 700;
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -66,13 +86,13 @@ export const Price = styled.span<{
   --color: ${(props) => props.$color};
   --line-decoration: ${(props) => props.$lineDecoration};
 
-  font-size: ${22 / 16}rem;
+  font-size: ${18 / 16}rem;
   font-weight: 700;
   color: var(--color);
   text-decoration: var(--line-decoration);
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -81,18 +101,31 @@ export const Price = styled.span<{
 `;
 
 export const DiscountFlag = styled.span`
-  font-size: ${14 / 16}rem;
+  font-size: ${13 / 16}rem;
   font-weight: 500;
   color: var(--color-red);
   background-color: var(--color-soft-pink);
-  padding: 6px 16px;
+  padding: 6px 12px;
   text-align: center;
   border-radius: 40px;
+
+  &::before {
+    content: "-";
+  }
+
+  &::after {
+    content: "%";
+  }
 `;
 
 export const ProductDescription = styled.p`
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
+  line-height: 1.4;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 export const RatingWrapper = styled.div`
@@ -101,12 +134,16 @@ export const RatingWrapper = styled.div`
 `;
 
 export const RatingNumber = styled.span`
-  font-size: ${16 / 16}rem;
+  font-size: ${15 / 16}rem;
 `;
 
 export const ProductCareTitle = styled.span`
-  font-size: ${18 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.bold};
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 export const ProductCareColumn = styled.div`
@@ -115,18 +152,21 @@ export const ProductCareColumn = styled.div`
 
 export const ProductCareIconWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 15px;
   flex: 2;
 `;
 
 export const ProductCareIconTitle = styled.span`
-  font-size: ${16 / 16}rem;
+  font-size: ${14 / 16}rem;
   font-weight: 600;
   margin-bottom: 4px;
 `;
 
 export const ProductCareDescription = styled.span`
+  flex: 3;
+  font-size: ${14 / 16}rem;
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
-  flex: 3;
+  text-transform: capitalize;
 `;
