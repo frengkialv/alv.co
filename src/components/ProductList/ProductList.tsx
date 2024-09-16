@@ -1,4 +1,5 @@
 import React from "react";
+import DynamicImage from "../DynamicImage";
 import {
   DiscountFlag,
   ImageWrapper,
@@ -13,8 +14,7 @@ import {
   Row,
 } from "./style";
 import { formatDiscountPrice } from "@/utils";
-import { ProductGridProps } from "@/type";
-import DynamicImage from "../DynamicImage";
+import { ProductGridProps } from "@/types/product";
 
 function ProductList({
   slug,
@@ -23,6 +23,7 @@ function ProductList({
   rating,
   discountByPercent,
   price,
+  categoryProduct,
 }: ProductGridProps) {
   return (
     <ProductListWrapper slug={slug}>

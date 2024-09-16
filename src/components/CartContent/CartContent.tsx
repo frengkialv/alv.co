@@ -8,13 +8,17 @@ import UnstyledButton from "../UnstyledButton";
 import BadgeNotification from "../BadgeNotification";
 import EmptyCartImage from "../../../public/empty-cart.png";
 import { WEIGHT } from "@/constants";
-import { CLOTHING_ORDERS } from "@/data";
-import { ClothingOrdersProps } from "@/type";
 import Button from "../Button";
+import { CartType } from "@/types/cart";
+import {
+  formatDiscountPrice,
+  formatPrice,
+  formatTotalPriceCart,
+} from "@/utils";
 
-export function CartIconTrigger() {
+export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
   return (
-    <BadgeNotification badgeNumber={CLOTHING_ORDERS.length}>
+    <BadgeNotification badgeNumber={badgeNumber}>
       <UnstyledButton>
         <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
       </UnstyledButton>
@@ -40,60 +44,70 @@ function EmptyCart() {
   );
 }
 
-function ListCart({ datas }: { datas: ClothingOrdersProps[] }) {
+function ListCart({ carts }: { carts: CartType[] }) {
   const router = useRouter();
   const [totalPrice, setTotalPrice] = React.useState<number>(0);
 
   React.useEffect(() => {
-    let nextTotalPrice = 0;
-
-    datas.forEach((data) => {
-      if (data.discountByPercent !== null) {
-        nextTotalPrice +=
-          (data.price - (data.price * data.discountByPercent) / 100) *
-          data.quantity;
-      } else {
-        nextTotalPrice += data.price * data.quantity;
-      }
-    });
+    const nextTotalPrice = formatTotalPriceCart(carts);
 
     setTotalPrice(nextTotalPrice);
-  }, [datas]);
+  }, [carts]);
 
   return (
     <ListCartWrapper>
       <ListWrapper>
-        {datas.map((data) => (
-          <List key={data.slug}>
-            <ImageWrapper>
-              <ImageList src={data.imgSrc} alt="" quality={100} fill priority />
-            </ImageWrapper>
-            <DetailWrapper>
-              <ProductName>{data.name}</ProductName>
-              <ColorAndSizeWrapper>
-                <Text style={{ flex: 1 }}>Color: {data.colors}</Text>
-                &nbsp; &nbsp;
-                <Text style={{ flex: 1 }}>Size: {data.size}</Text>
-              </ColorAndSizeWrapper>
-              <Text>Quantity: {data.quantity}</Text>
-              <PriceWrapper>
-                {/* Real Price or Price After Discount */}
-                <Price>
-                  {data.discountByPercent !== null
-                    ? (data.price -
-                        (data.price * data.discountByPercent) / 100) *
-                      data.quantity
-                    : data.price * data.quantity}
-                </Price>
+        {carts.map((cart) => {
+          const imageSrc = cart.product.productImage[0].imgSrc;
 
-                {/* Real Price */}
-                {data.discountByPercent !== null && (
-                  <Price $disabled={true}>{data.price * data.quantity}</Price>
-                )}
-              </PriceWrapper>
-            </DetailWrapper>
-          </List>
-        ))}
+          return (
+            <List key={cart.product.name}>
+              <ImageWrapper>
+                <ImageList
+                  src={`data:image/jpeg;base64,${imageSrc}`}
+                  alt=""
+                  quality={100}
+                  fill
+                  priority
+                />
+              </ImageWrapper>
+
+              <DetailWrapper>
+                <ProductName>{cart.product.name}</ProductName>
+                <ColorAndSizeWrapper>
+                  <Text style={{ flex: 1 }}>
+                    Color: {cart.product.stock[0].color}
+                  </Text>
+                  &nbsp; &nbsp;
+                  <Text style={{ flex: 1 }}>
+                    Size: {cart.product.stock[0].size}
+                  </Text>
+                </ColorAndSizeWrapper>
+                <Text>Quantity: {cart.quantity}</Text>
+                <PriceWrapper>
+                  {/* Real Price or Price After Discount */}
+                  <Price>
+                    {cart.product.discountByPercent !== null
+                      ? formatPrice(
+                          formatDiscountPrice(
+                            cart.product.price,
+                            cart.product.discountByPercent
+                          ) * cart.quantity
+                        )
+                      : formatPrice(cart.product.price * cart.quantity)}
+                  </Price>
+
+                  {/* Real Price */}
+                  {cart.product.discountByPercent !== null && (
+                    <Price $disabled={true}>
+                      {formatPrice(cart.product.price * cart.quantity)}
+                    </Price>
+                  )}
+                </PriceWrapper>
+              </DetailWrapper>
+            </List>
+          );
+        })}
       </ListWrapper>
 
       <TotalPriceWrapper>
@@ -108,13 +122,11 @@ function ListCart({ datas }: { datas: ClothingOrdersProps[] }) {
   );
 }
 
-function CartContent() {
-  const datas = CLOTHING_ORDERS as ClothingOrdersProps[];
-
+function CartContent({ carts }: { carts: CartType[] }) {
   return (
     <Wrapper>
-      {datas.length === 0 && <EmptyCart />}
-      {datas.length > 0 && <ListCart datas={datas} />}
+      {carts.length === 0 && <EmptyCart />}
+      {carts.length > 0 && <ListCart carts={carts} />}
     </Wrapper>
   );
 }
@@ -179,6 +191,7 @@ const ProductName = styled.h6`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 200px;
+  text-transform: capitalize;
 `;
 
 const ColorAndSizeWrapper = styled.div`
@@ -190,6 +203,7 @@ const Text = styled.span`
   font-size: ${13 / 16}rem;
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
+  text-transform: capitalize;
 `;
 
 const Price = styled.h6<{ $disabled?: boolean }>`

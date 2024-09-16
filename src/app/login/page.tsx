@@ -223,7 +223,8 @@ const LabelInput = styled.label`
 `;
 
 const Input = styled.input`
-  font-size: ${15 / 16}rem;
+  font-size: ${14 / 16}rem;
+  font-weight: ${WEIGHT.medium};
   padding: 10px;
   outline-offset: 4px;
   margin-top: 4px;

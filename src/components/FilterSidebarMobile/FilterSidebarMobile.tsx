@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { CategoryContext } from "../Provider/CategoryProvider";
-import { QUERIES } from "@/constants";
 import FilterLogo from "../SVG/FilterLogo";
 import DialogMenuCenter from "../DialogMenuCenter";
 import Accordion from "../Accordion";
@@ -11,6 +9,8 @@ import ColorFilter from "../ColorFilter";
 import SizeFilter from "../SizeFilter";
 import Button from "../Button";
 import { PropsFilter } from "../FilterSidebarDekstop";
+import { CategoryContext } from "../Provider/CategoryProvider";
+import { QUERIES } from "@/constants";
 
 function FilterContent({
   valuePrice,

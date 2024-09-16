@@ -116,3 +116,55 @@ export const SIZES_FILTER = [
     label: "X-Large",
   },
 ];
+
+interface ColorOption {
+  [key: string]: ColorValue;
+}
+
+interface ColorValue {
+  color: string;
+  border: string;
+}
+
+export const COLORS_OPTION: ColorOption = {
+  black: {
+    color: "#000000",
+    border: "#000000",
+  },
+  white: {
+    color: "#FFFFFF",
+    border: "#817b7b  ",
+  },
+  pink: {
+    color: "#F506A4",
+    border: "#c40583",
+  },
+  purple: {
+    color: "#7D06F5",
+    border: "#6405c4",
+  },
+  blue: {
+    color: "#063AF5",
+    border: "#052ec4",
+  },
+  "light-blue": {
+    color: "#06CAF5",
+    border: "#05a2c4",
+  },
+  orange: {
+    color: "#F57906",
+    border: "#c46105",
+  },
+  yellow: {
+    color: "#F5DD06",
+    border: "#c4b105",
+  },
+  red: {
+    color: "#F50606",
+    border: "#c40505",
+  },
+  green: {
+    color: "#00c12b",
+    border: "#26a943",
+  },
+};

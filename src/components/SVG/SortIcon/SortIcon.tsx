@@ -1,5 +1,5 @@
 "use client";
-import { SVGProps } from "@/type";
+import { SVGProps } from "@/types/common";
 import * as React from "react";
 import styled from "styled-components";
 

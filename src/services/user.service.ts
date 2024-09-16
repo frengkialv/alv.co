@@ -1,10 +1,21 @@
-import {
-  CommonApiResponse,
-  FindUserDtoOut,
-  LoginDtoOut,
-  LoginProps,
-} from "@/type";
 import { BaseHttpInstance, BaseHttpInstanceWithToken } from "./base.service";
+import { CommonApiResponse } from "@/types/common";
+
+interface LoginProps {
+  email: string;
+  password: string;
+}
+
+interface LoginDtoOut {
+  access_token: string;
+}
+
+export interface FindUserDtoOut {
+  email: string;
+  id: string;
+  name: string;
+  username: string;
+}
 
 export async function login({
   email,

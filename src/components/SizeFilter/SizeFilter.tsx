@@ -4,16 +4,6 @@ import styled from "styled-components";
 import Button from "../Button";
 import { SIZES_FILTER } from "@/constants";
 
-const Sizes = [
-  "XX-Small",
-  "X-Small",
-  "Small",
-  "Medium",
-  "Large",
-  "X-Large",
-  "XX-Large",
-];
-
 interface Props {
   value: string[];
   onValueChange: (val: string[]) => void;

@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import Rating from "../Rating/Rating";
 import VerifiedLogo from "../SVG/VerifiedLogo";
+import Rating, { RatingSize } from "../Rating/Rating";
 import { WEIGHT } from "@/constants";
-import { Size } from "@/type";
 
 function RatingCard() {
   return (
     <Card>
       <CardHeaderWrapping>
-        <Rating rating={4.4} size={Size.MEDIUM} />
+        <Rating rating={4.4} size={RatingSize.MEDIUM} />
         <PostedDate>August 14, 2023</PostedDate>
       </CardHeaderWrapping>
 

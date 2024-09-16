@@ -1,24 +1,27 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { DetailContext } from "../Provider/DetailProvider";
-import { QUERIES, WEIGHT } from "@/constants";
+import { COLORS_OPTION, QUERIES, WEIGHT } from "@/constants";
 
-function ColorOption() {
-  const { selectedColor, setSelectedColor, colors } =
-    React.useContext(DetailContext);
+interface Props {
+  colors: string[];
+  colorSelected: string;
+  setColorSelected: (val: string) => void;
+}
 
+function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
   return (
     <>
       <Title>Select Colors</Title>
       <ColorWrapper>
         {colors.map((color) => (
           <ButtonColor
-            $color={color}
             key={color}
-            onClick={() => setSelectedColor(color)}
+            $color={COLORS_OPTION[color].color}
+            $border={COLORS_OPTION[color].border}
+            onClick={() => setColorSelected(color)}
           >
-            {color === selectedColor && <>&#10004;</>}
+            {color === colorSelected && <>&#10004;</>}
           </ButtonColor>
         ))}
       </ColorWrapper>
@@ -27,8 +30,12 @@ function ColorOption() {
 }
 
 const Title = styled.span`
-  font-size: ${18 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.bold};
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 const ColorWrapper = styled.div`
@@ -41,15 +48,17 @@ const ColorWrapper = styled.div`
   }
 `;
 
-const ButtonColor = styled.button<{ $color: string }>`
+const ButtonColor = styled.button<{ $color: string; $border: string }>`
   --backgorund-color: ${(props) => props.$color};
+  --border: ${(props) => props.$border};
   font-size: 20px;
   width: 35px;
   height: 35px;
-  color: var(--color-white);
+  color: ${(props) =>
+    props.$color === "#FFFFFF" ? "var(--color-black)" : "var(--color-white)"};
   background-color: var(--backgorund-color);
   border-radius: 50%;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   outline-offset: 4px;
   user-select: none;
   cursor: pointer;

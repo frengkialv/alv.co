@@ -1,12 +1,14 @@
 "use client";
 import * as React from "react";
-import { CLOTHINGS } from "@/data";
 import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import FilterSidebarDekstop from "@/components/FilterSidebarDekstop";
 import MainGrid from "@/components/MainGrid";
 import PaginationWrapperCategoryPage from "@/components/PaginationWrapperCategoryPage";
 import SortWrapperCategoryPage from "@/components/SortWrapperCategoryPage";
 import FilterSidebarTablet from "@/components/FilterSidebarTablet";
+import FilterSidebarMobile from "@/components/FilterSidebarMobile";
+import ScrollToTop from "@/components/ScrollToTop";
+import Error from "next/error";
 import {
   ButtonWrapper,
   ContentWrapper,
@@ -16,10 +18,10 @@ import {
   WrapperFilterSidebarMobile,
   WrapperFilterSidebarTablet,
 } from "./style";
-import FilterSidebarMobile from "@/components/FilterSidebarMobile";
 import { getProduct } from "@/services/product.services";
-import { ProductsType } from "@/type";
 import { SortOptions } from "@/constants";
+import { PARAMSLABEL } from "@/types/common";
+import { ProductsType } from "@/types/product";
 
 interface PageProps {
   params: {
@@ -27,21 +29,12 @@ interface PageProps {
   };
 }
 
-interface PARAMSLABELPROPS {
-  [key: string]: string;
-}
-
-const PARAMSLABEL: PARAMSLABELPROPS = {
-  "t-shirts": "T-Shirts",
-  shoes: "Shoes",
-  accessories: "Accessories",
-  sport: "Sport",
-  "on-sale": "On Sale",
-  "new-arrivals": "New Arrivals",
-};
-
 function CategoryPage({ params }: PageProps) {
+  if (!(params.category in PARAMSLABEL)) {
+    return <Error statusCode={404} />;
+  }
   const label = PARAMSLABEL[params.category];
+
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: label, href: "/" + params.category },
@@ -80,6 +73,7 @@ function CategoryPage({ params }: PageProps) {
 
   return (
     <Wrapper>
+      <ScrollToTop />
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <ContentWrapper>
         <FilterSidebarDekstop
@@ -122,7 +116,9 @@ function CategoryPage({ params }: PageProps) {
               <SortWrapperCategoryPage value={sort} onValueChange={setSort} />
             </ButtonWrapper>
           </HeaderWrapper>
+
           <MainGrid datas={products} />
+
           <PaginationWrapperCategoryPage
             page={page}
             totalPages={totalPages}

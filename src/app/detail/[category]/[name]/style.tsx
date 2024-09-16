@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "@/type";
 import { QUERIES } from "@/constants";
 
 export const Wrapper = styled.div`

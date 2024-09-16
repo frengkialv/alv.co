@@ -1,3 +1,4 @@
+import React from "react";
 import FooterInformation from "../FooterInformation";
 import ReservedFooter from "../ReservedFooter";
 import FooterProvider from "../Provider/FooterProvider";
@@ -10,7 +11,6 @@ import {
   SubscribeWrapper,
   Wrapper,
 } from "./style";
-import React from "react";
 
 function Footer() {
   return (

@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { ChildrenProps } from "@/type";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 import { QUERIES } from "@/constants";
+import { ChildrenProps } from "@/types/common";
 
 const useFilterSidebarContent = () => {
   const [filterHeight, setFilterHeight] = React.useState<number>(0);

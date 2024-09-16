@@ -1,8 +1,8 @@
 "use client";
 import styled from "styled-components";
-import { QUERIES, WEIGHT } from "@/constants";
-import { ChildrenProps } from "@/type";
 import Tooltip from "../Tooltip";
+import { QUERIES, WEIGHT } from "@/constants";
+import { ChildrenProps } from "@/types/common";
 
 interface Props extends ChildrenProps {
   textTooltip: string;

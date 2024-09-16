@@ -7,14 +7,14 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 40px;
-  padding: 20px var(--padding-horizontal-wrapper);
+  padding: 16px var(--padding-horizontal-wrapper);
   background-color: var(--color-white-blur);
   backdrop-filter: blur(4px);
 
   @media ${QUERIES.phoneAndSmaller} {
     gap: 16px;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 `;
 

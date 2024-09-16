@@ -2,16 +2,16 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import { deleteCookie } from "cookies-next";
-import Avatar, { SizeProps } from "../Avatar";
-import { WEIGHT } from "@/constants";
 import SettingLogo from "../SVG/SettingLogo";
 import QuestionLogo from "../SVG/QuestionLogo";
-import UpgradeLogo from "../UpgradeLogo";
+import UpgradeLogo from "../SVG/UpgradeLogo";
 import SignOutLogo from "../SVG/SignOutLogo";
 import WalletIcon from "../SVG/WalletIcon";
 import Icon from "../Icon";
-import { FindUserDtoOut } from "@/type";
+import Avatar, { SizeProps } from "../Avatar";
+import { deleteCookie } from "cookies-next";
+import { WEIGHT } from "@/constants";
+import { FindUserDtoOut } from "@/services/user.service";
 
 export function AvatarPofile() {
   return (

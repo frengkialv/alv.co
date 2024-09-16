@@ -30,12 +30,20 @@ function RegisterPage() {
           </Notes>
           <FormWrapper>
             <LabelInput htmlFor={`${id}-name`}>Name</LabelInput>
-            <Input id={`${id}-name`} placeholder="Joe Schmo" />
+            <Input
+              id={`${id}-name`}
+              placeholder="Joe Schmo"
+              autoComplete="off"
+            />
 
             <Spacer size={20} />
 
             <LabelInput htmlFor={`${id}-username`}>Username</LabelInput>
-            <Input id={`${id}-username`} placeholder="joeschomo" />
+            <Input
+              id={`${id}-username`}
+              placeholder="joeschomo"
+              autoComplete="off"
+            />
 
             <Spacer size={20} />
 
@@ -44,6 +52,7 @@ function RegisterPage() {
               id={`${id}-email`}
               placeholder="example@gmail.com"
               type="email"
+              autoComplete="off"
             />
 
             <EmailNotes>
@@ -206,7 +215,8 @@ const LabelInput = styled.label`
 `;
 
 const Input = styled.input`
-  font-size: ${15 / 16}rem;
+  font-size: ${14 / 16}rem;
+  font-weight: ${WEIGHT.medium};
   padding: 10px;
   outline-offset: 4px;
   margin-top: 4px;

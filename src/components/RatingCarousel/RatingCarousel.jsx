@@ -1,15 +1,14 @@
 "use client";
-import React, { useContext } from "react";
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styled from "styled-components";
-import Rating from "../Rating";
 import styles from "./styles.module.css";
 import Spacer from "../Spacer";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import VerifiedLogo from "../SVG/VerifiedLogo";
-import { Size } from "@/type";
+import Rating, { RatingSize } from "../Rating";
 import { QUERIES } from "@/constants";
 import { TESTIMONIALS } from "@/data";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
@@ -48,7 +47,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
 };
 
 function RatingCarousel() {
-  const { width } = useContext(MainWrapperContext);
+  const { width } = Reaact.useContext(MainWrapperContext);
 
   return (
     <Wrapper>
@@ -71,7 +70,7 @@ function RatingCarousel() {
         >
           {TESTIMONIALS.map((testimoni, index) => (
             <Card key={index}>
-              <Rating rating={testimoni.rating} size={Size.MEDIUM} />
+              <Rating rating={testimoni.rating} size={RatingSize.MEDIUM} />
               <NameWrapper>
                 <Name>{testimoni.name}</Name>
                 <VerifiedLogo />

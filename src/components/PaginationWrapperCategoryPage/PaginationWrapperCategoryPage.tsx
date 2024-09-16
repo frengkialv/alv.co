@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Pagination from "../Pagination/Pagination";
 import styled from "styled-components";
+import Pagination from "../Pagination/Pagination";
 
 interface Props {
   page: number;

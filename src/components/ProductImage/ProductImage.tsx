@@ -1,6 +1,7 @@
 import React from "react";
-import DynamicImage from "../DynamicImage";
+import Image from "next/image";
 import ImageLink from "../ImageLink";
+import { ProductImageType } from "@/types/productImage";
 import {
   ImageDisplay,
   ImageItem,
@@ -10,68 +11,62 @@ import {
   Wrapper,
 } from "./style";
 
-function ProductImage() {
+interface Props {
+  images: ProductImageType[];
+}
+
+function ProductImage({ images }: Props) {
   return (
     <Wrapper>
       <ImageSelect>
-        <ImageItem>
-          <ImageLink id={1}>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-1.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </ImageLink>
-        </ImageItem>
-        <ImageItem>
-          <ImageLink id={2}>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-2.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </ImageLink>
-        </ImageItem>
-        <ImageItem>
-          <ImageLink id={3}>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-3.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </ImageLink>
-        </ImageItem>
+        {images?.map((image) => {
+          return (
+            <ImageItem key={image.id}>
+              <ImageLink id={image.imageIndex}>
+                <Image
+                  src={`data:image/jpeg;base64,${image.imgSrc}`}
+                  alt="product image"
+                  width={80}
+                  height={80}
+                  unoptimized
+                  style={{
+                    aspectRatio: "1 / 1",
+                    height: "100%",
+                    width: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                  }}
+                />
+              </ImageLink>
+            </ImageItem>
+          );
+        })}
       </ImageSelect>
 
       <ImageDisplay>
         <ImageShowcase className="image-showcase">
-          <RowImageDisplay>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-1.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </RowImageDisplay>
-          <RowImageDisplay>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-2.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </RowImageDisplay>
-          <RowImageDisplay>
-            <DynamicImage
-              url="/assets/one-life-t-shirt-3.png"
-              alt=""
-              width={100}
-              height={110}
-            />
-          </RowImageDisplay>
+          {images?.map((image) => {
+            return (
+              <RowImageDisplay key={image.id}>
+                <Image
+                  src={`data:image/jpeg;base64,${image.imgSrc}`}
+                  alt=""
+                  width={100}
+                  height={110}
+                  unoptimized
+                  style={{
+                    aspectRatio: "1 / 1",
+                    width: "100%",
+                    height: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                  }}
+                />
+              </RowImageDisplay>
+            );
+          })}
         </ImageShowcase>
       </ImageDisplay>
     </Wrapper>

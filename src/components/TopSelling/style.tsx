@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import Spacer from "@/components/Spacer";
-import { ChildrenProps } from "@/type";
 import { QUERIES, WEIGHT } from "@/constants";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 

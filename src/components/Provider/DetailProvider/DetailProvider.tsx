@@ -1,17 +1,11 @@
 "use client";
 import React from "react";
-import { ChildrenProps } from "@/type";
 import { SortRating } from "@/constants";
+import { ChildrenProps } from "@/types/common";
 
 interface DetailCentextValue {
   selectedImageId: number;
   setSelectedImageId: (val: number) => void;
-  selectedColor: string;
-  setSelectedColor: (val: string) => void;
-  colors: string[];
-  selectedSize: string;
-  setSelectedSize: (val: string) => void;
-  sizeOptions: string[];
   amountOrder: number;
   setAmountOrder: (val: number) => void;
   sortRating: SortRating;
@@ -22,21 +16,6 @@ export const DetailContext = React.createContext<DetailCentextValue>(null!);
 
 function DetailProvider({ children }: ChildrenProps) {
   const [selectedImageId, setSelectedImageId] = React.useState(1);
-  const [selectedColor, setSelectedColor] = React.useState<string>("#4F4631");
-  const [colors, setColors] = React.useState<string[]>([
-    "#4F4631",
-    "#314F4A",
-    "#31344F",
-  ]);
-  const [sizeOptions, setSizeOptions] = React.useState<string[]>([
-    "Small",
-    "Medium",
-    "Large",
-    "X-Large",
-  ]);
-  const [selectedSize, setSelectedSize] = React.useState<string>(
-    sizeOptions[0]
-  );
   const [amountOrder, setAmountOrder] = React.useState<number>(1);
 
   const [sortRating, setSortRating] = React.useState<SortRating>(
@@ -71,12 +50,6 @@ function DetailProvider({ children }: ChildrenProps) {
   const value = {
     selectedImageId,
     setSelectedImageId,
-    selectedColor,
-    setSelectedColor,
-    colors,
-    selectedSize,
-    setSelectedSize,
-    sizeOptions,
     amountOrder,
     setAmountOrder,
     sortRating,
