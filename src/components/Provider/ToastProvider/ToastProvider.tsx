@@ -1,0 +1,112 @@
+"use client";
+import React from "react";
+import * as ToastPrimitive from "@radix-ui/react-toast";
+import styled from "styled-components";
+import { ChildrenProps } from "@/types/common";
+import SuccessIcon from "@/components/SVG/SuccessIcon";
+import Icon from "@/components/Icon";
+
+// Define the type for toast messages
+interface ToastMessage {
+  title: string;
+  description?: string;
+}
+
+interface ToastContextType {
+  showToast: (message: ToastMessage) => void;
+}
+
+const ToastContext = React.createContext<ToastContextType>(null!);
+
+export const useToast = (): ToastContextType => {
+  const context = React.useContext(ToastContext);
+
+  if (!context) {
+    throw new Error("useToast must be used within a ToastProvider");
+  }
+  return context;
+};
+
+// Type for the provider's children prop
+
+function ToastProvider({ children }: ChildrenProps) {
+  const [toastMessage, setToastMessage] = React.useState<ToastMessage | null>(
+    null
+  );
+
+  const showToast = (message: ToastMessage) => {
+    setToastMessage(message);
+  };
+
+  const closeToast = () => {
+    setToastMessage(null);
+  };
+
+  return (
+    <ToastContext.Provider value={{ showToast }}>
+      {children}
+      <ToastPrimitive.Provider swipeDirection="right">
+        {toastMessage && (
+          <ToastRoot
+            onOpenChange={closeToast}
+            open={!!toastMessage}
+            duration={3000}
+          >
+            <SuccessIcon />
+            <div>
+              <ToastTitle>{toastMessage.title}</ToastTitle>
+              {toastMessage.description && (
+                <ToastDescription>{toastMessage.description}</ToastDescription>
+              )}
+            </div>
+            <ToastAction asChild altText="Close toast" onClick={closeToast}>
+              <Icon id="close" size={20} strokeWidth={1.2} />
+            </ToastAction>
+          </ToastRoot>
+        )}
+        <ToastViewport />
+      </ToastPrimitive.Provider>
+    </ToastContext.Provider>
+  );
+}
+
+// Styled-components for Toast styling
+const ToastRoot = styled(ToastPrimitive.Root)`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  padding: 14px 15px;
+  min-width: 320px;
+  filter: drop-shadow(2px 4px 8px hsl(0deg 0% 0% / 0.4));
+`;
+
+const ToastTitle = styled(ToastPrimitive.Title)`
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const ToastDescription = styled(ToastPrimitive.Description)`
+  font-size: 14px;
+`;
+
+const ToastAction = styled(ToastPrimitive.Action)`
+  align-self: flex-start;
+  margin-left: auto;
+  cursor: pointer;
+`;
+
+const ToastViewport = styled(ToastPrimitive.Viewport)`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100vw;
+  z-index: 1000;
+`;
+
+export default ToastProvider;

@@ -24,4 +24,5 @@ export interface StockType {
   color: ColorProduct;
   size: SizeProduct;
   stock: number;
+  productId: string;
 }

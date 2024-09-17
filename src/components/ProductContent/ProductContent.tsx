@@ -25,72 +25,35 @@ import {
 } from "./style";
 import { ProductsType } from "@/types/product";
 import { formatDiscountPrice, formatPrice } from "@/utils";
-import { StockType } from "@/types/stock";
+import { ColorProduct, SizeProduct } from "@/types/stock";
 
 interface Props {
   product: ProductsType;
+  colors: ColorProduct[];
+  colorSelected: ColorProduct | undefined;
+  colorChangeHandler: (color: ColorProduct) => void;
+  sizes: SizeProduct[];
+  sizeSelected: SizeProduct | undefined;
+  setSizeSelected: (size: SizeProduct) => void;
+  stockLeft: number | null;
+  amountOrder: number;
+  setAmountOrder: (amount: number) => void;
+  submitHandler: () => void;
 }
 
-function ProductContent({ product }: Props) {
-  console.log("🚀 ~ ProductContent ~ product:", product);
-  const [colors, setColors] = React.useState<string[]>([]);
-  const [sizes, setSizes] = React.useState<string[]>([]);
-
-  const [colorSelected, setColorSelected] = React.useState<string>("");
-  const [sizeSelected, setSizeSelected] = React.useState<string>("");
-
-  const [stockLeft, setStockLeft] = React.useState<number | null>(null);
-
-  React.useEffect(() => {
-    if (product) {
-      colorsGrouping(product.stock);
-    }
-  }, [product]);
-
-  React.useEffect(() => {
-    if (sizeSelected) {
-      let nextStockLeft = 0;
-      product.stock.forEach((stock) => {
-        if (stock.color === colorSelected && stock.size === sizeSelected) {
-          nextStockLeft = stock.stock;
-        }
-      });
-
-      setStockLeft(nextStockLeft);
-    }
-  }, [sizeSelected]);
-
-  const colorsGrouping = (stocks: StockType[]) => {
-    const nextColors: string[] = [];
-    const nextSizes: string[] = [];
-
-    stocks.forEach((stock) => {
-      if (!nextColors.includes(stock.color)) {
-        nextColors.push(stock.color);
-      }
-      if (!nextSizes.includes(stock.size)) {
-        nextSizes.push(stock.size);
-      }
-    });
-    setColors(nextColors);
-    setSizes(nextSizes);
-  };
-
-  const colorChangeHandler = (color: string) => {
-    setColorSelected(color);
-    setSizeSelected("");
-    setStockLeft(null);
-    const nextSizes: string[] = [];
-
-    product.stock.forEach((stock) => {
-      if (!nextSizes.includes(stock.size) && stock.color === color) {
-        nextSizes.push(stock.size);
-      }
-    });
-
-    setSizes(nextSizes);
-  };
-
+function ProductContent({
+  product,
+  colors,
+  colorSelected,
+  colorChangeHandler,
+  sizes,
+  sizeSelected,
+  setSizeSelected,
+  stockLeft,
+  amountOrder,
+  setAmountOrder,
+  submitHandler,
+}: Props) {
   return (
     <Wrapper>
       <Column>
@@ -156,7 +119,12 @@ function ProductContent({ product }: Props) {
         />
       </Column>
       <Column>
-        <AddToCartContent />
+        <AddToCartContent
+          amountOrder={amountOrder}
+          setAmountOrder={setAmountOrder}
+          stockLeft={stockLeft}
+          submitHandler={submitHandler}
+        />
       </Column>
     </Wrapper>
   );

@@ -3,16 +3,22 @@ import React from "react";
 import styled from "styled-components";
 import { QUERIES, WEIGHT } from "@/constants";
 import ErrorAlert from "../ErrorAlert";
+import { ColorProduct, SizeProduct } from "@/types/stock";
 
 interface Props {
-  sizes: string[];
-  sizeSelected: string;
-  setSizeSelected: (val: string) => void;
-  colorSelected: string;
+  sizes: SizeProduct[];
+  sizeSelected: SizeProduct | undefined;
+  setSizeSelected: (val: SizeProduct) => void;
+  colorSelected: ColorProduct | undefined;
   stockLeft: number | null;
 }
 
-const FIXED_SIZES = ["small", "medium", "large", "x-large"];
+const FIXED_SIZES: SizeProduct[] = [
+  SizeProduct.SMALL,
+  SizeProduct.MEDIUM,
+  SizeProduct.LARGE,
+  SizeProduct["X-LARGE"],
+];
 
 function SizeOption({
   sizes,
@@ -32,7 +38,7 @@ function SizeOption({
     }
   }, [colorSelected]);
 
-  const sizeSelectedHandler = (val: string) => {
+  const sizeSelectedHandler = (val: SizeProduct) => {
     if (!colorSelected) {
       setErrorMessage("Please select a color before choosing a size.");
       setShowErrorMessage(true);
@@ -75,6 +81,7 @@ function SizeOption({
 const Title = styled.span`
   font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.bold};
+  line-height: 1;
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: ${14 / 16}rem;
@@ -85,6 +92,7 @@ const StockLeftAlert = styled.span`
   font-size: ${14 / 16}rem;
   color: red;
   line-height: 1;
+  margin-top: 4px;
 `;
 
 const SizeWrapper = styled.div`
