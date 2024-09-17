@@ -2,11 +2,12 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS_OPTION, QUERIES, WEIGHT } from "@/constants";
+import { ColorProduct } from "@/types/stock";
 
 interface Props {
-  colors: string[];
-  colorSelected: string;
-  setColorSelected: (val: string) => void;
+  colors: ColorProduct[];
+  colorSelected: ColorProduct | undefined;
+  setColorSelected: (val: ColorProduct) => void;
 }
 
 function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
@@ -32,6 +33,7 @@ function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
 const Title = styled.span`
   font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.bold};
+  line-height: 1;
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: ${14 / 16}rem;

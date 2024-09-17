@@ -24,22 +24,27 @@ import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import CartGrid from "@/components/CartGrid";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
-import { getCart } from "@/services/cart.service";
-import { CartType } from "@/types/cart";
+import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
+import { deleteCart, updateQuantityCart } from "@/services/cart.service";
 import { formatPrice, formatTotalPriceCart } from "@/utils";
+import { useToast } from "@/components/Provider/ToastProvider";
+import { CartContext } from "@/components/Provider/CartProvider";
 
 function CartPage() {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Cart", href: "/cart" },
   ];
-  const [carts, setCarts] = React.useState<CartType[]>([]);
+  const { showToast } = useToast();
+
+  const { fetchDataCart, carts, setCarts } = React.useContext(CartContext);
+  console.log("🚀 ~ CartPage ~ carts:", carts);
+
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  // const [carts, setCarts] = React.useState<CartType[]>([]);
   const [totalPrice, setTotalPrice] = React.useState<number>(0);
   const [deliveryFee, setDeliveryFee] = React.useState<number>(15);
-
-  React.useEffect(() => {
-    findCartHandler();
-  }, []);
 
   React.useEffect(() => {
     const nextTotalPrice = formatTotalPriceCart(carts);
@@ -47,33 +52,47 @@ function CartPage() {
     setTotalPrice(nextTotalPrice);
   }, [carts]);
 
-  const findCartHandler = async () => {
+  const deleteProductHandler = async (id: string) => {
     try {
-      const { data } = await getCart();
+      setIsLoading(true);
+      const { data } = await deleteCart(id);
 
-      setCarts(data);
+      if (data) {
+        setTimeout(() => {
+          fetchDataCart();
+          showToast({
+            title: "Success!",
+            description: "Successfully delete cart.",
+          });
+        }, 2000);
+      }
     } catch (error) {
-      console.log("🚀 ~ findCartHandler ~ error:", error);
+      console.log("🚀 ~ error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
-  const changeQuantityHandler = ({
-    id,
-    value,
-  }: {
-    id: string;
-    value: number;
-  }) => {
-    const nextCarts = carts.map((cart) => {
-      if (cart.id === id) {
-        cart.quantity = value;
-        return cart;
+  const quantityChangeHandler = async (id: string, quantity: number) => {
+    try {
+      setIsLoading(true);
+      const { data } = await updateQuantityCart(id, quantity);
+
+      if (data) {
+        setTimeout(() => {
+          fetchDataCart();
+        }, 500);
       }
-
-      return cart;
-    });
-
-    setCarts(nextCarts);
+    } catch (error) {
+      window.location.href = "/cart";
+      console.log("🚀 ~ error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    }
   };
 
   return (
@@ -82,7 +101,11 @@ function CartPage() {
 
       <MainTitle>Your Cart</MainTitle>
       <ContentWrapper>
-        <CartGrid carts={carts} quantityOnChange={changeQuantityHandler} />
+        <CartGrid
+          carts={carts}
+          quantityOnChange={quantityChangeHandler}
+          deleteProduct={deleteProductHandler}
+        />
 
         <SummaryWrapper>
           <InnerWrapper>
@@ -122,6 +145,7 @@ function CartPage() {
           </InnerWrapper>
         </SummaryWrapper>
       </ContentWrapper>
+      <LoadingComponent isOpen={isLoading} />
     </Wrapper>
   );
 }

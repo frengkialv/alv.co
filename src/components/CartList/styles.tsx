@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import Link from "next/link";
 import { QUERIES, WEIGHT } from "@/constants";
 
 export const Row = styled.div`
@@ -17,7 +18,7 @@ export const Row = styled.div`
   }
 `;
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled(Link)`
   flex: 1;
   position: relative;
   min-width: 125px;
@@ -42,13 +43,15 @@ export const ProductNameWrapper = styled.div`
   align-items: center;
 `;
 
-export const ProductName = styled.h6`
+export const ProductName = styled(Link)`
   font-size: ${16 / 16}rem;
+  font-weight: 600;
+  color: var(--color-black);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 85%;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: capitalize;
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -64,6 +67,7 @@ export const EntityWrapper = styled.div`
 
 export const ProductAttributesWrapper = styled.div`
   display: flex;
+  align-items: center;
   font-size: ${14 / 16}rem;
   font-weight: ${WEIGHT.medium};
 
@@ -76,6 +80,19 @@ export const ProductLabel = styled.span``;
 
 export const ProductValue = styled.span`
   color: #666666;
+  text-transform: capitalize;
+`;
+
+export const AlertStock = styled.span`
+  font-size: ${12 / 16}rem;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background-color: #fde4e4;
+  color: #c03131;
+  line-height: 1;
+  margin-top: 4px;
+  margin-left: 14px;
 `;
 
 export const ProductPrice = styled.h5`

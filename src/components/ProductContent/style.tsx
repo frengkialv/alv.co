@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   padding-top: 20px;
 
   &:first-of-type {
@@ -140,6 +140,7 @@ export const RatingNumber = styled.span`
 export const ProductCareTitle = styled.span`
   font-size: ${16 / 16}rem;
   font-weight: ${WEIGHT.bold};
+  line-height: 1;
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: ${14 / 16}rem;
