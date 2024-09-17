@@ -3,6 +3,7 @@ import DynamicImage from "../DynamicImage";
 import { formatDiscountPrice, formatPrice } from "@/utils";
 import {
   AdditionButton,
+  AlertStock,
   BottomContent,
   DetailWrapper,
   DiscountFlag,
@@ -34,7 +35,10 @@ interface CartList {
   quantity: number;
   price: number;
   discountByPercent: number | null;
-  quantityOnChange: ({ id, value }: { id: string; value: number }) => void;
+  stockLeft: number;
+  slug: string;
+  quantityOnChange: (id: string, quantity: number) => void;
+  deleteProduct: (id: string) => void;
 }
 
 function CartList({
@@ -46,11 +50,14 @@ function CartList({
   quantity,
   price,
   discountByPercent,
+  stockLeft,
+  slug,
   quantityOnChange,
+  deleteProduct,
 }: CartList) {
   return (
     <Row>
-      <ImageWrapper>
+      <ImageWrapper href={slug}>
         <Image
           alt={name || ""}
           src={`data:image/jpeg;base64,${imgUrl}`}
@@ -68,21 +75,27 @@ function CartList({
       </ImageWrapper>
       <DetailWrapper>
         <ProductNameWrapper>
-          <ProductName>{name}</ProductName>
+          <ProductName href={slug}>{name}</ProductName>
           <Tooltip text="Delete product">
-            <UnstyledButton>
+            <UnstyledButton onClick={() => deleteProduct(id)}>
               <Icon id="trash2" color="#FF3333" size={20} strokeWidth={2} />
             </UnstyledButton>
           </Tooltip>
         </ProductNameWrapper>
         <EntityWrapper>
           <ProductAttributesWrapper>
-            <ProductLabel>Size: &nbsp;</ProductLabel>
-            <ProductValue>{size}</ProductValue>
-          </ProductAttributesWrapper>
-          <ProductAttributesWrapper>
             <ProductLabel>Color: &nbsp;</ProductLabel>
             <ProductValue>{color}</ProductValue>
+          </ProductAttributesWrapper>
+          <ProductAttributesWrapper>
+            <ProductLabel>Size: &nbsp;</ProductLabel>
+            <ProductValue>{size}</ProductValue>
+
+            {stockLeft && stockLeft <= 5 && (
+              <AlertStock>
+                Only {stockLeft} piece{stockLeft > 1 ? "s" : ""} left
+              </AlertStock>
+            )}
           </ProductAttributesWrapper>
         </EntityWrapper>
 
@@ -112,13 +125,29 @@ function CartList({
 
           <QuantitiOrderButtonWrapper>
             <SubtractionButton
-              onClick={() => quantityOnChange({ id: id, value: quantity - 1 })}
+              onClick={() => {
+                if (quantity === 1) {
+                  return;
+                }
+                quantityOnChange(id, quantity - 1);
+              }}
             >
               &#8722;
             </SubtractionButton>
-            <QuantitiInput type="number" min="0" value={quantity} readOnly />
+            <QuantitiInput
+              type="number"
+              min="0"
+              max="10"
+              value={quantity}
+              readOnly
+            />
             <AdditionButton
-              onClick={() => quantityOnChange({ id: id, value: quantity + 1 })}
+              onClick={() => {
+                if (quantity === 10) {
+                  return;
+                }
+                quantityOnChange(id, quantity + 1);
+              }}
             >
               +
             </AdditionButton>

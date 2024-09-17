@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
+import { getCookie } from "cookies-next";
 import { ChildrenProps } from "@/types/common";
+import { CartType } from "@/types/cart";
+import { getCart } from "@/services/cart.service";
 
 interface HeaderContextValue {
-  showSuperHeader: boolean;
-  setShowSuperHeader: (val: boolean) => void;
   showSearchModal: boolean;
   setShowSearchModal: (val: boolean) => void;
   showNavigationMobile: boolean;
@@ -14,14 +15,11 @@ interface HeaderContextValue {
 export const HeaderContext = React.createContext<HeaderContextValue>(null!);
 
 function HeaderProvider({ children }: ChildrenProps) {
-  const [showSuperHeader, setShowSuperHeader] = React.useState<boolean>(true);
   const [showSearchModal, setShowSearchModal] = React.useState<boolean>(false);
   const [showNavigationMobile, setshowNavigationMobile] =
     React.useState<boolean>(false);
 
   const value = {
-    showSuperHeader,
-    setShowSuperHeader,
     showSearchModal,
     setShowSearchModal,
     showNavigationMobile,

@@ -19,20 +19,20 @@ import ProfileDropdownContent, {
   AvatarPofile,
   ProfileDropdownContentEmpty,
 } from "../ProfileDropdownContent";
+import { CartContext } from "../Provider/CartProvider";
 
 function ActionHeader() {
   const router = useRouter();
   const pathname = usePathname();
 
   const accessToken = getCookie("access_token");
+  const { carts } = React.useContext(CartContext);
   const { setShowSearchModal } = React.useContext(HeaderContext);
   const [user, setUser] = React.useState<FindUserDtoOut>();
-  const [carts, setCarts] = React.useState<CartType[]>([]);
 
   React.useEffect(() => {
     if (accessToken) {
       findUserHandler();
-      findCartHandler();
     }
   }, []);
 
@@ -43,16 +43,6 @@ function ActionHeader() {
       setUser(data);
     } catch (error) {
       console.log("🚀 ~ findUserHandler ~ error:", error);
-    }
-  };
-
-  const findCartHandler = async () => {
-    try {
-      const { data } = await getCart();
-
-      setCarts(data);
-    } catch (error) {
-      console.log("🚀 ~ findCartHandler ~ error:", error);
     }
   };
 

@@ -7,6 +7,7 @@ import RatingAndDiscountTabWrapper from "@/components/RatingAndDiscountTabWrappe
 import SuggestionProduct from "@/components/SuggestionProduct";
 import Error from "next/error";
 import ScrollToTop from "@/components/ScrollToTop";
+import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
 import { useToast } from "@/components/Provider/ToastProvider/ToastProvider";
 import { CardWrapper, Wrapper } from "./style";
 import { PARAMSLABEL } from "@/types/common";
@@ -15,6 +16,7 @@ import { getProductByName } from "@/services/product.services";
 import { ColorProduct, SizeProduct, StockType } from "@/types/stock";
 import { getStockQuantity } from "@/services/productStock.service";
 import { addCart } from "@/services/cart.service";
+import { CartContext } from "@/components/Provider/CartProvider";
 
 interface PageProps {
   params: {
@@ -41,10 +43,14 @@ function DetailPage({ params }: PageProps) {
     { label: paramName, href: "/" + params.name },
   ];
 
+  // For Refetch Cart Data
+  const { fetchDataCart } = React.useContext(CartContext);
+
   const [product, setProduct] = React.useState<ProductsType>();
   const [isError, setIsError] = React.useState<boolean>(false);
   const [errorCode, setErrorCode] = React.useState<number>(404);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const [colors, setColors] = React.useState<ColorProduct[]>([]);
   const [sizes, setSizes] = React.useState<SizeProduct[]>([]);
@@ -144,23 +150,30 @@ function DetailPage({ params }: PageProps) {
 
   const submitCartHandler = async () => {
     try {
-      // const { data } = await addCart({
-      //   productId: product!.id,
-      //   quantity: amountOrder,
-      //   color: colorSelected!,
-      //   size: sizeSelected!,
-      // });
-
-      // if (data) {
-      // }
-      // console.log("🚀 ~ submitCartHandler ~ data:", data);
-
-      showToast({
-        title: "Success!",
-        description: "Successfully add item to cart.",
+      setIsLoading(true);
+      const { data } = await addCart({
+        productId: product!.id,
+        quantity: amountOrder,
+        color: colorSelected!,
+        size: sizeSelected!,
       });
+
+      console.log("🚀 ~ submitCartHandler ~ data:", data);
+      if (data) {
+        setTimeout(() => {
+          fetchDataCart();
+          showToast({
+            title: "Success!",
+            description: "Successfully add item to cart.",
+          });
+        }, 2000);
+      }
     } catch (error) {
       console.log("🚀 ~ submitCartHandler ~ error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
@@ -195,6 +208,8 @@ function DetailPage({ params }: PageProps) {
       {/* <RatingAndDiscountTabWrapper /> */}
 
       {/* <SuggestionProduct /> */}
+
+      <LoadingComponent isOpen={isLoading} />
     </Wrapper>
   );
 }

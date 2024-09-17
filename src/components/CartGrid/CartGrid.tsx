@@ -5,16 +5,21 @@ import { CartType } from "@/types/cart";
 
 interface CartGridProps {
   carts: CartType[];
-  quantityOnChange: ({ id, value }: { id: string; value: number }) => void;
+  quantityOnChange: (id: string, quantity: number) => void;
+  deleteProduct: (id: string) => void;
 }
 
-function CartGrid({ carts, quantityOnChange }: CartGridProps) {
+function CartGrid({ carts, quantityOnChange, deleteProduct }: CartGridProps) {
   return (
     <Wrapper>
       {carts.map((cart) => {
         const imgUrl = cart.product.productImage[0].imgSrc;
         const size = cart.product.stock[0].size;
         const color = cart.product.stock[0].color;
+        const stockLeft = cart.product.stock[0].stock;
+        const linkProduct = `/detail/${
+          cart.product.categoryProduct.name
+        }/${cart.product.name.replaceAll(" ", "+")}`;
 
         return (
           <CartList
@@ -27,7 +32,10 @@ function CartGrid({ carts, quantityOnChange }: CartGridProps) {
             quantity={cart.quantity}
             price={cart.product.price}
             discountByPercent={cart.product.discountByPercent}
+            slug={linkProduct}
             quantityOnChange={quantityOnChange}
+            deleteProduct={deleteProduct}
+            stockLeft={stockLeft}
           />
         );
       })}

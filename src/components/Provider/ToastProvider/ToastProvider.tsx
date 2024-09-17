@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ChildrenProps } from "@/types/common";
 import SuccessIcon from "@/components/SVG/SuccessIcon";
 import Icon from "@/components/Icon";
@@ -70,6 +70,28 @@ function ToastProvider({ children }: ChildrenProps) {
   );
 }
 
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+`;
+
 // Styled-components for Toast styling
 const ToastRoot = styled(ToastPrimitive.Root)`
   display: flex;
@@ -80,6 +102,16 @@ const ToastRoot = styled(ToastPrimitive.Root)`
   padding: 14px 15px;
   min-width: 320px;
   filter: drop-shadow(2px 4px 8px hsl(0deg 0% 0% / 0.4));
+  will-change: transform, opacity;
+
+  /* Animasi berdasarkan data-state */
+  &[data-state="open"] {
+    animation: ${slideIn} 300ms ease-in-out;
+  }
+
+  &[data-state="closed"] {
+    animation: ${slideOut} 300ms ease-in-out;
+  }
 `;
 
 const ToastTitle = styled(ToastPrimitive.Title)`
@@ -99,12 +131,12 @@ const ToastAction = styled(ToastPrimitive.Action)`
 
 const ToastViewport = styled(ToastPrimitive.Viewport)`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px;
   max-width: 100vw;
   z-index: 1000;
 `;

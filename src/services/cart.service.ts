@@ -31,3 +31,19 @@ export async function addCart({
 
   return resp;
 }
+
+export async function updateQuantityCart(id: string, quantity: number) {
+  const url = `/cart/quantity/${id}`;
+  const { data: resp } = await BaseHttpInstanceWithToken.put(url, {
+    quantity: quantity,
+  });
+
+  return resp;
+}
+
+export async function deleteCart(id: string) {
+  const url = `/cart/${id}`;
+  const { data: resp } = await BaseHttpInstanceWithToken.delete(url);
+
+  return resp;
+}

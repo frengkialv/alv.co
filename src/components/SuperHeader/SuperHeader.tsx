@@ -2,29 +2,13 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { QUERIES } from "@/constants";
-import { HeaderContext } from "../Provider/HeaderProvider";
 
 function SuperHeader() {
-  const { showSuperHeader, setShowSuperHeader } =
-    React.useContext(HeaderContext);
-
-  if (!showSuperHeader) {
-    return null;
-  }
   return (
     <SuperHeaderWrapper>
-      {/* <Filler /> */}
-      {showSuperHeader && (
-        <MarketingMassage>
-          Extra 20% Off + 5% Cashback For Your First Order.
-        </MarketingMassage>
-      )}
-
-      {/* <WrapperButton>
-        <UnstyledBotton onClick={() => setShowSuperHeader(false)}>
-          <Icon id="close" strokeWidth={2} color="white" />
-        </UnstyledBotton>
-      </WrapperButton> */}
+      <MarketingMassage>
+        Extra 20% Off + 5% Cashback For Your First Order.
+      </MarketingMassage>
     </SuperHeaderWrapper>
   );
 }

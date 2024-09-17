@@ -66,7 +66,7 @@ export const InnerWrapper = styled.div`
   border-radius: 20px;
   border: 1px solid var(--color-gray-200);
   position: sticky;
-  top: 90px;
+  top: 130px;
 `;
 
 export const SummaryTitle = styled.h5`

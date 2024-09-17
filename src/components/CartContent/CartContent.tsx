@@ -15,6 +15,7 @@ import {
   formatPrice,
   formatTotalPriceCart,
 } from "@/utils";
+import Link from "next/link";
 
 export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
   return (
@@ -59,9 +60,12 @@ function ListCart({ carts }: { carts: CartType[] }) {
       <ListWrapper>
         {carts.map((cart) => {
           const imageSrc = cart.product.productImage[0].imgSrc;
+          const linkProduct = `/detail/${
+            cart.product.categoryProduct.name
+          }/${cart.product.name.replaceAll(" ", "+")}`;
 
           return (
-            <List key={cart.product.name}>
+            <List key={cart.id} href={linkProduct}>
               <ImageWrapper>
                 <ImageList
                   src={`data:image/jpeg;base64,${imageSrc}`}
@@ -168,9 +172,10 @@ const ListWrapper = styled.div`
   overflow-x: hidden;
 `;
 
-const List = styled.div`
+const List = styled(Link)`
   display: flex;
   gap: 14px;
+  text-decoration: none;
 `;
 
 const ImageWrapper = styled.div`
@@ -187,6 +192,7 @@ const DetailWrapper = styled.div`
 `;
 
 const ProductName = styled.h6`
+  color: var(--color-black);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
