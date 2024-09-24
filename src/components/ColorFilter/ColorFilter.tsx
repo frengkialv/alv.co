@@ -2,25 +2,21 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS_FILTER } from "@/constants";
+import { CategoryContext } from "../Provider/CategoryProvider";
 
-interface Props {
-  value: string[];
-  onValueChange: (val: string[]) => void;
-}
+function ColorFilter() {
+  const { colorsFilter, setColorsFilter } = React.useContext(CategoryContext);
 
-function ColorFilter({ value, onValueChange }: Props) {
   const handleChangeSize = (val: string) => {
-    if (value.includes(val)) {
-      const nextColorsSelected = value.filter(
+    if (colorsFilter.includes(val)) {
+      const nextColorsSelected = colorsFilter.filter(
         (colorSelected) => colorSelected !== val
       );
-
-      onValueChange(nextColorsSelected);
+      setColorsFilter(nextColorsSelected);
     } else {
-      const nextColorsSelected = [...value];
+      const nextColorsSelected = [...colorsFilter];
       nextColorsSelected.push(val);
-
-      onValueChange(nextColorsSelected);
+      setColorsFilter(nextColorsSelected);
     }
   };
 
@@ -33,7 +29,7 @@ function ColorFilter({ value, onValueChange }: Props) {
           $border={color.border}
           onClick={() => handleChangeSize(color.name)}
         >
-          {value.includes(color.name) && <>&#10004;</>}
+          {colorsFilter.includes(color.name) && <>&#10004;</>}
         </Row>
       ))}
     </Wrapper>

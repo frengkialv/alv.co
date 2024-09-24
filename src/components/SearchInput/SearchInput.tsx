@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  background-color: var(--color-snow-flake);
+  background-color: var(--color-pearls);
   border: 1px solid transparent;
   padding: 12px 16px 12px 50px;
   border-radius: 25px;

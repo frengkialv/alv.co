@@ -1,7 +1,6 @@
 "use client";
 import styled from "styled-components";
 import { QUERIES } from "@/constants";
-import UnstyledButton from "../UnstyledButton";
 
 export const Wrapper = styled.div`
   display: flex;

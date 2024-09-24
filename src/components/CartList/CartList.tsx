@@ -132,7 +132,12 @@ function CartList({
                 quantityOnChange(id, quantity - 1);
               }}
             >
-              &#8722;
+              <Icon
+                id="minus"
+                size={18}
+                strokeWidth={1.5}
+                color={quantity === 1 ? "#898b8f" : "#000000"}
+              />
             </SubtractionButton>
             <QuantitiInput
               type="number"
@@ -142,14 +147,21 @@ function CartList({
               readOnly
             />
             <AdditionButton
+              disabled={quantity === 10 || quantity >= stockLeft}
               onClick={() => {
-                if (quantity === 10) {
-                  return;
-                }
                 quantityOnChange(id, quantity + 1);
               }}
             >
-              +
+              <Icon
+                id="plus"
+                size={18}
+                strokeWidth={1.5}
+                color={
+                  quantity === 10 || quantity >= stockLeft
+                    ? "#898b8f"
+                    : "#000000"
+                }
+              />
             </AdditionButton>
           </QuantitiOrderButtonWrapper>
         </BottomContent>

@@ -1,21 +1,21 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import BadgeNotification from "../BadgeNotification";
 import EmptyCartImage from "../../../public/empty-cart.png";
-import { WEIGHT } from "@/constants";
 import Button from "../Button";
+import { WEIGHT } from "@/constants";
 import { CartType } from "@/types/cart";
 import {
   formatDiscountPrice,
   formatPrice,
   formatTotalPriceCart,
 } from "@/utils";
-import Link from "next/link";
 
 export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
   return (
@@ -38,7 +38,7 @@ function EmptyCart() {
         height={300}
       />
       <TextWrapper>
-        <BoldText>Your Bag Is Empty</BoldText>
+        <BoldText>Your Shopping Cart Is Empty</BoldText>
         <NormalText>Start filling it up with your favourites</NormalText>
       </TextWrapper>
     </EmptyCartWrapper>
@@ -126,11 +126,11 @@ function ListCart({ carts }: { carts: CartType[] }) {
   );
 }
 
-function CartContent({ carts }: { carts: CartType[] }) {
+function CartContent({ carts }: { carts: CartType[] | null }) {
   return (
     <Wrapper>
-      {carts.length === 0 && <EmptyCart />}
-      {carts.length > 0 && <ListCart carts={carts} />}
+      {((carts && carts.length === 0) || carts === null) && <EmptyCart />}
+      {carts && carts.length > 0 && <ListCart carts={carts} />}
     </Wrapper>
   );
 }
@@ -156,7 +156,6 @@ const NormalText = styled.span`
 `;
 
 const ListCartWrapper = styled.div`
-  padding: 15px;
   width: 350px;
 `;
 

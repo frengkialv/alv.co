@@ -31,7 +31,7 @@ html {
   --color-white: hsl(0, 0%, 100%);
   --color-white-blur: rgb(255 255 255 / 0.8);
   --color-snow-flake: hsl(0, 0%, 94.12%); /* #F0F0F0 */
-  --color-pearls: hsl(330, 7%, 95%); /* #F2F0F1 */
+  --color-pearls: hsl(340, 11%, 95%); /* #F3F0F1 */
   --color-perfect-white: hsl(20, 9%, 94%); /* #F0EEED */
   --color-gray-100: hsl(0, 0%, 90%);
   --color-gray-200: hsl(330, 3%, 85%);

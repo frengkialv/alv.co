@@ -33,23 +33,14 @@ const useFilterSidebarContent = () => {
 };
 
 function FilterSidebarWrapperDekstop({ children }: ChildrenProps) {
-  const filterHeight = useFilterSidebarContent();
-
-  const { height } = React.useContext(MainWrapperContext);
-
-  const top = `-${filterHeight - height + 10}px`;
-  return (
-    <Wrapper className="filter-wrapper" $top={top}>
-      {children}
-    </Wrapper>
-  );
+  return <Wrapper className="filter-wrapper">{children}</Wrapper>;
 }
 
-const Wrapper = styled.div<{ $top: string }>`
+const Wrapper = styled.div`
   flex: 1;
   position: sticky;
   position: -webkit-sticky;
-  top: ${(props) => props.$top};
+  top: 0;
   min-width: 280px;
   height: fit-content;
   padding: 20px 24px;

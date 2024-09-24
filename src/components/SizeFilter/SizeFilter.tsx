@@ -3,35 +3,48 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import { SIZES_FILTER } from "@/constants";
+import { CategoryContext } from "../Provider/CategoryProvider";
 
-interface Props {
-  value: string[];
-  onValueChange: (val: string[]) => void;
+interface Sizes {
+  value: string;
+  label: string;
+  category: string;
 }
 
-function SizeFilter({ value, onValueChange }: Props) {
+function SizeFilter() {
+  const { currentPath, sizesFilter, setSizesFilter } =
+    React.useContext(CategoryContext);
+
+  const [sizes, setSizes] = React.useState<Sizes[]>([]);
+
+  React.useEffect(() => {
+    const nextSizes = SIZES_FILTER.filter(
+      (size) => size.category === currentPath
+    );
+
+    setSizes(nextSizes);
+  }, [currentPath]);
+
   const handleChangeSize = (val: string) => {
-    if (value.includes(val)) {
-      const nextSizeSelected = value.filter(
+    if (sizesFilter.includes(val)) {
+      const nextSizeSelected = sizesFilter.filter(
         (sizeSelected) => sizeSelected !== val
       );
-
-      onValueChange(nextSizeSelected);
+      setSizesFilter(nextSizeSelected);
     } else {
-      const nextSizeSelected = [...value];
+      const nextSizeSelected = [...sizesFilter];
       nextSizeSelected.push(val);
-
-      onValueChange(nextSizeSelected);
+      setSizesFilter(nextSizeSelected);
     }
   };
 
   return (
     <Wrapper>
-      {SIZES_FILTER.map((size) => (
+      {sizes.map((size) => (
         <Button
           key={size.value}
           size="small"
-          variant={value.includes(size.value) ? "primary" : "secondary"}
+          variant={sizesFilter.includes(size.value) ? "primary" : "secondary"}
           onClick={() => handleChangeSize(size.value)}
         >
           {size.label}

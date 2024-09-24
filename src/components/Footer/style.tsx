@@ -50,13 +50,14 @@ const WrapperStyle = styled.div<{ $subscriberHeight: number }>`
     props.$subscriberHeight
       ? props.$subscriberHeight / 2 + 40 + "px"
       : "190px"};
+
   position: relative;
   padding-top: var(--padding-top);
   padding-bottom: 40px;
   padding-left: var(--padding-horizontal-wrapper);
   padding-right: var(--padding-horizontal-wrapper);
   margin-top: ${(props) => props.$subscriberHeight / 2 + 50 + "px"};
-  background-color: var(--color-gray-900);
+  background-color: var(--color-pearls);
 `;
 
 export const SubscribeWrapper = styled.div`

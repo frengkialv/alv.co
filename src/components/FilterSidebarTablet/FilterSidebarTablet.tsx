@@ -9,47 +9,24 @@ import Slider from "../Slider";
 import SizeFilter from "../SizeFilter";
 import Button from "../Button";
 import { CategoryContext } from "../Provider/CategoryProvider";
-import { PropsFilter } from "../FilterSidebarDekstop";
 import { QUERIES } from "@/constants";
 
-function FilterContent({
-  valuePrice,
-  onPriceChange,
-  valueColor,
-  onColorChange,
-  valueSize,
-  onSizeChange,
-  submitFilter,
-}: PropsFilter) {
+function FilterContent({ submitFilter }: { submitFilter: () => void }) {
   return (
     <>
       <ContentWrapper>
         <Column>
-          <Accordion
-            value="item-1"
-            header="Price"
-            children={
-              <Slider value={valuePrice} onValueChange={onPriceChange} />
-            }
-          />
+          <Accordion value="item-1" header="Price" children={<Slider />} />
         </Column>
         <Column>
           <Accordion
             value="item-2"
             header="Colors"
-            children={
-              <ColorFilter value={valueColor} onValueChange={onColorChange} />
-            }
+            children={<ColorFilter />}
           />
         </Column>
         <Column>
-          <Accordion
-            value="item-3"
-            header="Size"
-            children={
-              <SizeFilter value={valueSize} onValueChange={onSizeChange} />
-            }
-          />
+          <Accordion value="item-3" header="Size" children={<SizeFilter />} />
         </Column>
       </ContentWrapper>
       <Button size="small" grow={true} onClick={submitFilter}>
@@ -59,16 +36,8 @@ function FilterContent({
   );
 }
 
-function FilterSidebarTablet({
-  valuePrice,
-  onPriceChange,
-  valueColor,
-  onColorChange,
-  valueSize,
-  onSizeChange,
-  submitFilter,
-}: PropsFilter) {
-  const { showFilterTablet, setShowFilterTablet } =
+function FilterSidebarTablet() {
+  const { showFilterTablet, setShowFilterTablet, submitFilter } =
     React.useContext(CategoryContext);
 
   const handleSubmitFilter = () => {
@@ -82,7 +51,7 @@ function FilterSidebarTablet({
   return (
     <Wrapper>
       <ButtonTrigger onClick={() => setShowFilterTablet(true)}>
-        All Filters
+        Filters
         <FilterLogo />
       </ButtonTrigger>
 
@@ -90,17 +59,7 @@ function FilterSidebarTablet({
         title="All Filters"
         open={showFilterTablet}
         onOpenChange={setShowFilterTablet}
-        children={
-          <FilterContent
-            valuePrice={valuePrice}
-            onPriceChange={onPriceChange}
-            valueColor={valueColor}
-            onColorChange={onColorChange}
-            valueSize={valueSize}
-            onSizeChange={onSizeChange}
-            submitFilter={handleSubmitFilter}
-          />
-        }
+        children={<FilterContent submitFilter={handleSubmitFilter} />}
       />
     </Wrapper>
   );
@@ -141,7 +100,7 @@ const ButtonTrigger = styled.button`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+  padding: 15px 0 24px 0;
 `;
 
 export const Column = styled.div`
