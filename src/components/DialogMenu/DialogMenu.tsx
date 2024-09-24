@@ -119,7 +119,6 @@ const HeaderTitle = styled.span`
 
 const MainContent = styled.div`
   padding: 25px;
-  padding-top: 30px;
 `;
 
 export default DialogMenu;

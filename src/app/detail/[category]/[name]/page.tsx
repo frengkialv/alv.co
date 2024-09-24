@@ -158,7 +158,6 @@ function DetailPage({ params }: PageProps) {
         size: sizeSelected!,
       });
 
-      console.log("🚀 ~ submitCartHandler ~ data:", data);
       if (data) {
         setTimeout(() => {
           fetchDataCart();
@@ -209,7 +208,7 @@ function DetailPage({ params }: PageProps) {
 
       {/* <SuggestionProduct /> */}
 
-      <LoadingComponent isOpen={isLoading} />
+      <LoadingComponent isLoading={isLoading} />
     </Wrapper>
   );
 }

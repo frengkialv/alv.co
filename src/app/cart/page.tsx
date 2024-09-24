@@ -1,19 +1,25 @@
 "use client";
 import * as React from "react";
+import Image from "next/image";
 import {
   ApplyButtonWrapper,
+  BoldText,
   ContentWrapper,
   DiscountValue,
+  EmptyDataWrapper,
+  EmptyImage,
   InnerWrapper,
   InputPromoWrapper,
   InputWrapper,
   Label,
   MainTitle,
+  NormalText,
   PromoIcon,
   PromoWrapper,
   RowSummary,
   SummaryTitle,
   SummaryWrapper,
+  TextWrapper,
   TotalLabel,
   TotalSummary,
   TotalValue,
@@ -25,6 +31,7 @@ import CartGrid from "@/components/CartGrid";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
+import EmptyCartImage from "../../../public/empty-cart.png";
 import { deleteCart, updateQuantityCart } from "@/services/cart.service";
 import { formatPrice, formatTotalPriceCart } from "@/utils";
 import { useToast } from "@/components/Provider/ToastProvider";
@@ -37,19 +44,19 @@ function CartPage() {
   ];
   const { showToast } = useToast();
 
-  const { fetchDataCart, carts, setCarts } = React.useContext(CartContext);
-  console.log("🚀 ~ CartPage ~ carts:", carts);
+  const { fetchDataCart, carts } = React.useContext(CartContext);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  // const [carts, setCarts] = React.useState<CartType[]>([]);
   const [totalPrice, setTotalPrice] = React.useState<number>(0);
   const [deliveryFee, setDeliveryFee] = React.useState<number>(15);
 
   React.useEffect(() => {
-    const nextTotalPrice = formatTotalPriceCart(carts);
+    if (carts) {
+      const nextTotalPrice = formatTotalPriceCart(carts);
 
-    setTotalPrice(nextTotalPrice);
+      setTotalPrice(nextTotalPrice);
+    }
   }, [carts]);
 
   const deleteProductHandler = async (id: string) => {
@@ -59,17 +66,17 @@ function CartPage() {
 
       if (data) {
         setTimeout(() => {
-          fetchDataCart();
           showToast({
             title: "Success!",
-            description: "Successfully delete cart.",
+            description: "Item has been removed from the cart.",
           });
         }, 2000);
       }
     } catch (error) {
       console.log("🚀 ~ error:", error);
     } finally {
-      setTimeout(() => {
+      setTimeout(async () => {
+        await fetchDataCart();
         setIsLoading(false);
       }, 2000);
     }
@@ -81,19 +88,39 @@ function CartPage() {
       const { data } = await updateQuantityCart(id, quantity);
 
       if (data) {
-        setTimeout(() => {
-          fetchDataCart();
-        }, 500);
+        setTimeout(() => {}, 500);
       }
     } catch (error) {
-      window.location.href = "/cart";
       console.log("🚀 ~ error:", error);
     } finally {
-      setTimeout(() => {
+      setTimeout(async () => {
+        await fetchDataCart();
         setIsLoading(false);
       }, 500);
     }
   };
+
+  if (carts && carts.length === 0) {
+    return (
+      <EmptyDataWrapper>
+        <EmptyImage
+          src={EmptyCartImage}
+          alt="Empty Cart"
+          quality={100}
+          width={300}
+          height={300}
+        />
+
+        <TextWrapper>
+          <BoldText>Your Shopping Cart Is Empty</BoldText>
+          <NormalText style={{ marginBottom: "10px" }}>
+            Start filling it up with your favourites
+          </NormalText>
+          <Button>Let's go Shopping!</Button>
+        </TextWrapper>
+      </EmptyDataWrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -120,11 +147,13 @@ function CartPage() {
             </RowSummary>
             <RowSummary>
               <Label>Delivery Fee</Label>
-              <Value>{formatPrice(deliveryFee)}</Value>
+              <Value>{formatPrice(totalPrice !== 0 ? deliveryFee : 0)}</Value>
             </RowSummary>
             <TotalSummary>
               <TotalLabel>Total</TotalLabel>
-              <TotalValue>{formatPrice(totalPrice + deliveryFee)}</TotalValue>
+              <TotalValue>
+                {formatPrice(totalPrice !== 0 ? totalPrice + deliveryFee : 0)}
+              </TotalValue>
             </TotalSummary>
             <PromoWrapper>
               <InputPromoWrapper>
@@ -133,19 +162,19 @@ function CartPage() {
               </InputPromoWrapper>
 
               <ApplyButtonWrapper>
-                <Button grow={true} size="small">
+                <Button grow={true} size="small" disabled={totalPrice === 0}>
                   Apply
                 </Button>
               </ApplyButtonWrapper>
             </PromoWrapper>
-            <Button grow={true} size="small">
+            <Button grow={true} size="small" disabled={totalPrice === 0}>
               Go to Checkout
               <Icon id="arrow-right" color="white" strokeWidth={2} />
             </Button>
           </InnerWrapper>
         </SummaryWrapper>
       </ContentWrapper>
-      <LoadingComponent isOpen={isLoading} />
+      <LoadingComponent isLoading={isLoading} />
     </Wrapper>
   );
 }

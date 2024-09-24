@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Icon from "@/components/Icon";
 import { QUERIES, WEIGHT } from "@/constants";
 import { MainWrapperContext } from "@/components/Provider/MainWrapperProvider";
+import Image from "next/image";
 
 export function PromoIcon() {
   const { width } = React.useContext(MainWrapperContext);
@@ -24,6 +25,34 @@ export function PromoIcon() {
     </PropIconStyle>
   );
 }
+
+export const EmptyDataWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0;
+`;
+
+export const EmptyImage = styled(Image)`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const BoldText = styled.h6``;
+
+export const NormalText = styled.span`
+  font-size: ${14 / 16}rem;
+  font-weight: ${WEIGHT.medium};
+  color: var(--color-gray-600);
+`;
 
 export const Wrapper = styled.div`
   padding-left: var(--padding-horizontal-wrapper);
@@ -70,12 +99,12 @@ export const InnerWrapper = styled.div`
 `;
 
 export const SummaryTitle = styled.h5`
-  font-size: ${24 / 16}rem;
+  font-size: ${18 / 16}rem;
   line-height: 1;
   margin-bottom: 20px;
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${20 / 16}rem;
+    font-size: ${16 / 16}rem;
   }
 `;
 
@@ -92,39 +121,27 @@ export const RowSummary = styled.div`
 `;
 
 export const Label = styled.span`
-  font-size: ${16 / 16}rem;
+  font-size: ${15 / 16}rem;
   font-weight: ${WEIGHT.medium};
   color: var(--color-gray-500);
-
-  @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
-  }
 `;
 
 export const Value = styled.span`
-  font-size: ${16 / 16}rem;
+  font-size: ${15 / 16}rem;
   font-weight: 700;
 
   &::before {
     content: "$ ";
   }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
-  }
 `;
 
 export const DiscountValue = styled.span`
-  font-size: ${16 / 16}rem;
+  font-size: ${15 / 16}rem;
   font-weight: 700;
   color: var(--color-red);
 
   &::before {
     content: "-$ ";
-  }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
   }
 `;
 
@@ -135,7 +152,7 @@ export const TotalSummary = styled.span`
 `;
 
 export const TotalLabel = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${17 / 16}rem;
   font-weight: ${WEIGHT.medium};
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -144,7 +161,7 @@ export const TotalLabel = styled.span`
 `;
 
 export const TotalValue = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${17 / 16}rem;
   font-weight: 700;
 
   &::before {

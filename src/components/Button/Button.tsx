@@ -79,8 +79,9 @@ const Wrapper = styled.button<{
   width: ${(props) => (props.$grow ? "100%" : undefined)};
   border-radius: 60px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
+  opacity: ${(props) => (props.disabled ? 0.8 : 1)};
   border: 1px solid transparent;
+  line-height: 1.2;
   outline-offset: 4px;
   white-space: nowrap;
   transition: background-color 0.3s ease;

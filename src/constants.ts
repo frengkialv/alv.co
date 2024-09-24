@@ -69,7 +69,7 @@ export const COLORS_FILTER = [
   {
     color: "#06CAF5",
     border: "#05a2c4",
-    name: "light-blue",
+    name: "lightBlue",
   },
   {
     color: "#063AF5",
@@ -102,19 +102,29 @@ export const SIZES_FILTER = [
   {
     value: "small",
     label: "Small",
+    category: "t-shirts",
   },
   {
     value: "medium",
     label: "Medium",
+    category: "t-shirts",
   },
   {
     value: "large",
     label: "Large",
+    category: "t-shirts",
   },
   {
     value: "x-large",
     label: "X-Large",
+    category: "t-shirts",
   },
+  { value: "40", label: "40", category: "shoes" },
+  { value: "41", label: "41", category: "shoes" },
+  { value: "42", label: "42", category: "shoes" },
+  { value: "43", label: "43", category: "shoes" },
+  { value: "44", label: "44", category: "shoes" },
+  { value: "one size", label: "One Size", category: "accessories" },
 ];
 
 interface ColorOption {
@@ -168,3 +178,5 @@ export const COLORS_OPTION: ColorOption = {
     border: "#26a943",
   },
 };
+
+export const CategoryPathnames = ["shoes", "t-shirts", "accessories", "sport"];

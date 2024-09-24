@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
   Clock,
@@ -11,6 +12,8 @@ import {
   Home,
   Mail,
   Menu,
+  Minus,
+  Plus,
   Search,
   Scissors,
   ShoppingBag,
@@ -23,7 +26,6 @@ import {
   Eye,
   EyeOff,
   LogIn,
-  AlertCircle,
 } from "react-feather";
 
 const icons = {
@@ -40,6 +42,8 @@ const icons = {
   home: Home,
   login: LogIn,
   menu: Menu,
+  minus: Minus,
+  plus: Plus,
   scissors: Scissors,
   search: Search,
   "shopping-bag": ShoppingBag,

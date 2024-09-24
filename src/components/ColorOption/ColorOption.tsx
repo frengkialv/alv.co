@@ -20,6 +20,7 @@ function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
             key={color}
             $color={COLORS_OPTION[color].color}
             $border={COLORS_OPTION[color].border}
+            disabled={color === colorSelected}
             onClick={() => setColorSelected(color)}
           >
             {color === colorSelected && <>&#10004;</>}

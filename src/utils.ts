@@ -47,3 +47,7 @@ export function formatTotalPriceCart(datas: CartType[]) {
 
   return nextTotalPrice;
 }
+
+export const scrollToTop = () => {
+  return window.scrollTo(0, 0);
+};

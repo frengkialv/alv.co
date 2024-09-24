@@ -8,48 +8,25 @@ import Slider from "../Slider";
 import ColorFilter from "../ColorFilter";
 import SizeFilter from "../SizeFilter";
 import Button from "../Button";
-import { PropsFilter } from "../FilterSidebarDekstop";
 import { CategoryContext } from "../Provider/CategoryProvider";
 import { QUERIES } from "@/constants";
 
-function FilterContent({
-  valuePrice,
-  onPriceChange,
-  valueColor,
-  onColorChange,
-  valueSize,
-  onSizeChange,
-  submitFilter,
-}: PropsFilter) {
+function FilterContent({ submitFilter }: { submitFilter: () => void }) {
   return (
     <>
       <ContentWrapper>
         <Column>
-          <Accordion
-            value="item-1"
-            header="Price"
-            children={
-              <Slider value={valuePrice} onValueChange={onPriceChange} />
-            }
-          />
+          <Accordion value="item-1" header="Price" children={<Slider />} />
         </Column>
         <Column>
           <Accordion
             value="item-2"
             header="Colors"
-            children={
-              <ColorFilter value={valueColor} onValueChange={onColorChange} />
-            }
+            children={<ColorFilter />}
           />
         </Column>
         <Column>
-          <Accordion
-            value="item-3"
-            header="Size"
-            children={
-              <SizeFilter value={valueSize} onValueChange={onSizeChange} />
-            }
-          />
+          <Accordion value="item-3" header="Size" children={<SizeFilter />} />
         </Column>
       </ContentWrapper>
       <Button size="small" grow={true} onClick={submitFilter}>
@@ -59,16 +36,8 @@ function FilterContent({
   );
 }
 
-function FilterSidebarMobile({
-  valuePrice,
-  onPriceChange,
-  valueColor,
-  onColorChange,
-  valueSize,
-  onSizeChange,
-  submitFilter,
-}: PropsFilter) {
-  const { showFilterMobile, setShowFilterMobile } =
+function FilterSidebarMobile() {
+  const { showFilterMobile, setShowFilterMobile, submitFilter } =
     React.useContext(CategoryContext);
 
   const handleSubmitFilter = () => {
@@ -87,17 +56,7 @@ function FilterSidebarMobile({
         title="All Filters"
         open={showFilterMobile}
         onOpenChange={setShowFilterMobile}
-        children={
-          <FilterContent
-            valuePrice={valuePrice}
-            onPriceChange={onPriceChange}
-            valueColor={valueColor}
-            onColorChange={onColorChange}
-            valueSize={valueSize}
-            onSizeChange={onSizeChange}
-            submitFilter={handleSubmitFilter}
-          />
-        }
+        children={<FilterContent submitFilter={handleSubmitFilter} />}
       />
     </Wrapper>
   );

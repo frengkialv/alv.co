@@ -57,7 +57,7 @@ function ActionHeader() {
       {pathname !== "/cart" && (
         <WrapperCartDropdownDekstop>
           <HoverCard
-            trigger={<CartIconTrigger badgeNumber={carts.length} />}
+            trigger={<CartIconTrigger badgeNumber={carts ? carts.length : 0} />}
             sideOffsite={10}
           >
             <CartContent carts={carts} />
@@ -67,7 +67,7 @@ function ActionHeader() {
 
       {pathname !== "/cart" && (
         <WrapperCartDropdownTablet>
-          <BadgeNotification badgeNumber={carts.length}>
+          <BadgeNotification badgeNumber={carts ? carts.length : 0}>
             <UnstyledButton onClick={() => router.push("/cart")}>
               <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
             </UnstyledButton>

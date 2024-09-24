@@ -60,7 +60,12 @@ function SizeOption({
               key={size}
               $selected={sizeSelected === size}
               disabled={isDisable}
-              onClick={() => sizeSelectedHandler(size)}
+              onClick={() => {
+                if (size === sizeSelected) {
+                  return;
+                }
+                sizeSelectedHandler(size);
+              }}
             >
               {size}
             </SizeButton>

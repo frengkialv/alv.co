@@ -1,7 +1,6 @@
 import React from "react";
 import FooterInformation from "../FooterInformation";
 import ReservedFooter from "../ReservedFooter";
-import FooterProvider from "../Provider/FooterProvider";
 import {
   Filler,
   SubscribeButton,
@@ -14,26 +13,24 @@ import {
 
 function Footer() {
   return (
-    <FooterProvider>
-      <Wrapper>
-        <SubscribeWrapper className="subscribe-wrapper">
-          <SubscribeText>STAY UP TO DATE ABOUT OUR LATEST OFFERS</SubscribeText>
+    <Wrapper>
+      <SubscribeWrapper className="subscribe-wrapper">
+        <SubscribeText>STAY UP TO DATE ABOUT OUR LATEST OFFERS</SubscribeText>
 
-          <Filler />
+        <Filler />
 
-          <SubscribeInputWrapper>
-            <div style={{ position: "relative" }}>
-              <SubscribeInput />
-            </div>
-            <SubscribeButton>Subscribe to Newsletter</SubscribeButton>
-          </SubscribeInputWrapper>
-        </SubscribeWrapper>
+        <SubscribeInputWrapper>
+          <div style={{ position: "relative" }}>
+            <SubscribeInput />
+          </div>
+          <SubscribeButton>Subscribe to Newsletter</SubscribeButton>
+        </SubscribeInputWrapper>
+      </SubscribeWrapper>
 
-        <FooterInformation />
+      <FooterInformation />
 
-        <ReservedFooter />
-      </Wrapper>
-    </FooterProvider>
+      <ReservedFooter />
+    </Wrapper>
   );
 }
 

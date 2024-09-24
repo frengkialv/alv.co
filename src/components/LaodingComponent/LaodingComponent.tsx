@@ -5,13 +5,12 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { WEIGHT } from "@/constants";
 
 interface Props {
-  isOpen: boolean;
-  onOpenChange?: (open: boolean) => void;
+  isLoading: boolean;
 }
 
-function LoadingComponent({ isOpen, onOpenChange }: Props) {
+function LoadingComponent({ isLoading }: Props) {
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog.Root open={isLoading}>
       <Dialog.Portal>
         <DialogOverlay />
         <DialogContent aria-describedby={undefined}>

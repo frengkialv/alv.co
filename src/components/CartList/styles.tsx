@@ -135,19 +135,21 @@ export const BottomContent = styled.div`
 
 export const QuantitiOrderButtonWrapper = styled.div`
   display: flex;
+  align-items: center;
+  border: 1.5px solid #bfc9d9;
+  border-radius: 60px;
+
+  &:hover {
+    border-color: var(--color-black);
+  }
 `;
 
 export const SubtractionButton = styled.button`
-  font-family: "Times New Roman", Times, serif;
-  font-size: ${16 / 16}rem;
-  font-weight: 800;
-  line-height: 0;
   padding: 10px;
-  padding-left: 20px;
+  padding-left: 14px;
   color: var(--color-black);
+  background-color: transparent;
   border: none;
-  border-top-left-radius: 60px 60px;
-  border-bottom-left-radius: 60px;
   outline: none;
   cursor: pointer;
 `;
@@ -159,7 +161,7 @@ export const QuantitiInput = styled.input`
   width: 30px;
   padding: 8px 0;
   color: var(--color-black);
-  background-color: var(--color-snow-flake);
+  background-color: transparent;
   border: none;
   outline: none;
   user-select: none;
@@ -190,16 +192,11 @@ export const QuantitiInput = styled.input`
 `;
 
 export const AdditionButton = styled.button`
-  font-family: "Times New Roman", Times, serif;
-  font-size: ${16 / 16}rem;
-  font-weight: 800;
-  line-height: 0;
   padding: 10px;
-  padding-right: 20px;
+  padding-right: 14px;
   color: var(--color-black);
+  background-color: transparent;
   border: none;
-  border-top-right-radius: 60px;
-  border-bottom-right-radius: 60px;
   outline: none;
   cursor: pointer;
 `;

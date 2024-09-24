@@ -7,11 +7,7 @@ import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import SortIcon from "../SVG/SortIcon";
 import { QUERIES, SortOptions, WEIGHT } from "@/constants";
-
-interface SortProps {
-  value: string;
-  onValueChange: (val: string) => void;
-}
+import { CategoryContext } from "../Provider/CategoryProvider";
 
 const FormRadioGroup = ({
   sort,
@@ -51,18 +47,21 @@ const FormRadioGroup = ({
   );
 };
 
-function SortWrapperCategoryPage({ value, onValueChange }: SortProps) {
+function SortWrapperCategoryPage() {
   const [showDialogMenu, setShowDialogMenu] = React.useState<boolean>(false);
+  const { sort, onChangeSortHandler } = React.useContext(CategoryContext);
 
   const handleChangeSort = (val: string) => {
-    onValueChange(val);
+    onChangeSortHandler(val);
 
     setTimeout(() => {
       setShowDialogMenu(false);
     }, 1000);
   };
 
-  const sortSelected = SortOptions.filter((sort) => sort.value === value);
+  const sortSelected = SortOptions.filter(
+    (sortOption) => sortOption.value === sort
+  );
 
   return (
     <Wrapper>
@@ -83,7 +82,7 @@ function SortWrapperCategoryPage({ value, onValueChange }: SortProps) {
         title="Sort"
         open={showDialogMenu}
         onOpenChange={setShowDialogMenu}
-        children={<FormRadioGroup sort={value} setSort={handleChangeSort} />}
+        children={<FormRadioGroup sort={sort} setSort={handleChangeSort} />}
       />
     </Wrapper>
   );

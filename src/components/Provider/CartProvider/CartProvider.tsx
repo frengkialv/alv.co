@@ -6,7 +6,7 @@ import { CartType } from "@/types/cart";
 import { getCart } from "@/services/cart.service";
 
 interface CartContextValue {
-  carts: CartType[];
+  carts: CartType[] | null;
   fetchDataCart: () => void;
   setCarts: (carts: CartType[]) => void;
 }
@@ -15,7 +15,7 @@ export const CartContext = React.createContext<CartContextValue>(null!);
 
 function CartProvider({ children }: ChildrenProps) {
   const accessToken = getCookie("access_token");
-  const [carts, setCarts] = React.useState<CartType[]>([]);
+  const [carts, setCarts] = React.useState<CartType[] | null>(null);
 
   React.useEffect(() => {
     if (accessToken) {
@@ -29,6 +29,7 @@ function CartProvider({ children }: ChildrenProps) {
 
       setCarts(data);
     } catch (error) {
+      setCarts([]);
       console.log("🚀 ~ fetchCartHandler ~ error:", error);
     }
   };

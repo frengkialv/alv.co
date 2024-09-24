@@ -35,16 +35,6 @@ const SuperHeaderWrapper = styled.div`
   @media (prefers-reduced-motion: no-preference) {
     animation: ${dropIn} 800ms linear;
   }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    justify-content: center;
-  }
-`;
-
-const Filler = styled.div`
-  @media ${QUERIES.phoneAndSmaller} {
-    display: none;
-  }
 `;
 
 const MarketingMassage = styled.div`
@@ -52,14 +42,6 @@ const MarketingMassage = styled.div`
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: 12px;
-  }
-`;
-
-const WrapperButton = styled.div`
-  text-align: end;
-
-  @media ${QUERIES.phoneAndSmaller} {
-    display: none;
   }
 `;
 

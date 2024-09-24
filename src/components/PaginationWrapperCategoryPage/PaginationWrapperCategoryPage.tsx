@@ -2,21 +2,23 @@
 import React from "react";
 import styled from "styled-components";
 import Pagination from "../Pagination/Pagination";
+import { CategoryContext } from "../Provider/CategoryProvider";
 
 interface Props {
   page: number;
   totalPages: number;
-  onPageChange: (val: number) => void;
 }
 
-function PaginationWrapperCategoryPage({
-  page,
-  totalPages,
-  onPageChange,
-}: Props) {
+function PaginationWrapperCategoryPage({ page, totalPages }: Props) {
+  const { onChangePageHandler } = React.useContext(CategoryContext);
+
   return (
     <Wrapper>
-      <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onChange={onChangePageHandler}
+      />
     </Wrapper>
   );
 }

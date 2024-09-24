@@ -50,7 +50,7 @@ function Pagination({ page, totalPages, onChange }: PaginationProps) {
             key={index}
             $selected={pageNumber === page}
             $disabled={pageNumber === dot}
-            disabled={pageNumber === dot}
+            disabled={pageNumber === dot || page === pageNumber}
             onClick={() => onChange(Number(pageNumber))}
           >
             {pageNumber}
