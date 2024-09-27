@@ -15,7 +15,9 @@ function Provider({ children }: ChildrenProps) {
           <FooterProvider>
             <CartProvider>
               <DetailProvider>
-                <CategoryProvider>{children}</CategoryProvider>
+                {/* <CategoryProvider> */}
+                {children}
+                {/* </CategoryProvider> */}
               </DetailProvider>
             </CartProvider>
           </FooterProvider>

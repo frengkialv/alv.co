@@ -23,6 +23,7 @@ import { PARAMSLABEL } from "@/types/common";
 import { ProductsType } from "@/types/product";
 import EmptyProduct from "@/components/EmptyProduct";
 import LoadingCategoryPage from "@/components/LoadingCategoryPage";
+import CategoryProvider from "@/components/Provider/CategoryProvider";
 
 interface PageProps {
   params: {
@@ -66,38 +67,40 @@ async function CategoryPage({ params, searchParams }: PageProps) {
   }
 
   return (
-    <Wrapper>
-      <ScrollToTop />
-      <BreadCrumbs breadcrumbs={breadcrumbs} />
-      <ContentWrapper>
-        <FilterSidebarDekstop />
-        <div style={{ flex: 4 }}>
-          <HeaderWrapper>
-            <Title>{PARAMSLABEL[params.category]}</Title>
-            <ButtonWrapper>
-              <WrapperFilterSidebarTablet>
-                <FilterSidebarTablet />
-              </WrapperFilterSidebarTablet>
+    <CategoryProvider>
+      <Wrapper>
+        <ScrollToTop />
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        <ContentWrapper>
+          <FilterSidebarDekstop />
+          <div style={{ flex: 4 }}>
+            <HeaderWrapper>
+              <Title>{PARAMSLABEL[params.category]}</Title>
+              <ButtonWrapper>
+                <WrapperFilterSidebarTablet>
+                  <FilterSidebarTablet />
+                </WrapperFilterSidebarTablet>
 
-              <WrapperFilterSidebarMobile>
-                <FilterSidebarMobile />
-              </WrapperFilterSidebarMobile>
+                <WrapperFilterSidebarMobile>
+                  <FilterSidebarMobile />
+                </WrapperFilterSidebarMobile>
 
-              <SortWrapperCategoryPage />
-            </ButtonWrapper>
-          </HeaderWrapper>
+                <SortWrapperCategoryPage />
+              </ButtonWrapper>
+            </HeaderWrapper>
 
-          <MainGrid datas={products} />
+            <MainGrid datas={products} />
 
-          <PaginationWrapperCategoryPage
-            page={currentPage}
-            totalPages={totalPages}
-          />
-        </div>
-      </ContentWrapper>
+            <PaginationWrapperCategoryPage
+              page={currentPage}
+              totalPages={totalPages}
+            />
+          </div>
+        </ContentWrapper>
 
-      <LoadingCategoryPage />
-    </Wrapper>
+        <LoadingCategoryPage />
+      </Wrapper>
+    </CategoryProvider>
   );
 }
 

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChildrenProps } from "@/types/common";
 import { CategoryPathnames, SortOptions } from "@/constants";
@@ -46,8 +46,11 @@ export const CategoryContext = React.createContext<CategoryContextValue>(null!);
 
 function CategoryProvider({ children }: ChildrenProps) {
   const router = useRouter();
+
   const pathname = usePathname(); // Get the current pathname
+
   const searchParams = useSearchParams(); // Get the query parameters
+
   const baseUrl = `${pathname}?`;
 
   const [currentPath, setCurrentPath] = React.useState<string>("");
@@ -214,7 +217,9 @@ function CategoryProvider({ children }: ChildrenProps) {
 
   return (
     <CategoryContext.Provider value={value}>
+      {/* <Suspense fallback={null}> */}
       {children}
+      {/* </Suspense> */}
     </CategoryContext.Provider>
   );
 }
