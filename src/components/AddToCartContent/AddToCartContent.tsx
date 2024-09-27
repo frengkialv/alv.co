@@ -1,22 +1,19 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { QUERIES, WEIGHT } from "@/constants";
 import Icon from "../Icon";
+import { QUERIES, WEIGHT } from "@/constants";
+import { DetailContext } from "../Provider/DetailProvider";
+import LoadingComponent from "../LaodingComponent/LaodingComponent";
 
 interface Props {
-  stockLeft: number | null;
-  amountOrder: number;
-  setAmountOrder: (amount: number) => void;
-  submitHandler: () => void;
+  productId: string;
 }
 
-function AddToCartContent({
-  amountOrder,
-  setAmountOrder,
-  stockLeft,
-  submitHandler,
-}: Props) {
+function AddToCartContent({ productId }: Props) {
+  const { stockLeft, amountOrder, setAmountOrder, submitHandler, isLoading } =
+    React.useContext(DetailContext);
+
   const handleSubtractAmount = () => {
     const nextAmount = amountOrder === 1 ? amountOrder : amountOrder - 1;
     setAmountOrder(nextAmount);
@@ -29,6 +26,7 @@ function AddToCartContent({
     const nextAmount = amountOrder + 1;
     setAmountOrder(nextAmount);
   };
+
   return (
     <OrderButtonWrapper>
       <QuantitiOrderButtonWrapper $disabled={!stockLeft}>
@@ -68,9 +66,14 @@ function AddToCartContent({
         </AdditionButton>
       </QuantitiOrderButtonWrapper>
 
-      <AddCartButton disabled={!stockLeft} onClick={submitHandler}>
+      <AddCartButton
+        disabled={!stockLeft}
+        onClick={() => submitHandler(productId)}
+      >
         Add to Cart
       </AddCartButton>
+
+      <LoadingComponent isLoading={isLoading} />
     </OrderButtonWrapper>
   );
 }
@@ -80,21 +83,22 @@ const OrderButtonWrapper = styled.div`
   gap: 14px;
 `;
 
-const QuantitiOrderButtonWrapper = styled.div<{ $disabled: boolean }>`
+const QuantitiOrderButtonWrapper = styled.div<{ $disabled?: boolean }>`
   display: flex;
   opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
   align-items: center;
-  border: 1.5px solid #bfc9d9;
+  border: 2px solid #bfc9d9;
   border-radius: 60px;
   min-width: fit-content;
 
   &:hover {
-    border-color: var(--color-black);
+    outline: 2px solid var(--color-black);
+    outline-offset: 4px;
   }
 `;
 
 const SubtractionButton = styled.button`
-  padding: 10px;
+  padding: 8px 10px;
   padding-left: 14px;
   color: var(--color-black);
   background-color: transparent;
@@ -108,7 +112,7 @@ const QuantitiInput = styled.input`
   text-align: center;
   font-size: ${14 / 16}rem;
   width: 30px;
-  padding: 8px 0;
+  padding: 4px 0;
   color: var(--color-black);
   background-color: transparent;
   border: none;
@@ -140,7 +144,7 @@ const QuantitiInput = styled.input`
 `;
 
 const AdditionButton = styled.button`
-  padding: 10px;
+  padding: 8px 10px;
   padding-right: 14px;
   color: var(--color-black);
   background-color: transparent;
@@ -149,7 +153,7 @@ const AdditionButton = styled.button`
   cursor: pointer;
 `;
 
-const AddCartButton = styled.button<{ disabled: boolean }>`
+const AddCartButton = styled.button<{ disabled?: boolean }>`
   color: var(--color-white);
   background-color: var(--color-black);
   padding: 10px;

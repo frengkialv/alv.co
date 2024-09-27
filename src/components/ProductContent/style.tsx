@@ -119,6 +119,10 @@ export const DiscountFlag = styled.span`
 `;
 
 export const ProductDescription = styled.p`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   color: var(--color-gray-600);
   font-weight: ${WEIGHT.medium};
   line-height: 1.4;

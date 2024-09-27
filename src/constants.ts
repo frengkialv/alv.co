@@ -98,7 +98,13 @@ export const COLORS_FILTER = [
   },
 ];
 
-export const SIZES_FILTER = [
+export interface SizesType {
+  value: string;
+  label: string;
+  category: string;
+}
+
+export const SIZES_FILTER: SizesType[] = [
   {
     value: "small",
     label: "Small",
@@ -143,6 +149,10 @@ export const COLORS_OPTION: ColorOption = {
   },
   white: {
     color: "#FFFFFF",
+    border: "#817b7b  ",
+  },
+  gray: {
+    color: "#b5b5b5",
     border: "#817b7b  ",
   },
   pink: {
