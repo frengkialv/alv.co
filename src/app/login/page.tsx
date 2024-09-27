@@ -1,15 +1,19 @@
 "use client";
 import React from "react";
+import styled from "styled-components";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import styled from "styled-components";
 import { QUERIES, WEIGHT } from "@/constants";
+import { login } from "@/services/user.service";
+import { useToast } from "@/components/Provider/ToastProvider";
 import Spacer from "@/components/Spacer";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
-import { login } from "@/services/user.service";
+import ErrorAlert from "@/components/ErrorAlert";
 
 function LoginPage() {
+  const { showToast } = useToast();
+
   const id = React.useId();
   const router = useRouter();
   const [isChecked, setIsChecked] = React.useState(true);
@@ -17,11 +21,15 @@ function LoginPage() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
 
+  const [showAllertError, setShowAllertError] = React.useState<boolean>(false);
+
   const submitLoginHandler = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     try {
+      setShowAllertError(false);
+
       if (!email || !password) {
         return;
       }
@@ -31,10 +39,19 @@ function LoginPage() {
       if (data) {
         setCookie("access_token", data.access_token);
 
+        showToast({
+          type: "success",
+          title: "Success",
+          description: "Login Success!",
+        });
+
+        window.setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
         // for hard reload
-        window.location.href = "/";
       }
     } catch (error) {
+      setShowAllertError(true);
       console.log("🚀 ~ LoginPage ~ error:", error);
     }
   };
@@ -59,6 +76,7 @@ function LoginPage() {
             <Input
               id={`${id}-email`}
               placeholder="example@gmail.com"
+              type="email"
               value={email}
               autoComplete="off"
               onChange={(event) => setEmail(event.target.value)}
@@ -106,6 +124,12 @@ function LoginPage() {
             </CheckboxWrapper>
 
             <ButtonWrapper>
+              {showAllertError && (
+                <>
+                  <ErrorAlert message="Incorect email or password" />
+                  <div style={{ marginBottom: "8px" }} />
+                </>
+              )}
               <Button grow={true} size="medium" type="submit">
                 LOG IN
               </Button>
@@ -307,7 +331,7 @@ const LabelCheckbox = styled.label`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 25px;
+  margin-top: 20px;
 `;
 
 const NotesBottom = styled.div`

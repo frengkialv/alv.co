@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 import { QUERIES, WEIGHT } from "@/constants";
+import { signIn } from "@/services/user.service";
+import { useToast } from "@/components/Provider/ToastProvider";
 import Spacer from "@/components/Spacer";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
@@ -10,8 +12,43 @@ import Icon from "@/components/Icon";
 function RegisterPage() {
   const id = React.useId();
   const router = useRouter();
+  const { showToast } = useToast();
   const [isChecked, setIsChecked] = React.useState<boolean>(true);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
+  const [name, setName] = React.useState<string>("");
+  const [username, setUsername] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+
+  const submitRegistration = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await signIn({ name, username, email, password });
+
+      if (data) {
+        showToast({
+          type: "success",
+          title: "Success",
+          description: "Sign in Success!",
+        });
+
+        window.setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
+    } catch (error) {
+      showToast({
+        type: "error",
+        title: "Error",
+        description: "Duplicate username or email!",
+      });
+      console.log("🚀 ~ submitRegistration ~ error:", error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -28,12 +65,15 @@ function RegisterPage() {
             We will never post on your behalf or share any information without
             your permission.
           </Notes>
-          <FormWrapper>
+          <FormWrapper onSubmit={submitRegistration}>
             <LabelInput htmlFor={`${id}-name`}>Name</LabelInput>
             <Input
               id={`${id}-name`}
+              type="text"
+              value={name}
               placeholder="Joe Schmo"
               autoComplete="off"
+              onChange={(event) => setName(event.target.value)}
             />
 
             <Spacer size={20} />
@@ -41,8 +81,12 @@ function RegisterPage() {
             <LabelInput htmlFor={`${id}-username`}>Username</LabelInput>
             <Input
               id={`${id}-username`}
+              type="text"
+              value={username}
+              minLength={6}
               placeholder="joeschomo"
               autoComplete="off"
+              onChange={(event) => setUsername(event.target.value)}
             />
 
             <Spacer size={20} />
@@ -52,7 +96,9 @@ function RegisterPage() {
               id={`${id}-email`}
               placeholder="example@gmail.com"
               type="email"
+              value={email}
               autoComplete="off"
+              onChange={(event) => setEmail(event.target.value)}
             />
 
             <EmailNotes>
@@ -73,7 +119,10 @@ function RegisterPage() {
                 id={`${id}-password`}
                 placeholder="must have at least 6 characters"
                 type={showPassword ? "text" : "password"}
+                minLength={8}
+                value={password}
                 style={{ marginTop: 0 }}
+                onChange={(event) => setPassword(event.target.value)}
               />
               <PasswordIconWrapper
                 onClick={() => setShowPassword(!showPassword)}
