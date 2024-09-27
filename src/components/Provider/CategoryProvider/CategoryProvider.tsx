@@ -217,9 +217,7 @@ function CategoryProvider({ children }: ChildrenProps) {
 
   return (
     <CategoryContext.Provider value={value}>
-      {/* <Suspense fallback={null}> */}
       {children}
-      {/* </Suspense> */}
     </CategoryContext.Provider>
   );
 }
