@@ -26,6 +26,7 @@ import {
   Eye,
   EyeOff,
   LogIn,
+  XCircle,
 } from "react-feather";
 
 const icons = {
@@ -53,6 +54,7 @@ const icons = {
   twitter: Twitter,
   user: User,
   warning: AlertCircle,
+  error: XCircle,
 };
 
 function Icon({

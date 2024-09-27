@@ -1,7 +1,14 @@
 import { BaseHttpInstance, BaseHttpInstanceWithToken } from "./base.service";
 import { CommonApiResponse } from "@/types/common";
 
-interface LoginProps {
+interface LoginDtoIn {
+  email: string;
+  password: string;
+}
+
+interface SignInDtoIn {
+  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -20,9 +27,21 @@ export interface FindUserDtoOut {
 export async function login({
   email,
   password,
-}: LoginProps): Promise<CommonApiResponse<LoginDtoOut>> {
+}: LoginDtoIn): Promise<CommonApiResponse<LoginDtoOut>> {
   const url = "/auth/login";
   const { data: resp } = await BaseHttpInstance.post(url, {
+    email,
+    password,
+  });
+
+  return resp;
+}
+
+export async function signIn({ name, username, email, password }: SignInDtoIn) {
+  const url = "/user/signin";
+  const { data: resp } = await BaseHttpInstance.post(url, {
+    name,
+    username,
     email,
     password,
   });

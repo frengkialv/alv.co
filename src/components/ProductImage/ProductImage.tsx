@@ -13,9 +13,10 @@ import {
 
 interface Props {
   images: ProductImageType[];
+  category: string;
 }
 
-function ProductImage({ images }: Props) {
+function ProductImage({ images, category }: Props) {
   return (
     <Wrapper>
       <ImageSelect>
@@ -35,7 +36,9 @@ function ProductImage({ images }: Props) {
                     width: "100%",
                     maxHeight: "100%",
                     objectFit: "cover",
-                    objectPosition: "top center",
+                    objectPosition: `${
+                      category === "shoes" ? "bottom" : "top"
+                    } center`,
                   }}
                 />
               </ImageLink>
@@ -61,7 +64,9 @@ function ProductImage({ images }: Props) {
                     height: "100%",
                     maxHeight: "100%",
                     objectFit: "cover",
-                    objectPosition: "top center",
+                    objectPosition: `${
+                      category === "shoes" ? "bottom" : "top"
+                    } center`,
                   }}
                 />
               </RowImageDisplay>

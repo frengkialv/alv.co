@@ -67,6 +67,7 @@ function CartPage() {
       if (data) {
         setTimeout(() => {
           showToast({
+            type: "success",
             title: "Success!",
             description: "Item has been removed from the cart.",
           });

@@ -3,6 +3,7 @@ import React from "react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
 import styled, { keyframes } from "styled-components";
 import { ChildrenProps } from "@/types/common";
+import { WEIGHT } from "@/constants";
 import SuccessIcon from "@/components/SVG/SuccessIcon";
 import Icon from "@/components/Icon";
 
@@ -10,6 +11,7 @@ import Icon from "@/components/Icon";
 interface ToastMessage {
   title: string;
   description?: string;
+  type: "success" | "warning" | "error";
 }
 
 interface ToastContextType {
@@ -52,7 +54,11 @@ function ToastProvider({ children }: ChildrenProps) {
             open={!!toastMessage}
             duration={3000}
           >
-            <SuccessIcon />
+            {toastMessage.type === "success" && <SuccessIcon />}
+            {toastMessage.type === "warning" && (
+              <Icon id="warning" color="yellow" />
+            )}
+            {toastMessage.type === "error" && <Icon id="error" color="red" />}
             <div>
               <ToastTitle>{toastMessage.title}</ToastTitle>
               {toastMessage.description && (
@@ -121,6 +127,7 @@ const ToastTitle = styled(ToastPrimitive.Title)`
 
 const ToastDescription = styled(ToastPrimitive.Description)`
   font-size: 14px;
+  font-weight: ${WEIGHT.medium};
 `;
 
 const ToastAction = styled(ToastPrimitive.Action)`

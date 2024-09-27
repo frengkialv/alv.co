@@ -25,35 +25,24 @@ import {
 } from "./style";
 import { ProductsType } from "@/types/product";
 import { formatDiscountPrice, formatPrice } from "@/utils";
-import { ColorProduct, SizeProduct } from "@/types/stock";
+import { ColorProduct } from "@/types/stock";
 
 interface Props {
   product: ProductsType;
-  colors: ColorProduct[];
-  colorSelected: ColorProduct | undefined;
-  colorChangeHandler: (color: ColorProduct) => void;
-  sizes: SizeProduct[];
-  sizeSelected: SizeProduct | undefined;
-  setSizeSelected: (size: SizeProduct) => void;
-  stockLeft: number | null;
-  amountOrder: number;
-  setAmountOrder: (amount: number) => void;
-  submitHandler: () => void;
+  category: string;
 }
 
-function ProductContent({
-  product,
-  colors,
-  colorSelected,
-  colorChangeHandler,
-  sizes,
-  sizeSelected,
-  setSizeSelected,
-  stockLeft,
-  amountOrder,
-  setAmountOrder,
-  submitHandler,
-}: Props) {
+function ProductContent({ product, category }: Props) {
+  const colors: ColorProduct[] = [];
+
+  if (product) {
+    product.stock.forEach((stock) => {
+      if (!colors.includes(stock.color)) {
+        colors.push(stock.color);
+      }
+    });
+  }
+
   return (
     <Wrapper>
       <Column>
@@ -81,7 +70,9 @@ function ProductContent({
             {formatPrice(product.price)}
           </Price>
 
-          <DiscountFlag>{product.discountByPercent}</DiscountFlag>
+          {product.discountByPercent && (
+            <DiscountFlag>{product.discountByPercent}</DiscountFlag>
+          )}
         </ProductPrice>
         <ProductDescription>{product.description}</ProductDescription>
       </Column>
@@ -103,28 +94,13 @@ function ProductContent({
         </ProductCareColumn>
       </Column>
       <Column>
-        <ColorOption
-          colors={colors}
-          colorSelected={colorSelected}
-          setColorSelected={colorChangeHandler}
-        />
+        <ColorOption colors={colors} />
       </Column>
       <Column>
-        <SizeOption
-          sizes={sizes}
-          sizeSelected={sizeSelected}
-          setSizeSelected={setSizeSelected}
-          colorSelected={colorSelected}
-          stockLeft={stockLeft}
-        />
+        <SizeOption category={category} product={product} />
       </Column>
       <Column>
-        <AddToCartContent
-          amountOrder={amountOrder}
-          setAmountOrder={setAmountOrder}
-          stockLeft={stockLeft}
-          submitHandler={submitHandler}
-        />
+        <AddToCartContent productId={product.id} />
       </Column>
     </Wrapper>
   );

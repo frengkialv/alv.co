@@ -1,50 +1,73 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { QUERIES, WEIGHT } from "@/constants";
+import { QUERIES, SIZES_FILTER, SizesType, WEIGHT } from "@/constants";
 import ErrorAlert from "../ErrorAlert";
 import { ColorProduct, SizeProduct } from "@/types/stock";
+import { DetailContext } from "../Provider/DetailProvider";
+import { ProductsType } from "@/types/product";
 
 interface Props {
-  sizes: SizeProduct[];
-  sizeSelected: SizeProduct | undefined;
-  setSizeSelected: (val: SizeProduct) => void;
-  colorSelected: ColorProduct | undefined;
-  stockLeft: number | null;
+  category: string;
+  product: ProductsType;
 }
 
-const FIXED_SIZES: SizeProduct[] = [
-  SizeProduct.SMALL,
-  SizeProduct.MEDIUM,
-  SizeProduct.LARGE,
-  SizeProduct["X-LARGE"],
-];
+function SizeOption({ category, product }: Props) {
+  const {
+    colorSelected,
+    sizeSelected,
+    setSizeSelected,
+    stockLeft,
+    setStockLeft,
+  } = React.useContext(DetailContext);
 
-function SizeOption({
-  sizes,
-  sizeSelected,
-  setSizeSelected,
-  colorSelected,
-  stockLeft,
-}: Props) {
+  const [sizesOption, setSizesOption] = React.useState<SizesType[]>([]);
+
+  const [availableSize, setAvailableSize] = React.useState<string[]>([]);
+
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const [showErrorMessage, setShowErrorMessage] =
     React.useState<boolean>(false);
 
   React.useEffect(() => {
+    const nextSizesOption = SIZES_FILTER.filter(
+      (size) => size.category === category
+    );
+
+    setSizesOption(nextSizesOption);
+  }, [category]);
+
+  React.useEffect(() => {
     if (colorSelected) {
       setErrorMessage("");
       setShowErrorMessage(false);
+      findAvailableSize();
     }
   }, [colorSelected]);
 
-  const sizeSelectedHandler = (val: SizeProduct) => {
+  const findAvailableSize = () => {
+    const nextAvailableSizes: string[] = [];
+    product.stock.forEach((stock) => {
+      if (stock.color === colorSelected) {
+        nextAvailableSizes.push(stock.size);
+      }
+    });
+
+    setAvailableSize(nextAvailableSizes);
+  };
+
+  const sizeSelectedHandler = (val: string) => {
     if (!colorSelected) {
       setErrorMessage("Please select a color before choosing a size.");
       setShowErrorMessage(true);
       return;
     }
 
+    const findStock = product.stock.filter(
+      (stock) => stock.size === val && stock.color === colorSelected
+    );
+
+    setStockLeft(findStock[0].stock);
     setSizeSelected(val);
   };
 
@@ -53,27 +76,28 @@ function SizeOption({
       <Title>Choose Size</Title>
       {showErrorMessage && <ErrorAlert message={errorMessage} />}
       <SizeWrapper>
-        {FIXED_SIZES.map((size) => {
-          const isDisable = !sizes.includes(size);
+        {sizesOption.map((size, index) => {
+          const isDisable = !availableSize.includes(size.value);
           return (
             <SizeButton
-              key={size}
-              $selected={sizeSelected === size}
+              key={index}
+              $selected={sizeSelected === size.value}
               disabled={isDisable}
               onClick={() => {
-                if (size === sizeSelected) {
+                if (size.value === sizeSelected) {
                   return;
                 }
-                sizeSelectedHandler(size);
+                sizeSelectedHandler(size.value);
               }}
             >
-              {size}
+              {size.label}
             </SizeButton>
           );
         })}
       </SizeWrapper>
       <StockLeftAlert>
-        {stockLeft &&
+        {stockLeft !== undefined &&
+          stockLeft !== 0 &&
           stockLeft <= 5 &&
           sizeSelected &&
           `Only ${stockLeft} piece${stockLeft > 1 ? "s" : ""} left`}
@@ -116,9 +140,11 @@ const SizeButton = styled.button<{ $selected: boolean; disabled: boolean }>`
   --color: ${(props) =>
     props.$selected ? "var(--color-white)" : "var(--color-black)"};
 
+  font-size: ${14 / 16}rem;
   font-weight: ${WEIGHT.medium};
+  line-height: 1.2;
   color: var(--color);
-  padding: 8px 20px;
+  padding: 8px 18px;
   background-color: var(--background-color);
   border: 1px solid transparent;
   border-radius: 60px;
@@ -128,7 +154,7 @@ const SizeButton = styled.button<{ $selected: boolean; disabled: boolean }>`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${14 / 16}rem;
+    /* font-size: ${14 / 16}rem; */
   }
 `;
 

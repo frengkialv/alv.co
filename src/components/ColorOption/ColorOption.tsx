@@ -3,14 +3,16 @@ import React from "react";
 import styled from "styled-components";
 import { COLORS_OPTION, QUERIES, WEIGHT } from "@/constants";
 import { ColorProduct } from "@/types/stock";
+import { DetailContext } from "../Provider/DetailProvider";
 
 interface Props {
   colors: ColorProduct[];
-  colorSelected: ColorProduct | undefined;
-  setColorSelected: (val: ColorProduct) => void;
 }
 
-function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
+function ColorOption({ colors }: Props) {
+  const { colorSelected, setColorSelected, setSizeSelected, setStockLeft } =
+    React.useContext(DetailContext);
+
   return (
     <>
       <Title>Select Colors</Title>
@@ -21,7 +23,11 @@ function ColorOption({ colors, colorSelected, setColorSelected }: Props) {
             $color={COLORS_OPTION[color].color}
             $border={COLORS_OPTION[color].border}
             disabled={color === colorSelected}
-            onClick={() => setColorSelected(color)}
+            onClick={() => {
+              setStockLeft(0);
+              setSizeSelected("");
+              setColorSelected(color);
+            }}
           >
             {color === colorSelected && <>&#10004;</>}
           </ButtonColor>
