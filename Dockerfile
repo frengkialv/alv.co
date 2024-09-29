@@ -15,11 +15,8 @@ RUN npm ci
 # Copy application source code
 COPY src ./src
 COPY public ./public
-COPY next.config.mjs . 
+COPY next.config.mjs .
 COPY tsconfig.json .
-
-# Set environment variables for the build
-ENV NEXT_PUBLIC_BASE_URL=http://152.42.242.77:8000
 
 # Build the Next.js application
 RUN npm run build
@@ -38,11 +35,8 @@ USER nextjs
 
 # Copy only the necessary files from the builder
 COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./ 
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Set the same environment variable at runtime
-ENV NEXT_PUBLIC_BASE_URL=http://152.42.242.77:8000
-
 # Start the application
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
