@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 next build",
+    "postbuild": "next lint || true",
     "start": "next start",
     "lint": "next lint"
   },
