@@ -7,7 +7,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Copy only the necessary files for installing dependencies
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package*.json .
 
 # Install dependencies based on the preferred package manager
 RUN npm ci
@@ -37,6 +37,8 @@ USER nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+ENV NEXT_TELEMETRY_DISABLED 1
 
 # Start the application
 CMD ["npm", "start"]
