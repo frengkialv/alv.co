@@ -1,35 +1,32 @@
+# Use a specific version of Node.js to ensure consistent builds
 FROM node:18-alpine AS base
 
-# Step 1. Rebuild the source code only when needed
+# Step 1: Build the application
 FROM base AS builder
 
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
+# Copy only the necessary files for installing dependencies
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-# Omit --production flag for TypeScript devDependencies
+
+# Install dependencies based on the preferred package manager
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \
-  # Allow install without lockfile, so example works even without Node.js installed locally
   else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && yarn install; \
   fi
 
+# Copy application source code
 COPY src ./src
 COPY public ./public
-COPY next.config.mjs .
+COPY next.config.mjs . 
 COPY tsconfig.json .
 
-# Environment variables must be present at build time
-# https://github.com/vercel/next.js/discussions/14030
+# Set environment variables for the build
 ENV NEXT_PUBLIC_BASE_URL=http://152.42.242.77:8000
 
-# Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line to disable telemetry at build time
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# Build Next.js based on the preferred package manager
+# Build the Next.js application
 RUN \
   if [ -f yarn.lock ]; then yarn build; \
   elif [ -f package-lock.json ]; then npm run build; \
@@ -37,31 +34,25 @@ RUN \
   else npm run build; \
   fi
 
-# Note: It is not necessary to add an intermediate step that does a full copy of `node_modules` here
-
-# Step 2. Production image, copy all the files and run next
+# Step 2: Create a lightweight production image
 FROM base AS runner
 
 WORKDIR /app
 
-# Don't run production as root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create a non-root user and group
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+# Switch to the non-root user
 USER nextjs
 
+# Copy only the necessary files from the builder
 COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./ 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Environment variables must be redefined at run time
+# Set the same environment variable at runtime
 ENV NEXT_PUBLIC_BASE_URL=http://152.42.242.77:8000
 
-# Uncomment the following line to disable telemetry at run time
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# Note: Don't expose ports here, Compose will handle that for us
-
+# Start the application
 CMD ["node", "server.js"]
