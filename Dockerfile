@@ -18,10 +18,10 @@ COPY public ./public
 COPY next.config.mjs .
 COPY tsconfig.json .
 
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_DISABLE_LINTING true
 
 # Build the Next.js application
-RUN npm run build
+RUN NEXT_TELEMETRY_DISABLED=1 npm run build
 
 # Step 2: Create a lightweight production image
 FROM base AS runner
