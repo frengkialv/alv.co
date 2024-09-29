@@ -18,6 +18,8 @@ COPY public ./public
 COPY next.config.mjs .
 COPY tsconfig.json .
 
+ENV NEXT_TELEMETRY_DISABLED 1
+
 # Build the Next.js application
 RUN npm run build
 
@@ -37,8 +39,6 @@ USER nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-ENV NEXT_TELEMETRY_DISABLED 1
 
 # Start the application
 CMD ["npm", "start"]
