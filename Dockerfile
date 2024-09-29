@@ -10,12 +10,7 @@ WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Install dependencies based on the preferred package manager
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \
-  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && yarn install; \
-  fi
+RUN npm ci
 
 # Copy application source code
 COPY src ./src
@@ -27,12 +22,7 @@ COPY tsconfig.json .
 ENV NEXT_PUBLIC_BASE_URL=http://152.42.242.77:8000
 
 # Build the Next.js application
-RUN \
-  if [ -f yarn.lock ]; then yarn build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then pnpm build; \
-  else npm run build; \
-  fi
+RUN npm run build
 
 # Step 2: Create a lightweight production image
 FROM base AS runner
