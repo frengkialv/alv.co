@@ -1,0 +1,24 @@
+# Node modules tidak perlu di-copy ke dalam Docker image, akan diinstal ulang oleh Dockerfile
+node_modules
+*.log
+
+# Direktori build Next.js
+.next
+out
+
+# Cache yarn atau npm yang tidak perlu dimasukkan
+.yarn
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# File dan direktori environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Folder yang digunakan oleh Git
+.git
+.gitignore

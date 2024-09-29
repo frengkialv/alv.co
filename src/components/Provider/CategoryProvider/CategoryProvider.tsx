@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChildrenProps } from "@/types/common";
 import { CategoryPathnames, SortOptions } from "@/constants";

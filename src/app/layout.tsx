@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-// import NextTopLoader from "nextjs-toploader";
+import NextTopLoader from "nextjs-toploader";
 import localFont from "next/font/local";
 import StyledComponentsRegistry from "../components/StyledComponentRegisty";
 import Header from "../components/Header";
@@ -80,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.className} ${integral_cf.variable}`}>
       <body>
-        {/* <NextTopLoader color="#000000" height={2} showSpinner={false} /> */}
+        <NextTopLoader color="#000000" height={2} showSpinner={false} />
         <AppRouterCacheProvider>
           <Provider>
             <StyledComponentsRegistry>
