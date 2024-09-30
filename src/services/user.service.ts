@@ -28,7 +28,8 @@ export async function login({
   email,
   password,
 }: LoginDtoIn): Promise<CommonApiResponse<LoginDtoOut>> {
-  const url = "/auth/login";
+  const url = `/auth/login`;
+
   const { data: resp } = await BaseHttpInstance.post(url, {
     email,
     password,
@@ -39,6 +40,7 @@ export async function login({
 
 export async function signIn({ name, username, email, password }: SignInDtoIn) {
   const url = "/user/signin";
+
   const { data: resp } = await BaseHttpInstance.post(url, {
     name,
     username,
@@ -51,6 +53,7 @@ export async function signIn({ name, username, email, password }: SignInDtoIn) {
 
 export async function findUser(): Promise<CommonApiResponse<FindUserDtoOut>> {
   const url = "/user/find";
+
   const { data: resp } = await BaseHttpInstanceWithToken.get(url);
 
   return resp;

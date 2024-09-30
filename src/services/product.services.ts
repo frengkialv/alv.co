@@ -1,17 +1,6 @@
 import { BaseHttpInstance } from "./base.service";
 import { ProductsType } from "@/types/product";
 import { CommonApiResponse } from "@/types/common";
-import React from "react";
-import { CategoryContext } from "@/components/Provider/CategoryProvider";
-
-interface QueryPropsGetProduct {
-  page: number;
-  price: string;
-  productSize: string[];
-  color: string[];
-  category: string;
-  sort: string;
-}
 
 export async function getProducts(
   searchParams: { [key: string]: string },
@@ -31,8 +20,6 @@ export async function getProducts(
     return data;
   } catch (error) {
     console.log("🚀 ~ error:", error);
-  } finally {
-    // setisLoading(false);
   }
 }
 

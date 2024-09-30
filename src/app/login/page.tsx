@@ -27,6 +27,7 @@ function LoginPage() {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+
     try {
       setShowAllertError(false);
 
