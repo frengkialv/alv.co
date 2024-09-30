@@ -17,17 +17,19 @@ function FilterSidebarDekstop() {
       </Header>
       <ContentWrapper>
         <Column>
-          <Accordion value="item-1" header="Price" children={<Slider />} />
+          <Accordion value="item-1" header="Price">
+            <Slider />
+          </Accordion>
         </Column>
         <Column>
-          <Accordion
-            value="item-2"
-            header="Colors"
-            children={<ColorFilter />}
-          />
+          <Accordion value="item-2" header="Colors">
+            <ColorFilter />
+          </Accordion>
         </Column>
         <Column>
-          <Accordion value="item-3" header="Size" children={<SizeFilter />} />
+          <Accordion value="item-3" header="Size">
+            <SizeFilter />
+          </Accordion>
         </Column>
       </ContentWrapper>
 

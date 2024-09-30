@@ -34,7 +34,7 @@ function ActionHeader() {
     if (accessToken) {
       findUserHandler();
     }
-  }, []);
+  }, [accessToken]);
 
   const findUserHandler = async () => {
     try {

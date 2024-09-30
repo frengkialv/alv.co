@@ -3,12 +3,13 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
+import { QUERIES, WEIGHT } from "@/constants";
 import Button from "@/components/Button";
 import EmptyDataImage from "../../../public/no-data.png";
-import { QUERIES, WEIGHT } from "@/constants";
 
 function EmptyProduct() {
   const router = useRouter();
+
   return (
     <EmptyDataWrapper>
       <EmptyDataInnerWrapper>
@@ -24,7 +25,7 @@ function EmptyProduct() {
 
       <TextWrapper>
         <BoldText>No result found</BoldText>
-        <NormalText>We couldn't find what you searched for.</NormalText>
+        <NormalText>{"We couldn't find what you searched for."}</NormalText>
         <NormalText style={{ marginBottom: "12px" }}>
           Try searching again
         </NormalText>

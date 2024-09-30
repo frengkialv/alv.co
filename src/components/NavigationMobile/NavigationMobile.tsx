@@ -100,20 +100,17 @@ function NavigationMobile({ open, onOpenChange }: Props) {
               </Accordion>
               <LinkWrapper
                 style={{ marginTop: "-13px" }}
-                href="/on-sale"
+                href="/"
                 onClick={() => onOpenChange(false)}
               >
                 <SaleIcon />
                 On Sale
               </LinkWrapper>
-              <LinkWrapper
-                href="/new-arrivals"
-                onClick={() => onOpenChange(false)}
-              >
+              <LinkWrapper href="/" onClick={() => onOpenChange(false)}>
                 <HangerLogo style={{ marginRight: "0px" }} />
                 New Arrivals
               </LinkWrapper>
-              <LinkWrapper href="/brands" onClick={() => onOpenChange(false)}>
+              <LinkWrapper href="/" onClick={() => onOpenChange(false)}>
                 <Icon id="tag" strokeWidth={2} size={20} />
                 Brands
               </LinkWrapper>

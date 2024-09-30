@@ -82,8 +82,9 @@ function SortWrapperCategoryPage() {
         title="Sort"
         open={showDialogMenu}
         onOpenChange={setShowDialogMenu}
-        children={<FormRadioGroup sort={sort} setSort={handleChangeSort} />}
-      />
+      >
+        <FormRadioGroup sort={sort} setSort={handleChangeSort} />
+      </DialogMenu>
     </Wrapper>
   );
 }

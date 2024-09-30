@@ -19,9 +19,9 @@ function RatingCard() {
       </NameWrapper>
 
       <Testimonial>
-        "This t-shirt is a must-have for anyone who appreciates good design. The
-        minimalistic yet stylish pattern caught my eye, and the fit is perfect.
-        I can see the designer's touch in every aspect of this shirt."
+        {
+          "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt."
+        }
       </Testimonial>
     </Card>
   );

@@ -21,7 +21,7 @@ function CartProvider({ children }: ChildrenProps) {
     if (accessToken) {
       fetchCartHandler();
     }
-  }, []);
+  }, [accessToken]);
 
   const fetchCartHandler = async () => {
     try {

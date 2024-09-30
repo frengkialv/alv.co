@@ -55,7 +55,7 @@ function ProfileDropdownContent({
     if (user) {
       getInitials(user.name);
     }
-  }, []);
+  }, [user]);
 
   const handleSignOut = () => {
     deleteCookie("access_token");

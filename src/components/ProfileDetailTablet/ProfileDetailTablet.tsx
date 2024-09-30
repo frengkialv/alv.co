@@ -28,7 +28,7 @@ function Content({
 
   React.useEffect(() => {
     getInitials(user.name);
-  }, []);
+  }, [user]);
 
   const getInitials = (name: string) => {
     const firstLetter = name.charAt(0).toUpperCase();

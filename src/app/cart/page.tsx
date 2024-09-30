@@ -116,7 +116,7 @@ function CartPage() {
           <NormalText style={{ marginBottom: "10px" }}>
             Start filling it up with your favourites
           </NormalText>
-          <Button>Let's go Shopping!</Button>
+          <Button>{"Let's go Shopping!"}</Button>
         </TextWrapper>
       </EmptyDataWrapper>
     );
