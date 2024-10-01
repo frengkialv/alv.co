@@ -80,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${satoshi.className} ${integral_cf.variable}`}>
       <body>
-        <NextTopLoader color="#A8A8A8" height={3} showSpinner={false} />
+        <NextTopLoader color="#636363" height={3} showSpinner={false} />
         <AppRouterCacheProvider>
           <Provider>
             <StyledComponentsRegistry>

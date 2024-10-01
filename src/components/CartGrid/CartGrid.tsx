@@ -18,6 +18,7 @@ function CartGrid({ carts, quantityOnChange, deleteProduct }: CartGridProps) {
           const size = cart.product.stock[0].size;
           const color = cart.product.stock[0].color;
           const stockLeft = cart.product.stock[0].stock;
+          const category = cart.product.categoryProduct.name;
           const linkProduct = `/detail/${
             cart.product.categoryProduct.name
           }/${cart.product.name.replaceAll(" ", "+")}`;
@@ -34,6 +35,7 @@ function CartGrid({ carts, quantityOnChange, deleteProduct }: CartGridProps) {
               price={cart.product.price}
               discountByPercent={cart.product.discountByPercent}
               slug={linkProduct}
+              category={category}
               quantityOnChange={quantityOnChange}
               deleteProduct={deleteProduct}
               stockLeft={stockLeft}

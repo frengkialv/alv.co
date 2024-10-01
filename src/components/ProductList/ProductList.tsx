@@ -49,7 +49,11 @@ function ProductList({
           unoptimized
           style={{
             objectPosition:
-              categoryProduct === "shoes" ? "center 30%" : "top center",
+              categoryProduct === "t-shirts"
+                ? "top center"
+                : categoryProduct === "shoes"
+                ? "center 30%"
+                : "center 70%",
           }}
         />
       </div>

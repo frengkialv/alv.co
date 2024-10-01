@@ -9,7 +9,7 @@ import UnstyledButton from "../UnstyledButton";
 import BadgeNotification from "../BadgeNotification";
 import EmptyCartImage from "../../../public/empty-cart.png";
 import Button from "../Button";
-import { WEIGHT } from "@/constants";
+import { QUERIES, WEIGHT } from "@/constants";
 import { CartType } from "@/types/cart";
 import {
   formatDiscountPrice,
@@ -60,6 +60,9 @@ function ListCart({ carts }: { carts: CartType[] }) {
       <ListWrapper>
         {carts.map((cart) => {
           const imageSrc = cart.product.productImage[0].imgSrc;
+
+          const category = cart.product.categoryProduct.name;
+
           const linkProduct = `/detail/${
             cart.product.categoryProduct.name
           }/${cart.product.name.replaceAll(" ", "+")}`;
@@ -73,6 +76,7 @@ function ListCart({ carts }: { carts: CartType[] }) {
                   quality={100}
                   fill
                   priority
+                  $category={category}
                 />
               </ImageWrapper>
 
@@ -221,9 +225,15 @@ const Price = styled.h6<{ $disabled?: boolean }>`
   }
 `;
 
-const ImageList = styled(Image)`
+const ImageList = styled(Image)<{ $category: string }>`
   object-fit: cover;
-  object-position: center top;
+
+  object-position: ${(props) =>
+    props.$category === "t-shirts"
+      ? "top center"
+      : props.$category === "shoes"
+      ? "center 50%"
+      : "center 70%"};
 `;
 
 const PriceWrapper = styled.div`

@@ -58,8 +58,8 @@ function NavigationContent() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <LinkWrapper href="/">On Sale</LinkWrapper>
-        <LinkWrapper href="/">New Arrivals</LinkWrapper>
+        <LinkWrapper href="/on-sale">On Sale</LinkWrapper>
+        <LinkWrapper href="/new-arrivals">New Arrivals</LinkWrapper>
         <LinkWrapper href="/">Brands</LinkWrapper>
       </Nav>
     </Wrapper>

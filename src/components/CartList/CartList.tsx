@@ -1,5 +1,4 @@
 import React from "react";
-import DynamicImage from "../DynamicImage";
 import { formatDiscountPrice, formatPrice } from "@/utils";
 import {
   AdditionButton,
@@ -8,6 +7,7 @@ import {
   DetailWrapper,
   DiscountFlag,
   EntityWrapper,
+  ImagePrimitive,
   ImageWrapper,
   PriceWrapper,
   ProductAttributesWrapper,
@@ -23,7 +23,6 @@ import {
 } from "./styles";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
-import Image from "next/image";
 import Tooltip from "../Tooltip";
 
 interface CartList {
@@ -37,6 +36,7 @@ interface CartList {
   discountByPercent: number | null;
   stockLeft: number;
   slug: string;
+  category: string;
   quantityOnChange: (id: string, quantity: number) => void;
   deleteProduct: (id: string) => void;
 }
@@ -52,25 +52,20 @@ function CartList({
   discountByPercent,
   stockLeft,
   slug,
+  category,
   quantityOnChange,
   deleteProduct,
 }: CartList) {
   return (
     <Row>
       <ImageWrapper href={slug}>
-        <Image
+        <ImagePrimitive
           alt={name || ""}
           src={`data:image/jpeg;base64,${imgUrl}`}
           width={125}
           height={125}
           unoptimized
-          style={{
-            aspectRatio: "1.1 / 1",
-            height: "auto",
-            width: "100%",
-            objectFit: "cover",
-            objectPosition: "top center",
-          }}
+          $category={category}
         />
       </ImageWrapper>
       <DetailWrapper>

@@ -82,8 +82,8 @@ export const COLORS_FILTER = [
     name: "purple",
   },
   {
-    color: "#F506A4",
-    border: "#c40583",
+    color: "#FFA4B6",
+    border: "#de909f",
     name: "pink",
   },
   {
@@ -189,4 +189,11 @@ export const COLORS_OPTION: ColorOption = {
   },
 };
 
-export const CategoryPathnames = ["shoes", "t-shirts", "accessories", "sport"];
+export const CategoryPathnames = [
+  "shoes",
+  "t-shirts",
+  "accessories",
+  "sport",
+  "on-sale",
+  "new-arrivals",
+];

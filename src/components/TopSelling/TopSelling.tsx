@@ -22,7 +22,6 @@ function TopSelling() {
   const fetchDataNewArrival = async () => {
     try {
       const { data } = await getProductsForDisplay("on-sale", 4);
-      console.log("🚀 ~ fetchDataNewArrival ~ data:", data);
 
       setProducts(data);
     } catch (error) {

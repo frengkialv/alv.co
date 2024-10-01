@@ -53,7 +53,12 @@ function MainProductList({
               maxWidth: "100%",
               height: "auto",
               objectFit: "cover",
-              objectPosition: "top center",
+              objectPosition:
+                categoryProduct === "t-shirts"
+                  ? "top center"
+                  : categoryProduct === "shoes"
+                  ? "center 30%"
+                  : "center 70%",
             }}
           />
         </div>

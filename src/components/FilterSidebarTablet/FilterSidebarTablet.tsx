@@ -12,6 +12,8 @@ import { CategoryContext } from "../Provider/CategoryProvider";
 import { QUERIES } from "@/constants";
 
 function FilterContent({ submitFilter }: { submitFilter: () => void }) {
+  const { currentPath } = React.useContext(CategoryContext);
+
   return (
     <>
       <ContentWrapper>
@@ -25,11 +27,13 @@ function FilterContent({ submitFilter }: { submitFilter: () => void }) {
             <ColorFilter />
           </Accordion>
         </Column>
-        <Column>
-          <Accordion value="item-3" header="Size">
-            <SizeFilter />
-          </Accordion>
-        </Column>
+        {currentPath !== "on-sale" && currentPath !== "new-arrivals" && (
+          <Column>
+            <Accordion value="item-3" header="Size">
+              <SizeFilter />
+            </Accordion>
+          </Column>
+        )}
       </ContentWrapper>
       <Button size="small" grow={true} onClick={submitFilter}>
         Apply Filter

@@ -1,6 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { QUERIES } from "@/constants";
+import Image from "next/image";
 
 export const Wrapper = styled.div`
   flex: 6;
@@ -35,6 +36,29 @@ export const ImageItem = styled.div`
 
   @media ${QUERIES.tabletAndSmaller} {
     height: auto;
+  }
+`;
+
+export const ImagePrimitive = styled(Image)<{ $category: string }>`
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: ${(props) =>
+    props.$category === "t-shirts"
+      ? "top center"
+      : props.$category === "shoes"
+      ? "center 30%"
+      : "center 70%"};
+
+  @media ${QUERIES.tabletAndSmaller} {
+    object-position: ${(props) =>
+      props.$category === "t-shirts"
+        ? "top center"
+        : props.$category === "shoes"
+        ? "center 50%"
+        : "center 70%"};
   }
 `;
 

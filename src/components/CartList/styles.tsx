@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { QUERIES, WEIGHT } from "@/constants";
+import Image from "next/image";
 
 export const Row = styled.div`
   display: flex;
@@ -26,6 +27,19 @@ export const ImageWrapper = styled(Link)`
   height: 100%;
   border-radius: 8px;
   overflow: hidden;
+`;
+
+export const ImagePrimitive = styled(Image)<{ $category: string }>`
+  aspect-ratio: 1 / 1;
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  object-position: ${(props) =>
+    props.$category === "t-shirts"
+      ? "top center"
+      : props.$category === "shoes"
+      ? "center 70%"
+      : "center 90%"};
 `;
 
 export const DetailWrapper = styled.div`

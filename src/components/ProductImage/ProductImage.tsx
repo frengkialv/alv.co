@@ -1,10 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import ImageLink from "../ImageLink";
 import { ProductImageType } from "@/types/productImage";
 import {
   ImageDisplay,
   ImageItem,
+  ImagePrimitive,
   ImageSelect,
   ImageShowcase,
   RowImageDisplay,
@@ -24,22 +24,13 @@ function ProductImage({ images, category }: Props) {
           return (
             <ImageItem key={image.id}>
               <ImageLink id={image.imageIndex}>
-                <Image
+                <ImagePrimitive
                   src={`data:image/jpeg;base64,${image.imgSrc}`}
                   alt="product image"
                   width={80}
                   height={80}
                   unoptimized
-                  style={{
-                    aspectRatio: "1 / 1",
-                    height: "100%",
-                    width: "100%",
-                    maxHeight: "100%",
-                    objectFit: "cover",
-                    objectPosition: `${
-                      category === "shoes" ? "bottom" : "top"
-                    } center`,
-                  }}
+                  $category={category}
                 />
               </ImageLink>
             </ImageItem>
@@ -52,22 +43,13 @@ function ProductImage({ images, category }: Props) {
           {images?.map((image) => {
             return (
               <RowImageDisplay key={image.id}>
-                <Image
+                <ImagePrimitive
                   src={`data:image/jpeg;base64,${image.imgSrc}`}
                   alt=""
                   width={100}
                   height={110}
                   unoptimized
-                  style={{
-                    aspectRatio: "1 / 1",
-                    width: "100%",
-                    height: "100%",
-                    maxHeight: "100%",
-                    objectFit: "cover",
-                    objectPosition: `${
-                      category === "shoes" ? "bottom" : "top"
-                    } center`,
-                  }}
+                  $category={category}
                 />
               </RowImageDisplay>
             );
