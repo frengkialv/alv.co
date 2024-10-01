@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ProductGrid from "../ProductGrid";
 import {
@@ -9,9 +10,25 @@ import {
   Wrapper,
 } from "./style";
 import { getProductsForDisplay } from "@/services/product.services";
+import { ProductsType } from "@/types/product";
 
-async function TopSelling() {
-  const datas = await getProductsForDisplay("on-sale", 4);
+function TopSelling() {
+  const [products, setProducts] = React.useState<ProductsType[]>([]);
+
+  React.useEffect(() => {
+    fetchDataNewArrival();
+  }, []);
+
+  const fetchDataNewArrival = async () => {
+    try {
+      const { data } = await getProductsForDisplay("on-sale", 4);
+      console.log("🚀 ~ fetchDataNewArrival ~ data:", data);
+
+      setProducts(data);
+    } catch (error) {
+      console.log("🚀 ~ fetchDataNewArrival ~ error:", error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -19,7 +36,7 @@ async function TopSelling() {
 
       <HeaderTitle>TOP SELLING</HeaderTitle>
 
-      <ProductGrid datas={datas} />
+      <ProductGrid datas={products} />
 
       <ButtonWrapper>
         <Button>View All</Button>

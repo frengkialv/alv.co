@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ProductGrid from "../ProductGrid";
 import {
@@ -9,9 +10,24 @@ import {
   Wrapper,
 } from "./style";
 import { getProductsForDisplay } from "@/services/product.services";
+import { ProductsType } from "@/types/product";
 
-async function NewArrival() {
-  const datas = await getProductsForDisplay("new-arrival", 4);
+function NewArrival() {
+  const [products, setProducts] = React.useState<ProductsType[]>([]);
+
+  React.useEffect(() => {
+    fetchDataNewArrival();
+  }, []);
+
+  const fetchDataNewArrival = async () => {
+    try {
+      const { data } = await getProductsForDisplay("new-arrival", 4);
+
+      setProducts(data);
+    } catch (error) {
+      console.log("🚀 ~ fetchDataNewArrival ~ error:", error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -19,7 +35,7 @@ async function NewArrival() {
 
       <HeaderTitle>NEW ARRIVALS</HeaderTitle>
 
-      <ProductGrid datas={datas} />
+      <ProductGrid datas={products} />
 
       <ButtonWrapper>
         <Button>View All</Button>
