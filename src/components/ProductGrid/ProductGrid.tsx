@@ -1,23 +1,28 @@
 import React from "react";
 import ProductList from "../ProductList";
-import { ClothingsType } from "@/type";
 import { Wrapper } from "./style";
+import { ProductsType } from "@/types/product";
 
-function ProductGrid({ datas }: { datas: ClothingsType[] }) {
+function ProductGrid({ datas }: { datas: ProductsType[] }) {
   return (
     <Wrapper>
-      {datas.map((data) => (
-        <ProductList
-          key={data.slug}
-          slug={data.slug}
-          name={data.name}
-          imgSrc={data.imgSrc}
-          rating={data.rating}
-          discountByPercent={data.discountByPercent}
-          price={data.price}
-          categoryProduct={"need to fix"}
-        />
-      ))}
+      {datas.map((data) => {
+        const imgSrc = data.productImage[0].imgSrc;
+
+        return (
+          <ProductList
+            key={data.id}
+            slug={data.name}
+            title={data.brand.name}
+            name={data.name}
+            imgSrc={imgSrc}
+            rating={5}
+            discountByPercent={data.discountByPercent}
+            price={data.price}
+            categoryProduct={data.categoryProduct.name}
+          />
+        );
+      })}
     </Wrapper>
   );
 }

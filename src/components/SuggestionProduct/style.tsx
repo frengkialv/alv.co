@@ -18,17 +18,17 @@ export const SpacerNewArrival = () => {
 
 export const HeaderTitle = styled.h1`
   font-family: var(--integral-cf);
-  font-size: ${48 / 16}rem;
+  font-size: ${38 / 16}rem;
   line-height: 45px;
   text-align: center;
 
   @media ${QUERIES.tabletAndSmaller} {
-    font-size: ${36 / 16}rem;
+    font-size: ${26 / 16}rem;
     line-height: 35px;
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${26 / 16}rem;
+    font-size: ${22 / 16}rem;
     line-height: 35px;
   }
 `;

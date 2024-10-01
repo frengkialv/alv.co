@@ -97,6 +97,7 @@ const FilterSidebarWrapperDekstopSkeleton = styled.div`
   padding: 15px 24px;
   border: 1px solid var(--color-gray-100);
   border-radius: 20px;
+  height: fit-content;
 
   @media ${QUERIES.tabletAndSmaller} {
     display: none;

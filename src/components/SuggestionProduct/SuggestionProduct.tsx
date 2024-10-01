@@ -1,10 +1,10 @@
 import React from "react";
-import { getNewestData } from "@/data";
 import ProductGrid from "../ProductGrid";
 import { Dash, HeaderTitle, SpacerNewArrival } from "./style";
+import { getProductsForDisplay } from "@/services/product.services";
 
-function NewArrival() {
-  const datas = getNewestData(4);
+async function SuggestionProduct() {
+  const datas = await getProductsForDisplay("new-arrival", 4);
 
   return (
     <>
@@ -19,4 +19,4 @@ function NewArrival() {
   );
 }
 
-export default NewArrival;
+export default SuggestionProduct;

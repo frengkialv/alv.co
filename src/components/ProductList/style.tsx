@@ -3,8 +3,9 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { QUERIES } from "@/constants";
-import Rating, { RatingSize } from "../Rating";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
+import Rating, { RatingSize } from "../Rating";
+import Image from "next/image";
 
 interface PriceProps {
   children: React.ReactNode;
@@ -54,21 +55,45 @@ export const ImageWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
+export const ImagePrimitive = styled(Image)`
+  width: 100%;
+  aspect-ratio: 0.9 / 1;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+`;
+
+export const Title = styled.div`
+  font-size: ${16 / 16}rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: capitalize;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 export const Name = styled.p`
-  font-size: ${20 / 16}rem;
-  font-weight: 700;
+  font-size: ${14 / 16}rem;
+  font-weight: 500;
+  line-height: 1.2;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: capitalize;
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 
@@ -88,20 +113,20 @@ export const PriceWrapper = styled.div`
 `;
 
 export const PriceDiscount = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: 700;
 
   &::before {
-    content: "$";
+    content: "$ ";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 
 const PriceStyle = styled.span`
-  font-size: ${20 / 16}rem;
+  font-size: ${16 / 16}rem;
   font-weight: 700;
 
   &::before {
@@ -109,16 +134,24 @@ const PriceStyle = styled.span`
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${16 / 16}rem;
+    font-size: ${12 / 16}rem;
   }
 `;
 
 export const DiscountFlag = styled.span`
-  font-size: ${12 / 16}rem;
+  font-size: ${13 / 16}rem;
   font-weight: 500;
   color: var(--color-red);
   background-color: var(--color-soft-pink);
-  padding: 6px 16px;
+  padding: 6px 12px;
   text-align: center;
   border-radius: 40px;
+
+  &::before {
+    content: "-";
+  }
+
+  &::after {
+    content: "%";
+  }
 `;

@@ -23,6 +23,27 @@ export async function getProducts(
   }
 }
 
+export async function getProductsForDisplay(
+  category: string,
+  totalData: number
+) {
+  try {
+    let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product/display/${category}/${totalData}`;
+
+    const res = await fetch(url, { cache: "no-store" });
+
+    if (!res.ok) {
+      return "Internal server error";
+    }
+
+    const { data } = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log("🚀 ~ error:", error);
+  }
+}
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function getQueryData(searchParams: { [key: string]: string }) {

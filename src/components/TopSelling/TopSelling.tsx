@@ -1,5 +1,5 @@
 import React from "react";
-import { getTopSellingData } from "@/data";
+import ProductGrid from "../ProductGrid";
 import {
   Button,
   ButtonWrapper,
@@ -8,10 +8,10 @@ import {
   SpacerTopSelling,
   Wrapper,
 } from "./style";
-import ProductGrid from "../ProductGrid";
+import { getProductsForDisplay } from "@/services/product.services";
 
-function TopSelling() {
-  const datas = getTopSellingData(4);
+async function TopSelling() {
+  const datas = await getProductsForDisplay("on-sale", 4);
 
   return (
     <Wrapper>

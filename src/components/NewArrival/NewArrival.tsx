@@ -1,6 +1,5 @@
 import React from "react";
 import ProductGrid from "../ProductGrid";
-import { getNewestData } from "@/data";
 import {
   Button,
   ButtonWrapper,
@@ -9,9 +8,11 @@ import {
   SpacerNewArrival,
   Wrapper,
 } from "./style";
+import { getProductsForDisplay } from "@/services/product.services";
 
-function NewArrival() {
-  const datas = getNewestData(4);
+async function NewArrival() {
+  const datas = await getProductsForDisplay("new-arrival", 4);
+
   return (
     <Wrapper>
       <SpacerNewArrival />

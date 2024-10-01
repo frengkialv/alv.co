@@ -77,7 +77,8 @@ async function DetailPage({ params }: PageProps) {
 
       {/* <RatingAndDiscountTabWrapper /> */}
 
-      {/* <SuggestionProduct /> */}
+      {/* <div style={{ marginTop: "10px" }} />
+      <SuggestionProduct /> */}
     </Wrapper>
   );
 }

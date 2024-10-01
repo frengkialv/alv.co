@@ -23,10 +23,6 @@ export function formatDiscountPrice(price: number, discountPercent: number) {
   return result;
 }
 
-export function isNewClothing(releaseDate: Date) {
-  return differenceInDays(new Date(), releaseDate) < 30;
-}
-
 export function formatPrice(price: number) {
   return new Intl.NumberFormat().format(price);
 }
@@ -47,7 +43,3 @@ export function formatTotalPriceCart(datas: CartType[]) {
 
   return nextTotalPrice;
 }
-
-export const scrollToTop = () => {
-  return window.scrollTo(0, 0);
-};
