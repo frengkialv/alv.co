@@ -1,5 +1,5 @@
 # Use a specific version of Node.js to ensure consistent builds
-FROM node:18-alpine AS base
+FROM node:19.5.0-alpine AS base
 
 # Step 1: Build the application
 FROM base AS builder
