@@ -1,5 +1,5 @@
 # Use a specific version of Node.js to ensure consistent builds
-FROM node:20.3.0-alpine AS base
+FROM node:20.11.1-slim AS base
 
 # Step 1: Build the application
 FROM base AS builder
@@ -13,10 +13,11 @@ COPY package*.json .
 RUN npm ci
 
 # Copy application source code
-COPY src ./src
-COPY public ./public
-COPY next.config.mjs .
-COPY tsconfig.json .
+# COPY src ./src
+#COPY public ./public
+# COPY next.config.mjs .
+# COPY tsconfig.json .
+COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -43,4 +44,4 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Start the application
-CMD ["node", "server.js"]
+CMD ["node", "start"]
