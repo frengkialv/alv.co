@@ -44,4 +44,4 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Start the application
-CMD ["node", "start"]
+CMD ["node", "server.js"]
