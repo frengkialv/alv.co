@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 
 // const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://152.42.242.77:8000";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "https://alvco-be.my.id";
 
 const accessToken = getCookie("access_token");
 
