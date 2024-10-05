@@ -7,8 +7,12 @@ import Header from "../components/Header";
 import Footer from "@/components/Footer";
 import Provider from "@/components/Provider";
 import "./globals.css";
+
 export const metadata: Metadata = {
   title: "Alv.co",
+  icons: {
+    icon: "./alv-logo.png",
+  },
 };
 
 const satoshi = localFont({

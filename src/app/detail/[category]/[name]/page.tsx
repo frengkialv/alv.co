@@ -10,11 +10,25 @@ import { CardWrapper, Wrapper } from "./style";
 import { PARAMSLABEL } from "@/types/common";
 import { getProductByName } from "@/services/product.services";
 import { notFound } from "next/navigation";
+import { capitalizeFirstLetter } from "@/utils";
 
 interface PageProps {
   params: {
     name: string;
     category: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const nextParams = params.name.replaceAll("%2B", "%20");
+
+  const { data } = await getProductByName(nextParams);
+
+  const brandName = capitalizeFirstLetter(data.brand.name);
+  const productName = capitalizeFirstLetter(data.name);
+
+  return {
+    title: `${brandName} ${productName}`,
   };
 }
 
@@ -40,6 +54,7 @@ async function DetailPage({ params }: PageProps) {
 
   const findProductHandler = async () => {
     const nextParams = params.name.replaceAll("%2B", "%20");
+
     try {
       const { data } = await getProductByName(nextParams);
 

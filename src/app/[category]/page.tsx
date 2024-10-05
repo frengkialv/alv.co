@@ -24,12 +24,21 @@ import { ProductsType } from "@/types/product";
 import EmptyProduct from "@/components/EmptyProduct";
 import LoadingCategoryPage from "@/components/LoadingCategoryPage";
 import CategoryProvider from "@/components/Provider/CategoryProvider";
+import { capitalizeFirstLetter } from "@/utils";
 
 interface PageProps {
   params: {
     category: string;
   };
   searchParams: { [key: string]: string };
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const categoryName = capitalizeFirstLetter(params.category);
+
+  return {
+    title: `Buy ${categoryName} Online | Alv.co`,
+  };
 }
 
 async function CategoryPage({ params, searchParams }: PageProps) {
