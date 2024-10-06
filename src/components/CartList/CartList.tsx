@@ -4,6 +4,8 @@ import {
   AdditionButton,
   AlertStock,
   BottomContent,
+  DeleteButtonDekstop,
+  DeleteButtonMobile,
   DetailWrapper,
   DiscountFlag,
   EntityWrapper,
@@ -12,18 +14,21 @@ import {
   PriceWrapper,
   ProductAttributesWrapper,
   ProductLabel,
-  ProductName,
+  ProductNameDekstop,
+  ProductNamePhone,
   ProductNameWrapper,
   ProductPrice,
   ProductValue,
   QuantitiInput,
-  QuantitiOrderButtonWrapper,
+  QuantitiOrderButtonDekstopWrapper,
   Row,
+  SelectMobileWrapper,
   SubtractionButton,
 } from "./styles";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import Tooltip from "../Tooltip";
+import SelectMobile from "../SelectMobile";
 
 interface CartList {
   id: string;
@@ -40,6 +45,28 @@ interface CartList {
   quantityOnChange: (id: string, quantity: number) => void;
   deleteProduct: (id: string) => void;
 }
+const options = [
+  {
+    value: 1,
+    label: 1,
+  },
+  {
+    value: 2,
+    label: 2,
+  },
+  {
+    value: 3,
+    label: 3,
+  },
+  {
+    value: 4,
+    label: 4,
+  },
+  {
+    value: 5,
+    label: 5,
+  },
+];
 
 function CartList({
   id,
@@ -56,6 +83,27 @@ function CartList({
   quantityOnChange,
   deleteProduct,
 }: CartList) {
+  const truncateString = (str: string) => {
+    if (str.length <= 30) return str;
+
+    // Get the first 30 characters
+    let truncated = str.substring(0, 30);
+
+    // Find the last space to avoid cutting off a word
+    let lastSpaceIndex = truncated.lastIndexOf(" ");
+
+    // If there's a space, truncate at the last word
+    if (lastSpaceIndex > -1) {
+      truncated = truncated.substring(0, lastSpaceIndex);
+    }
+
+    return truncated;
+  };
+
+  const handleChangeSelect = (val: string | number) => {
+    quantityOnChange(id, Number(val));
+  };
+
   return (
     <Row>
       <ImageWrapper href={slug}>
@@ -70,28 +118,59 @@ function CartList({
       </ImageWrapper>
       <DetailWrapper>
         <ProductNameWrapper>
-          <ProductName href={slug}>{name}</ProductName>
-          <Tooltip text="Delete product">
-            <UnstyledButton onClick={() => deleteProduct(id)}>
-              <Icon id="trash2" color="#FF3333" size={20} strokeWidth={2} />
-            </UnstyledButton>
-          </Tooltip>
+          <ProductNameDekstop href={slug}>{name}</ProductNameDekstop>
+          <ProductNamePhone href={slug}>
+            {truncateString(name)}
+          </ProductNamePhone>
+          <DeleteButtonDekstop>
+            <Tooltip text="Delete product">
+              <UnstyledButton onClick={() => deleteProduct(id)}>
+                <Icon id="trash2" color="#FF3333" size={20} strokeWidth={2} />
+              </UnstyledButton>
+            </Tooltip>
+          </DeleteButtonDekstop>
+
+          <DeleteButtonMobile>
+            <Tooltip text="Delete product">
+              <UnstyledButton onClick={() => deleteProduct(id)}>
+                <Icon id="close" color="#000000" size={20} strokeWidth={2} />
+              </UnstyledButton>
+            </Tooltip>
+          </DeleteButtonMobile>
         </ProductNameWrapper>
         <EntityWrapper>
-          <ProductAttributesWrapper>
-            <ProductLabel>Color: &nbsp;</ProductLabel>
-            <ProductValue>{color}</ProductValue>
-          </ProductAttributesWrapper>
-          <ProductAttributesWrapper>
-            <ProductLabel>Size: &nbsp;</ProductLabel>
-            <ProductValue>{size}</ProductValue>
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: "2px",
+            }}
+          >
+            <ProductAttributesWrapper>
+              <ProductLabel>Color: &nbsp;</ProductLabel>
+              <ProductValue>{color}</ProductValue>
+            </ProductAttributesWrapper>
+            <ProductAttributesWrapper>
+              <ProductLabel>Size: &nbsp;</ProductLabel>
+              <ProductValue>{size}</ProductValue>
 
-            {stockLeft && stockLeft <= 5 && (
-              <AlertStock>
-                Only {stockLeft} piece{stockLeft > 1 ? "s" : ""} left
-              </AlertStock>
-            )}
-          </ProductAttributesWrapper>
+              {stockLeft && stockLeft <= 5 && (
+                <AlertStock>
+                  Only {stockLeft} piece{stockLeft > 1 ? "s" : ""} left
+                </AlertStock>
+              )}
+            </ProductAttributesWrapper>
+          </div>
+
+          <SelectMobileWrapper>
+            <SelectMobile
+              label="Qty:"
+              value={quantity}
+              options={options}
+              handleChange={handleChangeSelect}
+            />
+          </SelectMobileWrapper>
         </EntityWrapper>
 
         <BottomContent>
@@ -118,7 +197,7 @@ function CartList({
             )}
           </PriceWrapper>
 
-          <QuantitiOrderButtonWrapper>
+          <QuantitiOrderButtonDekstopWrapper>
             <SubtractionButton
               onClick={() => {
                 if (quantity === 1) {
@@ -142,7 +221,7 @@ function CartList({
               readOnly
             />
             <AdditionButton
-              disabled={quantity === 10 || quantity >= stockLeft}
+              disabled={quantity === 5 || quantity >= stockLeft}
               onClick={() => {
                 quantityOnChange(id, quantity + 1);
               }}
@@ -152,13 +231,13 @@ function CartList({
                 size={18}
                 strokeWidth={1.5}
                 color={
-                  quantity === 10 || quantity >= stockLeft
+                  quantity === 5 || quantity >= stockLeft
                     ? "#898b8f"
                     : "#000000"
                 }
               />
             </AdditionButton>
-          </QuantitiOrderButtonWrapper>
+          </QuantitiOrderButtonDekstopWrapper>
         </BottomContent>
       </DetailWrapper>
     </Row>

@@ -96,6 +96,10 @@ export const InnerWrapper = styled.div`
   border: 1px solid var(--color-gray-200);
   position: sticky;
   top: 130px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding: 16px;
+  }
 `;
 
 export const SummaryTitle = styled.h5`

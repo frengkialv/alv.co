@@ -49,7 +49,7 @@ function AddToCartContent({ productId }: Props) {
         />
         <AdditionButton
           disabled={
-            !stockLeft || amountOrder === 10 || amountOrder >= stockLeft!
+            !stockLeft || amountOrder === 5 || amountOrder >= stockLeft!
           }
           onClick={handleAdditionalAmount}
         >
@@ -58,7 +58,7 @@ function AddToCartContent({ productId }: Props) {
             size={18}
             strokeWidth={1.5}
             color={
-              amountOrder === 10 || amountOrder >= stockLeft!
+              amountOrder === 5 || amountOrder >= stockLeft!
                 ? "#898b8f"
                 : "#000000"
             }

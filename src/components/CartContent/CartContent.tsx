@@ -120,7 +120,7 @@ function ListCart({ carts }: { carts: CartType[] }) {
 
       <TotalPriceWrapper>
         Sub Total
-        <Price>{totalPrice}</Price>
+        <Price>{formatPrice(totalPrice)}</Price>
       </TotalPriceWrapper>
 
       <Button size="small" grow={true} onClick={() => router.push("/cart")}>

@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: PageProps) {
 
   const { data } = await getProductByName(nextParams);
 
-  const brandName = capitalizeFirstLetter(data.brand.name);
-  const productName = capitalizeFirstLetter(data.name);
+  const brandName = data ? capitalizeFirstLetter(data.brand.name) : "";
+  const productName = data ? capitalizeFirstLetter(data.name) : "";
 
   return {
     title: `${brandName} ${productName}`,

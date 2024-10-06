@@ -30,7 +30,7 @@ export const ImageWrapper = styled(Link)`
 `;
 
 export const ImagePrimitive = styled(Image)<{ $category: string }>`
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 0.9 / 1;
   height: auto;
   width: 100%;
   object-fit: cover;
@@ -57,7 +57,8 @@ export const ProductNameWrapper = styled.div`
   align-items: center;
 `;
 
-export const ProductName = styled(Link)`
+export const ProductNameDekstop = styled(Link)`
+  display: revert;
   font-size: ${16 / 16}rem;
   font-weight: 600;
   color: var(--color-black);
@@ -69,14 +70,48 @@ export const ProductName = styled(Link)`
   text-transform: capitalize;
 
   @media ${QUERIES.phoneAndSmaller} {
+    display: none;
     font-size: ${14 / 16}rem;
+  }
+`;
+
+export const ProductNamePhone = styled(Link)`
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: revert;
+    font-size: ${14 / 16}rem;
+    font-weight: 600;
+    color: var(--color-black);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    line-height: 1.2;
+    text-transform: capitalize;
+  }
+`;
+
+export const DeleteButtonDekstop = styled.div`
+  display: revert;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
+  }
+`;
+
+export const DeleteButtonMobile = styled.div`
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: revert;
   }
 `;
 
 export const EntityWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   gap: 2px;
+  align-items: baseline;
 `;
 
 export const ProductAttributesWrapper = styled.div`
@@ -84,10 +119,6 @@ export const ProductAttributesWrapper = styled.div`
   align-items: center;
   font-size: ${14 / 16}rem;
   font-weight: ${WEIGHT.medium};
-
-  @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${12 / 16}rem;
-  }
 `;
 
 export const ProductLabel = styled.span``;
@@ -109,15 +140,24 @@ export const AlertStock = styled.span`
   margin-left: 14px;
 `;
 
+export const SelectMobileWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: revert;
+  }
+`;
+
 export const ProductPrice = styled.h5`
   font-size: ${15 / 16}rem;
+  user-select: none;
 
   &::before {
     content: "$";
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    font-size: ${13 / 16}rem;
+    font-size: ${14 / 16}rem;
   }
 `;
 
@@ -135,6 +175,7 @@ export const DiscountFlag = styled.span`
   padding: 6px 14px;
   text-align: center;
   border-radius: 40px;
+  user-select: none;
 
   @media ${QUERIES.phoneAndSmaller} {
     padding: 4px 12px;
@@ -147,7 +188,7 @@ export const BottomContent = styled.div`
   align-items: center;
 `;
 
-export const QuantitiOrderButtonWrapper = styled.div`
+export const QuantitiOrderButtonDekstopWrapper = styled.div`
   display: flex;
   align-items: center;
   border: 1.5px solid #bfc9d9;
@@ -155,6 +196,10 @@ export const QuantitiOrderButtonWrapper = styled.div`
 
   &:hover {
     border-color: var(--color-black);
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
   }
 `;
 
