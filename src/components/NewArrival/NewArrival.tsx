@@ -11,8 +11,10 @@ import {
 } from "./style";
 import { getProductsForDisplay } from "@/services/product.services";
 import { ProductsType } from "@/types/product";
+import { useRouter } from "next/navigation";
 
 function NewArrival() {
+  const router = useRouter();
   const [products, setProducts] = React.useState<ProductsType[]>([]);
 
   React.useEffect(() => {
@@ -38,7 +40,7 @@ function NewArrival() {
       <ProductGrid datas={products} />
 
       <ButtonWrapper>
-        <Button>View All</Button>
+        <Button onClick={() => router.push("/new-arrivals")}>View All</Button>
       </ButtonWrapper>
 
       <SpacerNewArrival />

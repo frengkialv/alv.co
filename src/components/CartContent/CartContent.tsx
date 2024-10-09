@@ -9,7 +9,7 @@ import UnstyledButton from "../UnstyledButton";
 import BadgeNotification from "../BadgeNotification";
 import EmptyCartImage from "../../../public/empty-cart.png";
 import Button from "../Button";
-import { QUERIES, WEIGHT } from "@/constants";
+import { WEIGHT } from "@/constants";
 import { CartType } from "@/types/cart";
 import {
   formatDiscountPrice,

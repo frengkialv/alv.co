@@ -11,6 +11,7 @@ export const PARAMSLABEL: PARAMSLABELPROPS = {
   sport: "Sport",
   "on-sale": "On Sale",
   "new-arrivals": "New Arrivals",
+  brand: "Brand",
 };
 
 export interface SVGProps {

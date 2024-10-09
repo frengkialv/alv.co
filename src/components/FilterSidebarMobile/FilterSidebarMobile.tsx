@@ -27,13 +27,15 @@ function FilterContent({ submitFilter }: { submitFilter: () => void }) {
             <ColorFilter />
           </Accordion>
         </Column>
-        {currentPath !== "on-sale" && currentPath !== "new-arrivals" && (
-          <Column>
-            <Accordion value="item-3" header="Size">
-              <SizeFilter />
-            </Accordion>
-          </Column>
-        )}
+        {currentPath !== "on-sale" &&
+          currentPath !== "new-arrivals" &&
+          currentPath !== "brand" && (
+            <Column>
+              <Accordion value="item-3" header="Size">
+                <SizeFilter />
+              </Accordion>
+            </Column>
+          )}
       </ContentWrapper>
       <Button size="small" grow={true} onClick={submitFilter}>
         Apply Filter

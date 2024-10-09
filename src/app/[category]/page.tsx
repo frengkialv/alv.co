@@ -1,5 +1,4 @@
 import * as React from "react";
-import { notFound } from "next/navigation";
 import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import FilterSidebarDekstop from "@/components/FilterSidebarDekstop";
 import MainGrid from "@/components/MainGrid";
@@ -8,7 +7,6 @@ import SortWrapperCategoryPage from "@/components/SortWrapperCategoryPage";
 import FilterSidebarTablet from "@/components/FilterSidebarTablet";
 import FilterSidebarMobile from "@/components/FilterSidebarMobile";
 import ScrollToTop from "@/components/ScrollToTop";
-import ErrorComponent from "@/components/ErrorComponent";
 import {
   ButtonWrapper,
   ContentWrapper,
@@ -21,10 +19,10 @@ import {
 import { getProducts } from "@/services/product.services";
 import { PARAMSLABEL } from "@/types/common";
 import { ProductsType } from "@/types/product";
+import { capitalizeFirstLetter } from "@/utils";
 import EmptyProduct from "@/components/EmptyProduct";
 import LoadingCategoryPage from "@/components/LoadingCategoryPage";
 import CategoryProvider from "@/components/Provider/CategoryProvider";
-import { capitalizeFirstLetter } from "@/utils";
 
 interface PageProps {
   params: {
@@ -33,32 +31,83 @@ interface PageProps {
   searchParams: { [key: string]: string };
 }
 
-export async function generateMetadata({ params }: PageProps) {
-  const categoryName = capitalizeFirstLetter(params.category);
+export async function generateMetadata({ params, searchParams }: PageProps) {
+  const categoryName =
+    params.category === "brand" ? searchParams.brand : params.category;
 
   return {
-    title: `Buy ${categoryName} Online | Alv.co`,
+    title: `Buy ${capitalizeFirstLetter(categoryName)} Online | Alv.co`,
   };
 }
 
+const findBrands = async (brandName: string) => {
+  try {
+    const SEARCH_BRAND_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/brand/name/${brandName}`;
+
+    const res = await fetch(SEARCH_BRAND_URL, { cache: "no-store" });
+
+    if (!res.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    const { data: brand } = await res.json();
+
+    if (brand === null) {
+      throw new Error("Page Not Found");
+    }
+
+    return brand;
+  } catch (error) {
+    throw new Error("Page Not Found");
+  }
+};
+
 async function CategoryPage({ params, searchParams }: PageProps) {
   if (!(params.category in PARAMSLABEL)) {
-    return notFound();
+    throw new Error("Page Not Found");
   }
 
-  const label = PARAMSLABEL[params.category];
+  let brandId = "";
+  let breadcrumbs = [];
 
-  const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: label, href: "/" + params.category },
-  ];
+  // Validation brand
+  if (params.category === "brand") {
+    const brand = await findBrands(searchParams.brand);
+
+    brandId = brand.id;
+
+    breadcrumbs = [
+      { label: "Home", href: "/" },
+      { label: "Brand", href: "/brands" },
+      { label: searchParams.brand, href: "/" + searchParams.brand },
+    ];
+  } else {
+    const label = PARAMSLABEL[params.category];
+
+    breadcrumbs = [
+      { label: "Home", href: "/" },
+      { label: label, href: "/" + params.category },
+    ];
+  }
+
+  const title =
+    params.category === "brand"
+      ? searchParams.brand
+      : PARAMSLABEL[params.category];
 
   let data;
 
-  data = await getProducts(searchParams, params.category);
+  if (params.category === "brand") {
+    data = await getProducts(
+      { ...searchParams, brand: brandId },
+      params.category
+    );
+  } else {
+    data = await getProducts(searchParams, params.category);
+  }
 
   if (data === "Internal server error") {
-    return <ErrorComponent statusCode={500} />;
+    throw new Error("Oops! The page you're looking for couldn't be found.");
   }
 
   const {
@@ -80,11 +129,13 @@ async function CategoryPage({ params, searchParams }: PageProps) {
       <Wrapper>
         <ScrollToTop />
         <BreadCrumbs breadcrumbs={breadcrumbs} />
+
         <ContentWrapper>
           <FilterSidebarDekstop />
+
           <div style={{ flex: 4 }}>
             <HeaderWrapper>
-              <Title>{PARAMSLABEL[params.category]}</Title>
+              <Title>{title}</Title>
               <ButtonWrapper>
                 <WrapperFilterSidebarTablet>
                   <FilterSidebarTablet />

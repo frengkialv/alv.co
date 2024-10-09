@@ -28,6 +28,7 @@ export const Title = styled.h1`
   font-size: ${28 / 16}rem;
   font-weight: ${WEIGHT.bold};
   line-height: 27px;
+  text-transform: capitalize;
   white-space: nowrap;
 
   @media ${QUERIES.tabletAndSmaller} {

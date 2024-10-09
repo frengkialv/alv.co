@@ -1,27 +1,27 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import styled from "styled-components";
+import Button from "@/components/Button";
+import EmptyDataIcon from "../SVG/EmptyDataIcon";
 import { useRouter } from "next/navigation";
 import { QUERIES, WEIGHT } from "@/constants";
-import Button from "@/components/Button";
-import EmptyDataImage from "../../../public/no-data.png";
 
 function EmptyProduct() {
   const router = useRouter();
 
   return (
     <EmptyDataWrapper>
-      <EmptyDataInnerWrapper>
-        <EmptyImage
-          src={EmptyDataImage}
-          alt="Empty Cart"
-          width={200}
-          height={200}
-          quality={100}
-          unoptimized
-        />
-      </EmptyDataInnerWrapper>
+      <EmptyDataImageDekstopWrapper>
+        <EmptyDataIcon width="550px" />
+      </EmptyDataImageDekstopWrapper>
+
+      <EmptyDataImageTabletWrapper>
+        <EmptyDataIcon width="450px" />
+      </EmptyDataImageTabletWrapper>
+
+      <EmptyDataImagePhoneWrapper>
+        <EmptyDataIcon width="350px" />
+      </EmptyDataImagePhoneWrapper>
 
       <TextWrapper>
         <BoldText>No result found</BoldText>
@@ -45,20 +45,38 @@ const EmptyDataWrapper = styled.div`
   padding: 80px 0;
 `;
 
-const EmptyDataInnerWrapper = styled.div`
-  width: 200px;
+const EmptyDataImageDekstopWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
-  @media ${QUERIES.phoneAndSmaller} {
-    width: 130px;
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
   }
 `;
 
-const EmptyImage = styled(Image)`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  height: 100%;
+const EmptyDataImageTabletWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
+  }
+`;
+
+const EmptyDataImagePhoneWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -66,6 +84,11 @@ const TextWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  gap: 2px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-top: 20px;
+  }
 `;
 
 const BoldText = styled.h6`

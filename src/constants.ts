@@ -196,4 +196,5 @@ export const CategoryPathnames = [
   "sport",
   "on-sale",
   "new-arrivals",
+  "brand",
 ];

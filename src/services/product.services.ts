@@ -9,12 +9,20 @@ export async function getProducts(
   try {
     const query = getQueryData(searchParams);
 
-    let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product?category=${paramsCategory}${query}`;
+    let url;
+
+    if (paramsCategory === "brand") {
+      url = `${process.env.NEXT_PUBLIC_BASE_URL}/product?brand=${searchParams.brand}${query}`;
+    } else {
+      url = `${process.env.NEXT_PUBLIC_BASE_URL}/product?category=${paramsCategory}${query}`;
+    }
 
     const res = await fetch(url, { cache: "no-store" });
+
     if (!res.ok) {
       return "Internal server error";
     }
+
     const data = await res.json();
 
     return data;

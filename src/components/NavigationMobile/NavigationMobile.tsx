@@ -113,7 +113,7 @@ function NavigationMobile({ open, onOpenChange }: Props) {
                 <HangerLogo style={{ marginRight: "0px" }} />
                 New Arrivals
               </LinkWrapper>
-              <LinkWrapper href="/" onClick={() => onOpenChange(false)}>
+              <LinkWrapper href="/brands" onClick={() => onOpenChange(false)}>
                 <Icon id="tag" strokeWidth={2} size={20} />
                 Brands
               </LinkWrapper>

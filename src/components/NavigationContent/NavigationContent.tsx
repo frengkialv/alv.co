@@ -60,7 +60,7 @@ function NavigationContent() {
 
         <LinkWrapper href="/on-sale">On Sale</LinkWrapper>
         <LinkWrapper href="/new-arrivals">New Arrivals</LinkWrapper>
-        <LinkWrapper href="/">Brands</LinkWrapper>
+        <LinkWrapper href="/brands">Brands</LinkWrapper>
       </Nav>
     </Wrapper>
   );

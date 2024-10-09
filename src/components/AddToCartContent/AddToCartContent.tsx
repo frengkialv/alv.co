@@ -2,9 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 import Icon from "../Icon";
+import LoadingComponent from "../LaodingComponent/LaodingComponent";
 import { QUERIES, WEIGHT } from "@/constants";
 import { DetailContext } from "../Provider/DetailProvider";
-import LoadingComponent from "../LaodingComponent/LaodingComponent";
 
 interface Props {
   productId: string;

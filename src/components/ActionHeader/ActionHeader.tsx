@@ -13,8 +13,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { HeaderContext } from "../Provider/HeaderProvider";
 import { QUERIES } from "@/constants";
 import { findUser, FindUserDtoOut } from "@/services/user.service";
-import { CartType } from "@/types/cart";
-import { getCart } from "@/services/cart.service";
 import ProfileDropdownContent, {
   AvatarPofile,
   ProfileDropdownContentEmpty,

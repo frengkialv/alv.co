@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styled, { css } from "styled-components";
+import { QUERIES } from "@/constants";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "light";
@@ -88,6 +89,10 @@ const Wrapper = styled.button<{
 
   ${(props) => sizes[props.$size]}
   ${(props) => variants[props.$variant]}
+
+  @media ${QUERIES.phoneAndSmaller} {
+    line-height: 1;
+  }
 `;
 
 export default Button;

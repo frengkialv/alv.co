@@ -6,8 +6,6 @@ import { Wrapper } from "./style";
 import { QUERIES } from "@/constants";
 
 function DetailPageLoading() {
-  const arr = new Array(10).fill(0);
-
   return (
     <Wrapper style={{ marginTop: "10px" }}>
       <BreadCrumbsSkeletonDektop>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { Nothing_You_Could_Do } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import localFont from "next/font/local";
 import StyledComponentsRegistry from "../components/StyledComponentRegisty";
@@ -10,9 +11,6 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Alv.co",
-  icons: {
-    icon: "./alv-logo.png",
-  },
 };
 
 const satoshi = localFont({
@@ -76,13 +74,23 @@ const integral_cf = localFont({
   variable: "--integral-cf",
 });
 
+const nothing_you_could_do = Nothing_You_Could_Do({
+  weight: ["400"],
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-nothing-you-could-do",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${satoshi.className} ${integral_cf.variable}`}>
+    <html
+      lang="en"
+      className={`${satoshi.className} ${integral_cf.variable} ${nothing_you_could_do.variable}`}
+    >
       <body>
         <NextTopLoader color="#636363" height={3} showSpinner={false} />
         <AppRouterCacheProvider>
