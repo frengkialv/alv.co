@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 next build",
     "postbuild": "next lint || true",
-    "start": "next start",
+    "start": "node .next/standalone/server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -38,8 +38,6 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
     "react-feather": "^2.0.10",
-    "react-multi-carousel": "^2.8.5",
-    "sharp": "^0.33.5",
     "styled-components": "^6.1.12"
   },
   "devDependencies": {
