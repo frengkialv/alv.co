@@ -1,2 +1,2 @@
-export * from "./ErrorICon";
-export { default } from "./ErrorICon";
+export * from "./ErrorIcon";
+export { default } from "./ErrorIcon";
