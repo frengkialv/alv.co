@@ -1,7 +1,10 @@
 services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
+  next-app:
+    container_name: alv.co-fe
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - NODE_ENV=production
+      - NEXT_PUBLIC_BASE_URL=https://alvco-be.my.id
+    ports:
+      - 3000:3000

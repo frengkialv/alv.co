@@ -1,4 +1,3 @@
-import { differenceInDays } from "date-fns";
 import { CartType } from "./types/cart";
 
 export function ratingCalculation(rating: number) {

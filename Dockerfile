@@ -11,7 +11,11 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Build the Next.js application
 RUN bun run build
+
+ENV NEXT_TELEMETRY_DISABLED 1
 
 # Stage 3: Production server
 FROM base AS runner
@@ -21,5 +25,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-EXPOSE 3000
+ENV NEXT_TELEMETRY_DISABLED 1
+
 CMD ["bun", "run", "server.js"]
