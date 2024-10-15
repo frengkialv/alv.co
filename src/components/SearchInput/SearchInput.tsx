@@ -37,6 +37,7 @@ const Wrapper = styled.div`
 
 const Input = styled.input`
   width: 100%;
+  text-decoration: none;
   background-color: var(--color-pearls);
   border: 1px solid transparent;
   padding: 12px 16px 12px 50px;

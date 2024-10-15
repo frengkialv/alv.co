@@ -4,6 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import Icon from "../Icon";
 import styled from "styled-components";
+import Image from "next/image";
 import UnstyledButton from "../UnstyledButton";
 import SearchInput from "../SearchInput";
 import { WEIGHT } from "@/constants";
@@ -13,7 +14,8 @@ import { ProductsType } from "@/types/product";
 import { getProductAndBrandByQuery } from "@/services/product.services";
 import { useRouter } from "next/navigation";
 import { formatDiscountPrice, formatPrice } from "@/utils";
-import Image from "next/image";
+import { useDebounce } from "@/hooks/useDebounce";
+import LoadingComponent from "../LaodingComponent";
 
 interface SearchModal {
   open: boolean | undefined;
@@ -25,27 +27,33 @@ function SearchModal() {
   const { showSearchModal, setShowSearchModal } =
     React.useContext(HeaderContext);
 
-  const [search, setSearch] = React.useState<string>("");
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [products, setProducts] = React.useState<ProductsType[]>([]);
   const [brands, setBrands] = React.useState<BrandType[]>([]);
+  const [search, setSearch] = React.useState<string>("");
+  const debouncedSearch = useDebounce(search);
 
   React.useEffect(() => {
-    if (search) {
-      fetchProductAndBrand(search);
+    if (debouncedSearch) {
+      fetchProductAndBrand(debouncedSearch);
     } else {
       setProducts([]);
       setBrands([]);
     }
-  }, [search]);
+  }, [debouncedSearch]);
 
   const fetchProductAndBrand = async (query: string) => {
     try {
-      const { data } = await getProductAndBrandByQuery(query);
+      setLoading(true);
+      const { data } = await getProductAndBrandByQuery(query.toLowerCase());
 
       setProducts(data.products);
       setBrands(data.brands);
     } catch (error) {
       console.log("🚀 ~ fetchProductAndBrand ~ error:", error);
+    } finally {
+      console.log("======= Masuk Finally ==========");
+      setLoading(false);
     }
   };
 
@@ -93,7 +101,13 @@ function SearchModal() {
 
                   {products.length > 0 && (
                     <>
-                      <Title>Products</Title>
+                      <Title
+                        style={{
+                          marginBottom: "-20px",
+                        }}
+                      >
+                        Products
+                      </Title>
                       {products.map((product) => {
                         const imgUrl = product.productImage[0].imgSrc;
                         const price = formatPrice(
@@ -185,6 +199,8 @@ function SearchModal() {
           </InnerWrapper>
         </Content>
       </Dialog.Portal>
+
+      <LoadingComponent isLoading={loading} />
     </Wrapper>
   );
 }
@@ -198,19 +214,23 @@ const Backdrop = styled(Dialog.Overlay)`
 `;
 
 const Content = styled(Dialog.Content)`
+  display: flex;
+  flex-direction: column;
   position: fixed;
   inset: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 20px;
   background-color: white;
 `;
 
 const InnerWrapper = styled.div`
+  min-height: 0;
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
+  /* padding-bottom: 90px; */
 `;
 
 const SearchInputWrapper = styled.div`
@@ -228,7 +248,7 @@ const DropdownWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 const Title = styled.h3`

@@ -11,6 +11,7 @@ import { ProductsType } from "@/types/product";
 import { BrandType } from "@/types/brand";
 import { formatDiscountPrice, formatPrice } from "@/utils";
 import Icon from "../Icon";
+import { useDebounce } from "@/hooks/useDebounce";
 
 interface Props {
   type?: string;
@@ -28,9 +29,10 @@ function SearchInputDropdown({
   const [topOffset, setTopOffset] = React.useState<number>(0);
   const [inputWidth, setInputWidth] = React.useState<number>(0);
   const [showDropdown, setshowDropdown] = React.useState<boolean>(false);
-  const [search, setSearch] = React.useState<string>("");
   const [products, setProducts] = React.useState<ProductsType[]>([]);
   const [brands, setBrands] = React.useState<BrandType[]>([]);
+  const [search, setSearch] = React.useState<string>("");
+  const debouncedSearch = useDebounce(search);
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -53,13 +55,13 @@ function SearchInputDropdown({
   }, []);
 
   React.useEffect(() => {
-    if (search) {
-      fetchProductAndBrand(search);
+    if (debouncedSearch.length > 0) {
+      fetchProductAndBrand(debouncedSearch);
     } else {
       setProducts([]);
       setBrands([]);
     }
-  }, [search]);
+  }, [debouncedSearch]);
 
   // Event listener untuk update lebar saat window diresize
   const handleResize = () => {
