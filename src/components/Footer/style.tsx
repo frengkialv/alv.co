@@ -167,6 +167,7 @@ const IconEmailTabletStyle = styled(Icon)`
 `;
 
 export const SubscribeButton = styled.button`
+  color: var(--color-black);
   background-color: var(--color-white);
   padding: 12px 84px;
   border-radius: 62px;

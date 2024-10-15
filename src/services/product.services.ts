@@ -111,3 +111,11 @@ export async function getProductByName(
 
   return resp;
 }
+
+export async function getProductAndBrandByQuery(query: string) {
+  const url = `product/search?q=${query}`;
+
+  const { data: resp } = await BaseHttpInstance.get(url);
+
+  return resp;
+}

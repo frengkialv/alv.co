@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { COLORS_FILTER } from "@/constants";
 import { CategoryContext } from "../Provider/CategoryProvider";
+import CheckmarkIcon from "../SVG/CheckmarkIcon";
 
 function ColorFilter() {
   const { colorsFilter, setColorsFilter } = React.useContext(CategoryContext);
@@ -29,7 +30,9 @@ function ColorFilter() {
           $border={color.border}
           onClick={() => handleChangeSize(color.name)}
         >
-          {colorsFilter.includes(color.name) && <>&#10004;</>}
+          {colorsFilter.includes(color.name) && (
+            <CheckmarkIcon color={color.name === "white" ? "black" : "white"} />
+          )}
         </Row>
       ))}
     </Wrapper>
@@ -48,8 +51,6 @@ const Row = styled.div<{ $color: string; $border: string }>`
   align-items: center;
   font-size: ${18 / 16}rem;
   font-weight: 500;
-  color: ${(props) =>
-    props.$color === "#FFFFFF" ? "var(--color-black)" : "var(--color-white)"};
   width: 35px;
   height: 35px;
   background-color: ${(props) => props.$color};

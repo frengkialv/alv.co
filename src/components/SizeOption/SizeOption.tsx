@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import { QUERIES, SIZES_FILTER, SizesType, WEIGHT } from "@/constants";
 import ErrorAlert from "../ErrorAlert";
-import { ColorProduct, SizeProduct } from "@/types/stock";
-import { DetailContext } from "../Provider/DetailProvider";
+import { QUERIES, SIZES_FILTER, SizesType, WEIGHT } from "@/constants";
+import { DetailContext, useUpdateURL } from "../Provider/DetailProvider";
 import { ProductsType } from "@/types/product";
 
 interface Props {
@@ -20,6 +19,7 @@ function SizeOption({ category, product }: Props) {
     stockLeft,
     setStockLeft,
   } = React.useContext(DetailContext);
+  const updateURL = useUpdateURL();
 
   const [sizesOption, setSizesOption] = React.useState<SizesType[]>([]);
 
@@ -68,6 +68,7 @@ function SizeOption({ category, product }: Props) {
     );
 
     setStockLeft(findStock[0].stock);
+    updateURL("size", val);
     setSizeSelected(val);
   };
 
@@ -77,11 +78,16 @@ function SizeOption({ category, product }: Props) {
       {showErrorMessage && <ErrorAlert message={errorMessage} />}
       <SizeWrapper>
         {sizesOption.map((size, index) => {
-          const isDisable = !availableSize.includes(size.value);
+          const isDisable =
+            !availableSize.includes(size.value) && colorSelected !== undefined;
+
+          const isSelected =
+            sizeSelected === size.value && availableSize.includes(sizeSelected);
+
           return (
             <SizeButton
               key={index}
-              $selected={sizeSelected === size.value}
+              $selected={isSelected}
               disabled={isDisable}
               onClick={() => {
                 if (size.value === sizeSelected) {
@@ -140,6 +146,8 @@ const SizeButton = styled.button<{ $selected: boolean; disabled: boolean }>`
   --color: ${(props) =>
     props.$selected ? "var(--color-white)" : "var(--color-black)"};
 
+  position: relative;
+  overflow: hidden;
   font-size: ${14 / 16}rem;
   font-weight: ${WEIGHT.medium};
   line-height: 1.2;
@@ -151,10 +159,21 @@ const SizeButton = styled.button<{ $selected: boolean; disabled: boolean }>`
   outline-offset: 4px;
   text-transform: capitalize;
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: pointer;
 
-  @media ${QUERIES.phoneAndSmaller} {
-    /* font-size: ${14 / 16}rem; */
+  &:disabled {
+    cursor: not-allowed;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: grey;
+      transform: rotate(-35deg);
+    }
   }
 `;
 

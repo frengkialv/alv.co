@@ -11,6 +11,7 @@ import {
   SmallText,
   Wrapper,
 } from "./style";
+import { useRouter } from "next/navigation";
 
 function InformationContent() {
   return (

@@ -67,10 +67,11 @@ function NavigationContent() {
 }
 
 const Wrapper = styled(NavigationMenu.Root)`
-  @media ${QUERIES.tabletAndSmaller} {
+  @media (max-width: ${1350 / 16}rem) {
     flex: 1;
     justify-content: center;
   }
+
   @media ${QUERIES.phoneAndSmaller} {
     display: none;
   }
@@ -80,7 +81,7 @@ const Nav = styled(NavigationMenu.List)`
   display: flex;
   gap: 24px;
 
-  @media ${QUERIES.tabletAndSmaller} {
+  @media (max-width: ${1350 / 16}rem) {
     flex: 1;
     justify-content: center;
   }

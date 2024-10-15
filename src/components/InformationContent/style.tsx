@@ -2,58 +2,19 @@
 import styled from "styled-components";
 import { QUERIES, WEIGHT } from "@/constants";
 import { ChildrenProps } from "@/types/common";
+import { useRouter } from "next/navigation";
 
-export const Wrapper = ({ children }: ChildrenProps) => {
-  return <WrapperStyle>{children}</WrapperStyle>;
-};
+export const ShopButton = ({ children }: ChildrenProps) => {
+  const router = useRouter();
 
-export const LargeText = ({ children }: ChildrenProps) => {
-  return <LargeTextStyle>{children}</LargeTextStyle>;
-};
-
-export const SmallText = ({ children }: ChildrenProps) => {
-  return <SmallTextStyle>{children}</SmallTextStyle>;
-};
-
-export const ShopButton = ({ children, ...delegated }: ChildrenProps) => {
-  return <ShopButtonStyle {...delegated}>{children}</ShopButtonStyle>;
-};
-
-export const AmountWrapperDekstop = ({ children }: ChildrenProps) => {
-  return <AmountWrapperDekstopStyle>{children}</AmountWrapperDekstopStyle>;
-};
-
-export const InternationalBrandAmountDekstop = ({
-  children,
-}: ChildrenProps) => {
   return (
-    <InternationalBrandAmountDekstopStyle>
+    <ShopButtonStyle onClick={() => router.push("/on-sale")}>
       {children}
-    </InternationalBrandAmountDekstopStyle>
+    </ShopButtonStyle>
   );
 };
 
-export const NumberAmount = ({ children }: ChildrenProps) => {
-  return <NumberAmountStyle>{children}</NumberAmountStyle>;
-};
-
-export const DescAmount = ({ children }: ChildrenProps) => {
-  return <DescAmountStyle>{children}</DescAmountStyle>;
-};
-
-export const AmountWrapperMobile = ({ children }: ChildrenProps) => {
-  return <AmountWrapperMobileStyle>{children}</AmountWrapperMobileStyle>;
-};
-
-export const InternationalBrandAmountMobile = ({ children }: ChildrenProps) => {
-  return (
-    <InternationalBrandAmountMobileStyle>
-      {children}
-    </InternationalBrandAmountMobileStyle>
-  );
-};
-
-const WrapperStyle = styled.div`
+export const Wrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -67,14 +28,14 @@ const WrapperStyle = styled.div`
   }
 `;
 
-const LargeTextStyle = styled.h1`
+export const LargeText = styled.h1`
   font-family: var(--integral-cf);
   font-size: clamp(3rem, 5vw - 0.25rem, 4rem);
   font-weight: ${WEIGHT["bold"]};
   line-height: clamp(3.5rem, 10vw - 4rem, 4.3rem);
 `;
 
-const SmallTextStyle = styled.p`
+export const SmallText = styled.p`
   color: var(--color-gray-600);
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -82,7 +43,7 @@ const SmallTextStyle = styled.p`
   }
 `;
 
-const ShopButtonStyle = styled.button`
+export const ShopButtonStyle = styled.button`
   font-size: 1rem;
   color: var(--color-white);
   background-color: var(--color-black);
@@ -98,7 +59,7 @@ const ShopButtonStyle = styled.button`
   }
 `;
 
-const AmountWrapperDekstopStyle = styled.div`
+export const AmountWrapperDekstop = styled.div`
   display: flex;
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -106,7 +67,7 @@ const AmountWrapperDekstopStyle = styled.div`
   }
 `;
 
-const AmountWrapperMobileStyle = styled.div`
+export const AmountWrapperMobile = styled.div`
   display: none;
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -116,7 +77,7 @@ const AmountWrapperMobileStyle = styled.div`
   }
 `;
 
-const InternationalBrandAmountDekstopStyle = styled.div`
+export const InternationalBrandAmountDekstop = styled.div`
   padding-left: 32px;
   padding-right: 32px;
 
@@ -133,7 +94,7 @@ const InternationalBrandAmountDekstopStyle = styled.div`
   }
 `;
 
-const InternationalBrandAmountMobileStyle = styled.div`
+export const InternationalBrandAmountMobile = styled.div`
   display: none;
 
   @media ${QUERIES.phoneAndSmaller} {
@@ -147,13 +108,13 @@ const InternationalBrandAmountMobileStyle = styled.div`
   }
 `;
 
-const NumberAmountStyle = styled.span`
+export const NumberAmount = styled.span`
   display: block;
   font-size: clamp(1.4rem, 5vw - 1.5rem, 2.5rem);
   font-weight: ${WEIGHT["bold"]};
 `;
 
-const DescAmountStyle = styled.span`
+export const DescAmount = styled.span`
   color: var(--color-gray-400);
 
   @media ${QUERIES.phoneAndSmaller} {

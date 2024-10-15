@@ -6,6 +6,7 @@ import RatingAndDiscountTabWrapper from "@/components/RatingAndDiscountTabWrappe
 import SuggestionProduct from "@/components/SuggestionProduct";
 import ScrollToTop from "@/components/ScrollToTop";
 import ErrorComponent from "@/components/ErrorComponent";
+import DetailProvider from "@/components/Provider/DetailProvider";
 import { CardWrapper, Wrapper } from "./style";
 import { PARAMSLABEL } from "@/types/common";
 import { getProductByName } from "@/services/product.services";
@@ -80,21 +81,23 @@ async function DetailPage({ params }: PageProps) {
   }
 
   return (
-    <Wrapper>
-      <ScrollToTop />
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+    <DetailProvider>
+      <Wrapper>
+        <ScrollToTop />
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
 
-      <CardWrapper>
-        <ProductImage images={data.productImage} category={params.category} />
+        <CardWrapper>
+          <ProductImage images={data.productImage} category={params.category} />
 
-        <ProductContent product={data} category={params.category} />
-      </CardWrapper>
+          <ProductContent product={data} category={params.category} />
+        </CardWrapper>
 
-      {/* <RatingAndDiscountTabWrapper /> */}
+        {/* <RatingAndDiscountTabWrapper /> */}
 
-      {/* <div style={{ marginTop: "10px" }} />
+        {/* <div style={{ marginTop: "10px" }} />
       <SuggestionProduct /> */}
-    </Wrapper>
+      </Wrapper>
+    </DetailProvider>
   );
 }
 

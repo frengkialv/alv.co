@@ -93,7 +93,7 @@ export const COLORS_FILTER = [
   },
   {
     color: "#FFFFFF",
-    border: "#CCCCCC  ",
+    border: "#817b7b  ",
     name: "white",
   },
 ];
@@ -156,8 +156,8 @@ export const COLORS_OPTION: ColorOption = {
     border: "#817b7b  ",
   },
   pink: {
-    color: "#F506A4",
-    border: "#c40583",
+    color: "#FFA4B6",
+    border: "#de909f",
   },
   purple: {
     color: "#7D06F5",

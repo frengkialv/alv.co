@@ -37,7 +37,7 @@ function FilterContent({ submitFilter }: { submitFilter: () => void }) {
             </Column>
           )}
       </ContentWrapper>
-      <Button size="small" grow={true} onClick={submitFilter}>
+      <Button size="medium" grow={true} onClick={submitFilter}>
         Apply Filter
       </Button>
     </>

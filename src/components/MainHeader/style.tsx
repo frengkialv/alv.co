@@ -33,7 +33,7 @@ export const WrapperSearchInput = styled.div`
   flex: 1;
   min-width: 250px;
 
-  @media ${QUERIES.tabletAndSmaller} {
+  @media (max-width: ${1350 / 16}rem) {
     display: none;
   }
 `;

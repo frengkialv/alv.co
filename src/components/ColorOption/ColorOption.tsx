@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import CheckmarkIcon from "../SVG/CheckmarkIcon";
 import { COLORS_OPTION, QUERIES, WEIGHT } from "@/constants";
 import { ColorProduct } from "@/types/stock";
-import { DetailContext } from "../Provider/DetailProvider";
+import { DetailContext, useUpdateURL } from "../Provider/DetailProvider";
 
 interface Props {
   colors: ColorProduct[];
@@ -12,6 +13,8 @@ interface Props {
 function ColorOption({ colors }: Props) {
   const { colorSelected, setColorSelected, setSizeSelected, setStockLeft } =
     React.useContext(DetailContext);
+
+  const updateURL = useUpdateURL();
 
   return (
     <>
@@ -27,9 +30,12 @@ function ColorOption({ colors }: Props) {
               setStockLeft(0);
               setSizeSelected("");
               setColorSelected(color);
+              updateURL("color", color);
             }}
           >
-            {color === colorSelected && <>&#10004;</>}
+            {color === colorSelected && (
+              <CheckmarkIcon color={color === "white" ? "black" : "white"} />
+            )}
           </ButtonColor>
         ))}
       </ColorWrapper>
@@ -60,11 +66,13 @@ const ColorWrapper = styled.div`
 const ButtonColor = styled.button<{ $color: string; $border: string }>`
   --backgorund-color: ${(props) => props.$color};
   --border: ${(props) => props.$border};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   width: 35px;
   height: 35px;
-  color: ${(props) =>
-    props.$color === "#FFFFFF" ? "var(--color-black)" : "var(--color-white)"};
   background-color: var(--backgorund-color);
   border-radius: 50%;
   border: 1px solid var(--border);

@@ -7,6 +7,9 @@ import SortWrapperCategoryPage from "@/components/SortWrapperCategoryPage";
 import FilterSidebarTablet from "@/components/FilterSidebarTablet";
 import FilterSidebarMobile from "@/components/FilterSidebarMobile";
 import ScrollToTop from "@/components/ScrollToTop";
+import EmptyProduct from "@/components/EmptyProduct";
+import LoadingCategoryPage from "@/components/LoadingCategoryPage";
+import CategoryProvider from "@/components/Provider/CategoryProvider";
 import {
   ButtonWrapper,
   ContentWrapper,
@@ -20,9 +23,6 @@ import { getProducts } from "@/services/product.services";
 import { PARAMSLABEL } from "@/types/common";
 import { ProductsType } from "@/types/product";
 import { capitalizeFirstLetter } from "@/utils";
-import EmptyProduct from "@/components/EmptyProduct";
-import LoadingCategoryPage from "@/components/LoadingCategoryPage";
-import CategoryProvider from "@/components/Provider/CategoryProvider";
 
 interface PageProps {
   params: {

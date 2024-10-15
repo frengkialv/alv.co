@@ -6,12 +6,25 @@ import Icon from "../Icon";
 interface Props {
   type?: string;
   placeholder?: string;
+  value: string;
+  onChange: (val: string) => void;
 }
 
-const SearchInput = ({ type = "text", placeholder, ...delegated }: Props) => {
+const SearchInput = ({
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+  ...delegated
+}: Props) => {
   return (
     <Wrapper {...delegated}>
-      <Input type={type} placeholder={placeholder} />
+      <Input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
       <SearchIcon id="search" strokeWidth={2} />
     </Wrapper>
   );

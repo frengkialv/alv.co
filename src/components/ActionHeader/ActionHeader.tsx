@@ -109,7 +109,7 @@ const SearchButton = styled(UnstyledButton)`
   display: none;
   user-select: none;
 
-  @media ${QUERIES.tabletAndSmaller} {
+  @media (max-width: ${1350 / 16}rem) {
     display: block;
     margin-right: -5px;
   }

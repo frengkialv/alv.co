@@ -1,10 +1,11 @@
 "use client";
+
 import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { SortRating } from "@/constants";
 import { ChildrenProps } from "@/types/common";
 import { ColorProduct, SizeProduct } from "@/types/stock";
-import { usePathname, useRouter } from "next/navigation";
 import { addCart } from "@/services/cart.service";
 import { useToast } from "../ToastProvider";
 import { CartContext } from "../CartProvider";
@@ -33,16 +34,21 @@ interface DetailCentextValue {
   submitHandler: (productId: string) => void;
 }
 
+type ProductState = {
+  [key: string]: string;
+} & {
+  image?: string;
+};
+
 export const DetailContext = React.createContext<DetailCentextValue>(null!);
 
 function DetailProvider({ children }: ChildrenProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathName = usePathname(); // Get the current pathname
   const isLogin = getCookie("access_token");
-
   const { fetchDataCart } = React.useContext(CartContext);
   const { showToast } = useToast();
-
-  const pathName = usePathname(); // Get the current pathname
 
   const [currentPath, setCurrentPath] = React.useState<string>("");
 
@@ -65,13 +71,6 @@ function DetailProvider({ children }: ChildrenProps) {
   const [sortRating, setSortRating] = React.useState<SortRating>(
     SortRating.ASCENDING
   );
-
-  React.useEffect(() => {
-    if (pathName !== currentPath) {
-      setCurrentPath(pathName);
-      resetAllSatte();
-    }
-  }, [pathName]);
 
   React.useEffect(() => {
     slideImage();
@@ -98,13 +97,31 @@ function DetailProvider({ children }: ChildrenProps) {
     };
   }, [selectedImageId]);
 
-  const resetAllSatte = () => {
-    setSelectedImageId(1);
-    setColorSelected(undefined);
-    setSizeSelected("");
-    setStockLeft(undefined);
-    setAmountOrder(1);
-    setSortRating(SortRating.ASCENDING);
+  React.useEffect(() => {
+    getInitialState();
+  }, []);
+
+  const getInitialState = () => {
+    const prevParams = Object.fromEntries(searchParams.entries()); // Mengubah searchParams menjadi objek
+    const params: ProductState = {};
+
+    for (const [key, value] of Object.entries(prevParams)) {
+      params[key] = value;
+    }
+
+    if (Object.keys(params).length === 0) {
+      return;
+    }
+
+    if (params.hasOwnProperty("color")) {
+      const nextColorSelected: ColorProduct = params.color as ColorProduct;
+      setColorSelected(nextColorSelected);
+    }
+
+    if (params.hasOwnProperty("size")) {
+      const nextSizeSelected: string = params.size;
+      setSizeSelected(nextSizeSelected);
+    }
   };
 
   const submitHandler = async (productId: string) => {
@@ -174,6 +191,24 @@ function DetailProvider({ children }: ChildrenProps) {
   return (
     <DetailContext.Provider value={value}>{children}</DetailContext.Provider>
   );
+}
+
+export function useUpdateURL() {
+  const router = useRouter();
+
+  return (key: "color" | "size", value: ColorProduct | string) => {
+    // Jika color berubah otomatis menghapus query size
+    if (key === "color") {
+      router.push(`?color=${value}`, { scroll: false });
+    } else {
+      const searchParams = new URLSearchParams(window.location.search);
+      const nextSearchParams = Object.fromEntries(searchParams.entries()); // Mengubah searchParams menjadi objek
+
+      router.push(`?color=${nextSearchParams.color}&size=${value}`, {
+        scroll: false,
+      });
+    }
+  };
 }
 
 export default DetailProvider;
