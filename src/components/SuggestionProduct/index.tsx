@@ -1,2 +1,2 @@
-export * from './SuggestionProduct';
-export { default } from './SuggestionProduct';
+export * from "./SuggestionProduct";
+export { default } from "./SuggestionProduct";

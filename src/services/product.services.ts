@@ -35,11 +35,16 @@ export async function getProductsForDisplay(
   category: string,
   totalData: number
 ) {
-  let url = `/product/display/${category}/${totalData}`;
+  try {
+    let url = `/product/display/${category}/${totalData}`;
 
-  const { data: resp } = await BaseHttpInstance.get(url);
+    const { data: resp } = await BaseHttpInstance.get(url);
 
-  return resp;
+    return resp;
+  } catch (error) {
+    console.log("🚀 ~ error:", error);
+    throw new Error("Oops! Something wicked happened.");
+  }
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

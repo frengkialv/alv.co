@@ -31,7 +31,13 @@ function ColorFilter() {
           onClick={() => handleChangeSize(color.name)}
         >
           {colorsFilter.includes(color.name) && (
-            <CheckmarkIcon color={color.name === "white" ? "black" : "white"} />
+            <CheckmarkIcon
+              color={
+                color.name === "white" || color.name === "gray"
+                  ? "black"
+                  : "white"
+              }
+            />
           )}
         </Row>
       ))}

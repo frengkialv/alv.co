@@ -3,7 +3,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductImage from "@/components/ProductImage";
 import ProductContent from "@/components/ProductContent";
 import RatingAndDiscountTabWrapper from "@/components/RatingAndDiscountTabWrapper";
-import SuggestionProduct from "@/components/SuggestionProduct";
 import ScrollToTop from "@/components/ScrollToTop";
 import ErrorComponent from "@/components/ErrorComponent";
 import DetailProvider from "@/components/Provider/DetailProvider";

@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import Spacer from "@/components/Spacer";
-import { QUERIES } from "@/constants";
+import { QUERIES, WEIGHT } from "@/constants";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
 
 export const SpacerNewArrival = () => {
@@ -16,11 +16,18 @@ export const SpacerNewArrival = () => {
   );
 };
 
+export const Wrapper = styled.div`
+  margin-top: 10px;
+  padding-right: var(--padding-horizontal-wrapper);
+  padding-left: var(--padding-horizontal-wrapper);
+`;
+
 export const HeaderTitle = styled.h1`
   font-family: var(--integral-cf);
   font-size: ${38 / 16}rem;
   line-height: 45px;
   text-align: center;
+  text-transform: uppercase;
 
   @media ${QUERIES.tabletAndSmaller} {
     font-size: ${26 / 16}rem;
@@ -31,6 +38,11 @@ export const HeaderTitle = styled.h1`
     font-size: ${22 / 16}rem;
     line-height: 35px;
   }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const Dash = styled.div`

@@ -67,9 +67,9 @@ export const COLORS_FILTER = [
     name: "orange",
   },
   {
-    color: "#06CAF5",
-    border: "#05a2c4",
-    name: "lightBlue",
+    color: "#b5b5b5",
+    border: "#817b7b",
+    name: "gray",
   },
   {
     color: "#063AF5",
@@ -149,11 +149,11 @@ export const COLORS_OPTION: ColorOption = {
   },
   white: {
     color: "#FFFFFF",
-    border: "#817b7b  ",
+    border: "#817b7b",
   },
   gray: {
     color: "#b5b5b5",
-    border: "#817b7b  ",
+    border: "#817b7b",
   },
   pink: {
     color: "#FFA4B6",

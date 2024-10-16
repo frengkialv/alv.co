@@ -1,36 +1,37 @@
 import React from "react";
 import ProductGrid from "../ProductGrid";
-import { Dash, HeaderTitle, SpacerNewArrival } from "./style";
-import { getProductsForDisplay } from "@/services/product.services";
+import ButtonToNewArrival from "../SharedButtons/ButtonToNewArrival";
+import {
+  ButtonWrapper,
+  Dash,
+  HeaderTitle,
+  SpacerNewArrival,
+  Wrapper,
+} from "./style";
 import { ProductsType } from "@/types/product";
 
-function SuggestionProduct() {
-  const [products, setProducts] = React.useState<ProductsType[]>([]);
+interface Props {
+  data: ProductsType[];
+  title: string;
+}
 
-  React.useEffect(() => {
-    fetchDataNewArrival();
-  }, []);
-
-  const fetchDataNewArrival = async () => {
-    try {
-      const { data } = await getProductsForDisplay("new-arrival", 4);
-
-      setProducts(data);
-    } catch (error) {
-      console.log("🚀 ~ fetchDataNewArrival ~ error:", error);
-    }
-  };
-
+function SuggestionProduct({ data, title }: Props) {
   return (
-    <>
+    <Wrapper>
       <SpacerNewArrival />
 
-      <HeaderTitle>You May Also Like</HeaderTitle>
+      <HeaderTitle>{title}</HeaderTitle>
 
-      <ProductGrid datas={products} />
+      <ProductGrid datas={data} />
+
+      <ButtonWrapper>
+        <ButtonToNewArrival />
+      </ButtonWrapper>
+
+      <SpacerNewArrival />
 
       <Dash />
-    </>
+    </Wrapper>
   );
 }
 
