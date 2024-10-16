@@ -6,7 +6,7 @@ import { getProductsForDisplay } from "@/services/product.services";
 export const dynamic = "force-dynamic";
 
 async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 6000));
+  // await new Promise((resolve) => setTimeout(resolve, 6000));
 
   const { data: newArrivals } = await getProductsForDisplay("new-arrival", 4);
 

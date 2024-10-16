@@ -474,8 +474,12 @@ const CommentTablet = styled(SkeletonTablet)`
 `;
 
 const CommentPhone = styled(SkeletonPhone)`
-  display: flex;
-  gap: 20px;
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: flex;
+    gap: 20px;
+  }
 `;
 
 export default HomePageLoading;
