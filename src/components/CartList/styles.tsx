@@ -30,7 +30,7 @@ export const ImageWrapper = styled(Link)`
 `;
 
 export const ImagePrimitive = styled(Image)<{ $category: string }>`
-  aspect-ratio: 0.9 / 1;
+  aspect-ratio: 0.7 / 1;
   height: auto;
   width: 100%;
   object-fit: cover;
@@ -46,9 +46,9 @@ export const DetailWrapper = styled.div`
   flex: 6;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 4px;
-  height: auto;
+  /* justify-content: space-between; */
+  gap: 20px;
+  /* height: auto; */
 `;
 
 export const ProductNameWrapper = styled.div`
@@ -145,6 +145,7 @@ export const SelectMobileWrapper = styled.div`
 
   @media ${QUERIES.phoneAndSmaller} {
     display: revert;
+    margin-top: 10px;
   }
 `;
 

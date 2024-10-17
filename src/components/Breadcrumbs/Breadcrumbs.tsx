@@ -1,6 +1,13 @@
 "use client";
 import React from "react";
-import { BreadcrumbList, CrumbLink, CrumbText, CrumbWrapper } from "./style";
+import {
+  BreadcrumbList,
+  CrumbLink,
+  CrumbLinkWrapper,
+  CrumbText,
+  CrumbWrapper,
+} from "./style";
+import Icon from "../Icon";
 
 interface Breadcrumb {
   label: string;
@@ -22,7 +29,12 @@ function Crumb({
 }) {
   return (
     <CrumbWrapper>
-      {!isCurrentPage && <CrumbLink href={href}>{children}</CrumbLink>}
+      {!isCurrentPage && (
+        <CrumbLink href={href}>
+          {children}
+          <Icon id="chevron-right" size={16} strokeWidth={1.5} />
+        </CrumbLink>
+      )}
 
       {isCurrentPage && <CrumbText>{children}</CrumbText>}
     </CrumbWrapper>

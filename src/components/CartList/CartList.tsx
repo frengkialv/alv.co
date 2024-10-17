@@ -28,7 +28,7 @@ import {
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import Tooltip from "../Tooltip";
-import SelectMobile from "../SelectMobile";
+import SelectQTYMobile from "../SelectQTYMobile";
 
 interface CartList {
   id: string;
@@ -45,28 +45,6 @@ interface CartList {
   quantityOnChange: (id: string, quantity: number) => void;
   deleteProduct: (id: string) => void;
 }
-const options = [
-  {
-    value: 1,
-    label: 1,
-  },
-  {
-    value: 2,
-    label: 2,
-  },
-  {
-    value: 3,
-    label: 3,
-  },
-  {
-    value: 4,
-    label: 4,
-  },
-  {
-    value: 5,
-    label: 5,
-  },
-];
 
 function CartList({
   id,
@@ -156,21 +134,19 @@ function CartList({
               <ProductValue>{size}</ProductValue>
 
               {stockLeft && stockLeft <= 5 && (
-                <AlertStock>
-                  Only {stockLeft} piece{stockLeft > 1 ? "s" : ""} left
-                </AlertStock>
+                <AlertStock>{stockLeft} left</AlertStock>
               )}
             </ProductAttributesWrapper>
-          </div>
 
-          <SelectMobileWrapper>
-            <SelectMobile
-              label="Qty:"
-              value={quantity}
-              options={options}
-              handleChange={handleChangeSelect}
-            />
-          </SelectMobileWrapper>
+            <SelectMobileWrapper>
+              <SelectQTYMobile
+                label="Qty:"
+                stockLeft={stockLeft}
+                value={quantity}
+                handleChange={handleChangeSelect}
+              />
+            </SelectMobileWrapper>
+          </div>
         </EntityWrapper>
 
         <BottomContent>

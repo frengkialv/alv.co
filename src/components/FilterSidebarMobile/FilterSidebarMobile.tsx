@@ -15,7 +15,7 @@ function FilterContent({ submitFilter }: { submitFilter: () => void }) {
   const { currentPath } = React.useContext(CategoryContext);
 
   return (
-    <>
+    <FilterWrapper>
       <ContentWrapper>
         <Column>
           <Accordion value="item-1" header="Price">
@@ -40,7 +40,7 @@ function FilterContent({ submitFilter }: { submitFilter: () => void }) {
       <Button size="medium" grow={true} onClick={submitFilter}>
         Apply Filter
       </Button>
-    </>
+    </FilterWrapper>
   );
 }
 
@@ -97,6 +97,11 @@ const ButtonTrigger = styled.button`
   @media ${QUERIES.phoneAndSmaller} {
     padding: 6px 8px;
   }
+`;
+
+const FilterWrapper = styled.div`
+  padding: 25px;
+  padding-top: 30px;
 `;
 
 export const ContentWrapper = styled.div`

@@ -77,7 +77,8 @@ const Content = styled(Dialog.Content)`
   bottom: 0;
   right: 0;
   left: 0;
-  height: 85%;
+  height: auto;
+  max-height: 85%;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   animation: ${slideIn} 0.3s ease-out;
@@ -110,9 +111,6 @@ const HeaderTitle = styled.span`
 `;
 
 const MainContent = styled.div`
-  padding: 25px;
-  padding-top: 30px;
-  height: calc(85vh - 63.8px);
   overflow-y: auto;
 `;
 
