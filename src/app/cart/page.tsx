@@ -5,8 +5,9 @@ import {
   BoldText,
   ContentWrapper,
   DiscountValue,
+  EmptyCartImageDekstop,
+  EmptyCartImageMobile,
   EmptyDataWrapper,
-  EmptyImage,
   InnerWrapper,
   InputPromoWrapper,
   InputWrapper,
@@ -25,17 +26,17 @@ import {
   Value,
   Wrapper,
 } from "./styles";
-import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import CartGrid from "@/components/CartGrid";
-import Button from "@/components/Button";
-import Icon from "@/components/Icon";
-import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
-import EmptyCartImage from "../../../public/empty-cart.png";
 import { deleteCart, updateQuantityCart } from "@/services/cart.service";
 import { formatPrice, formatTotalPriceCart } from "@/utils";
 import { useToast } from "@/components/Provider/ToastProvider";
 import { CartContext } from "@/components/Provider/CartProvider";
 import { useRouter } from "next/navigation";
+import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import CartGrid from "@/components/CartGrid";
+import Button from "@/components/Button";
+import Icon from "@/components/Icon";
+import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
+import EmptyCartIcon from "@/components/SVG/EmptyCartIcon";
 
 function CartPage() {
   const router = useRouter();
@@ -105,20 +106,23 @@ function CartPage() {
   if (carts && carts.length === 0) {
     return (
       <EmptyDataWrapper>
-        <EmptyImage
-          src={EmptyCartImage}
-          alt="Empty Cart"
-          quality={100}
-          width={300}
-          height={300}
-        />
+        <EmptyCartImageDekstop>
+          <EmptyCartIcon width="420" height="300" />
+        </EmptyCartImageDekstop>
+
+        <EmptyCartImageMobile>
+          <EmptyCartIcon width="320" height="200" />
+        </EmptyCartImageMobile>
 
         <TextWrapper>
           <BoldText>Your Shopping Cart Is Empty</BoldText>
           <NormalText style={{ marginBottom: "10px" }}>
             Start filling it up with your favourites
           </NormalText>
-          <Button onClick={() => router.push("on-sale")}>
+          <Button
+            style={{ marginTop: "8px" }}
+            onClick={() => router.push("on-sale")}
+          >
             {"Let's go Shopping!"}
           </Button>
         </TextWrapper>

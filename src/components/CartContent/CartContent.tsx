@@ -7,8 +7,8 @@ import styled from "styled-components";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import BadgeNotification from "../BadgeNotification";
-import EmptyCartImage from "../../../public/empty-cart.png";
 import Button from "../Button";
+import EmptyCartIcon from "../SVG/EmptyCartIcon";
 import { WEIGHT } from "@/constants";
 import { CartType } from "@/types/cart";
 import {
@@ -28,18 +28,20 @@ export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
 }
 
 function EmptyCart() {
+  const router = useRouter();
+
   return (
     <EmptyCartWrapper>
-      <Image
-        src={EmptyCartImage}
-        alt="Empty Cart"
-        quality={100}
-        width={300}
-        height={300}
-      />
+      <EmptyCartIcon width="320" height="200" />
       <TextWrapper>
         <BoldText>Your Shopping Cart Is Empty</BoldText>
         <NormalText>Start filling it up with your favourites</NormalText>
+        <Button
+          style={{ marginTop: "16px" }}
+          onClick={() => router.push("on-sale")}
+        >
+          {"Let's go Shopping!"}
+        </Button>
       </TextWrapper>
     </EmptyCartWrapper>
   );
@@ -142,7 +144,10 @@ function CartContent({ carts }: { carts: CartType[] | null }) {
 const Wrapper = styled.div``;
 
 const EmptyCartWrapper = styled.div`
-  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 30px; */
+  padding: 30px 20px;
 `;
 
 const TextWrapper = styled.div`

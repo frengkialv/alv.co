@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { QUERIES } from "@/constants";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "light";
   size?: "small" | "medium" | "large";
   type?: "button" | "submit" | "reset";

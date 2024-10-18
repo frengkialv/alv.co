@@ -31,13 +31,27 @@ export const EmptyDataWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 80px 0;
+  height: 80vh;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding: 0;
+  }
 `;
 
-export const EmptyImage = styled(Image)`
+export const EmptyCartImageDekstop = styled.div`
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
+  }
+`;
+
+export const EmptyCartImageMobile = styled.div`
+  display: none;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: block;
+  }
 `;
 
 export const TextWrapper = styled.div`
