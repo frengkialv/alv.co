@@ -1,12 +1,6 @@
 "use client";
 import React from "react";
-import {
-  BreadcrumbList,
-  CrumbLink,
-  CrumbLinkWrapper,
-  CrumbText,
-  CrumbWrapper,
-} from "./style";
+import { BreadcrumbList, CrumbLink, CrumbText, CrumbWrapper } from "./style";
 import Icon from "../Icon";
 
 interface Breadcrumb {

@@ -117,7 +117,7 @@ function RegisterPage() {
             <PasswordInputWrapper>
               <Input
                 id={`${id}-password`}
-                placeholder="must have at least 6 characters"
+                placeholder="must have at least 8 characters"
                 type={showPassword ? "text" : "password"}
                 minLength={8}
                 value={password}

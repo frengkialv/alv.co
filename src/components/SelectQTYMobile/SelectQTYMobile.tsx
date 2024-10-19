@@ -1,9 +1,12 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
+import { WEIGHT } from "@/constants";
+import { updateQuantityCart } from "@/services/cart.service";
 import Icon from "../Icon";
 import DialogMenuCenter from "../DialogMenuCenter";
-import { WEIGHT } from "@/constants";
+import LoadingComponent from "../LaodingComponent";
 
 type Options = {
   label: number;
@@ -11,10 +14,10 @@ type Options = {
 };
 
 interface Props {
-  label?: string;
+  id: string;
+  label: string;
   value: number;
   stockLeft: number;
-  handleChange: (val: number) => void;
 }
 
 const options: Options[] = [
@@ -40,15 +43,25 @@ const options: Options[] = [
   },
 ];
 
-function SelectQTYMobile({ label, value, stockLeft, handleChange }: Props) {
+function SelectQTYMobile({ id, label, value, stockLeft }: Props) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [show, setShow] = React.useState<boolean>(false);
 
-  const handleChangeQuantity = (val: number) => {
-    if (val === value) return;
-
-    handleChange(val);
-
-    setShow(false);
+  const quantityChangeHandler = async (quantity: number) => {
+    try {
+      if (quantity === value) return;
+      setIsLoading(true);
+      await updateQuantityCart(id, quantity);
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+    } finally {
+      setShow(false);
+      router.refresh();
+      setTimeout(async () => {
+        setIsLoading(false);
+      }, 500);
+    }
   };
 
   return (
@@ -62,9 +75,10 @@ function SelectQTYMobile({ label, value, stockLeft, handleChange }: Props) {
         <FilterQuantity
           qtySelected={value}
           stockLeft={stockLeft}
-          handleChange={handleChangeQuantity}
+          handleChange={quantityChangeHandler}
         />
       </DialogMenuCenter>
+      <LoadingComponent isLoading={isLoading} />
     </>
   );
 }

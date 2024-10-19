@@ -1,11 +1,8 @@
 import React from "react";
 import { formatDiscountPrice, formatPrice } from "@/utils";
 import {
-  AdditionButton,
   AlertStock,
   BottomContent,
-  DeleteButtonDekstop,
-  DeleteButtonMobile,
   DetailWrapper,
   DiscountFlag,
   EntityWrapper,
@@ -19,16 +16,12 @@ import {
   ProductNameWrapper,
   ProductPrice,
   ProductValue,
-  QuantitiInput,
-  QuantitiOrderButtonDekstopWrapper,
   Row,
   SelectMobileWrapper,
-  SubtractionButton,
 } from "./styles";
-import Icon from "../Icon";
-import UnstyledButton from "../UnstyledButton";
-import Tooltip from "../Tooltip";
 import SelectQTYMobile from "../SelectQTYMobile";
+import QuantityOrderButtonDesktop from "../SharedButtons/QuantityOrderButtonDesktop";
+import DeleteCartButton from "../SharedButtons/DeleteCartButton";
 
 interface CartList {
   id: string;
@@ -42,8 +35,6 @@ interface CartList {
   stockLeft: number;
   slug: string;
   category: string;
-  quantityOnChange: (id: string, quantity: number) => void;
-  deleteProduct: (id: string) => void;
 }
 
 function CartList({
@@ -58,8 +49,6 @@ function CartList({
   stockLeft,
   slug,
   category,
-  quantityOnChange,
-  deleteProduct,
 }: CartList) {
   const truncateString = (str: string) => {
     if (str.length <= 30) return str;
@@ -76,10 +65,6 @@ function CartList({
     }
 
     return truncated;
-  };
-
-  const handleChangeSelect = (val: string | number) => {
-    quantityOnChange(id, Number(val));
   };
 
   return (
@@ -100,53 +85,32 @@ function CartList({
           <ProductNamePhone href={slug}>
             {truncateString(name)}
           </ProductNamePhone>
-          <DeleteButtonDekstop>
-            <Tooltip text="Delete product">
-              <UnstyledButton onClick={() => deleteProduct(id)}>
-                <Icon id="trash2" color="#FF3333" size={20} strokeWidth={2} />
-              </UnstyledButton>
-            </Tooltip>
-          </DeleteButtonDekstop>
 
-          <DeleteButtonMobile>
-            <Tooltip text="Delete product">
-              <UnstyledButton onClick={() => deleteProduct(id)}>
-                <Icon id="close" color="#000000" size={20} strokeWidth={2} />
-              </UnstyledButton>
-            </Tooltip>
-          </DeleteButtonMobile>
+          <DeleteCartButton id={id} />
         </ProductNameWrapper>
+
         <EntityWrapper>
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              gap: "2px",
-            }}
-          >
-            <ProductAttributesWrapper>
-              <ProductLabel>Color: &nbsp;</ProductLabel>
-              <ProductValue>{color}</ProductValue>
-            </ProductAttributesWrapper>
-            <ProductAttributesWrapper>
-              <ProductLabel>Size: &nbsp;</ProductLabel>
-              <ProductValue>{size}</ProductValue>
+          <ProductAttributesWrapper>
+            <ProductLabel>Color: &nbsp;</ProductLabel>
+            <ProductValue>{color}</ProductValue>
+          </ProductAttributesWrapper>
+          <ProductAttributesWrapper>
+            <ProductLabel>Size: &nbsp;</ProductLabel>
+            <ProductValue>{size}</ProductValue>
 
-              {stockLeft && stockLeft <= 5 && (
-                <AlertStock>{stockLeft} left</AlertStock>
-              )}
-            </ProductAttributesWrapper>
+            {stockLeft && stockLeft <= 5 && (
+              <AlertStock>{stockLeft} left</AlertStock>
+            )}
+          </ProductAttributesWrapper>
 
-            <SelectMobileWrapper>
-              <SelectQTYMobile
-                label="Qty:"
-                stockLeft={stockLeft}
-                value={quantity}
-                handleChange={handleChangeSelect}
-              />
-            </SelectMobileWrapper>
-          </div>
+          <SelectMobileWrapper>
+            <SelectQTYMobile
+              id={id}
+              label="Qty:"
+              stockLeft={stockLeft}
+              value={quantity}
+            />
+          </SelectMobileWrapper>
         </EntityWrapper>
 
         <BottomContent>
@@ -173,47 +137,11 @@ function CartList({
             )}
           </PriceWrapper>
 
-          <QuantitiOrderButtonDekstopWrapper>
-            <SubtractionButton
-              onClick={() => {
-                if (quantity === 1) {
-                  return;
-                }
-                quantityOnChange(id, quantity - 1);
-              }}
-            >
-              <Icon
-                id="minus"
-                size={18}
-                strokeWidth={1.5}
-                color={quantity === 1 ? "#898b8f" : "#000000"}
-              />
-            </SubtractionButton>
-            <QuantitiInput
-              type="number"
-              min="0"
-              max="10"
-              value={quantity}
-              readOnly
-            />
-            <AdditionButton
-              disabled={quantity === 5 || quantity >= stockLeft}
-              onClick={() => {
-                quantityOnChange(id, quantity + 1);
-              }}
-            >
-              <Icon
-                id="plus"
-                size={18}
-                strokeWidth={1.5}
-                color={
-                  quantity === 5 || quantity >= stockLeft
-                    ? "#898b8f"
-                    : "#000000"
-                }
-              />
-            </AdditionButton>
-          </QuantitiOrderButtonDekstopWrapper>
+          <QuantityOrderButtonDesktop
+            id={id}
+            quantity={quantity}
+            stockLeft={stockLeft}
+          />
         </BottomContent>
       </DetailWrapper>
     </Row>

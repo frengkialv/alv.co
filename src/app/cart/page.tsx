@@ -1,5 +1,5 @@
-"use client";
 import * as React from "react";
+import { cookies } from "next/headers";
 import {
   ApplyButtonWrapper,
   BoldText,
@@ -26,82 +26,53 @@ import {
   Value,
   Wrapper,
 } from "./styles";
-import { deleteCart, updateQuantityCart } from "@/services/cart.service";
 import { formatPrice, formatTotalPriceCart } from "@/utils";
-import { useToast } from "@/components/Provider/ToastProvider";
-import { CartContext } from "@/components/Provider/CartProvider";
-import { useRouter } from "next/navigation";
 import BreadCrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import CartGrid from "@/components/CartGrid";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
-import LoadingComponent from "@/components/LaodingComponent/LaodingComponent";
 import EmptyCartIcon from "@/components/SVG/EmptyCartIcon";
 
-function CartPage() {
-  const router = useRouter();
+export async function generateMetadata() {
+  return {
+    title: "Cart",
+  };
+}
+
+async function getCarts() {
+  const cookiesStore = cookies();
+  const access_token = cookiesStore.get("access_token")?.value;
+
+  try {
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/cart`;
+
+    const res = await fetch(url, {
+      cache: "no-store",
+      headers: { authorization: access_token! },
+    });
+
+    if (!res.ok) {
+      throw new Error("Oops! Something wicked happened.");
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log("🚀 ~ getCarts ~ error:", error);
+    throw new Error("Oops! Something wicked happened.");
+  }
+}
+
+async function CartPage() {
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
+
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Cart", href: "/cart" },
   ];
-  const { showToast } = useToast();
 
-  const { fetchDataCart, carts } = React.useContext(CartContext);
-
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
-  const [totalPrice, setTotalPrice] = React.useState<number>(0);
-  const [deliveryFee, setDeliveryFee] = React.useState<number>(15);
-
-  React.useEffect(() => {
-    if (carts) {
-      const nextTotalPrice = formatTotalPriceCart(carts);
-
-      setTotalPrice(nextTotalPrice);
-    }
-  }, [carts]);
-
-  const deleteProductHandler = async (id: string) => {
-    try {
-      setIsLoading(true);
-      const { data } = await deleteCart(id);
-
-      if (data) {
-        setTimeout(() => {
-          showToast({
-            type: "success",
-            title: "Success!",
-            description: "Item has been removed from the cart.",
-          });
-        }, 2000);
-      }
-    } catch (error) {
-      console.log("🚀 ~ error:", error);
-    } finally {
-      setTimeout(async () => {
-        await fetchDataCart();
-        setIsLoading(false);
-      }, 2000);
-    }
-  };
-
-  const quantityChangeHandler = async (id: string, quantity: number) => {
-    try {
-      setIsLoading(true);
-      const { data } = await updateQuantityCart(id, quantity);
-
-      if (data) {
-        setTimeout(() => {}, 500);
-      }
-    } catch (error) {
-      console.log("🚀 ~ error:", error);
-    } finally {
-      setTimeout(async () => {
-        await fetchDataCart();
-        setIsLoading(false);
-      }, 500);
-    }
-  };
+  const { data: carts } = await getCarts();
 
   if (carts && carts.length === 0) {
     return (
@@ -121,7 +92,7 @@ function CartPage() {
           </NormalText>
           <Button
             style={{ marginTop: "8px" }}
-            onClick={() => router.push("on-sale")}
+            // onClick={() => router.push("on-sale")}
           >
             {"Let's go Shopping!"}
           </Button>
@@ -129,6 +100,8 @@ function CartPage() {
       </EmptyDataWrapper>
     );
   }
+  const deliveryFee = 15;
+  const totalPrice = formatTotalPriceCart(carts);
 
   return (
     <Wrapper>
@@ -136,11 +109,7 @@ function CartPage() {
 
       <MainTitle>Your Cart</MainTitle>
       <ContentWrapper>
-        <CartGrid
-          carts={carts}
-          quantityOnChange={quantityChangeHandler}
-          deleteProduct={deleteProductHandler}
-        />
+        <CartGrid carts={carts} />
 
         <SummaryWrapper>
           <InnerWrapper>
@@ -182,7 +151,6 @@ function CartPage() {
           </InnerWrapper>
         </SummaryWrapper>
       </ContentWrapper>
-      <LoadingComponent isLoading={isLoading} />
     </Wrapper>
   );
 }

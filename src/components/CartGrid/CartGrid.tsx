@@ -5,11 +5,9 @@ import { CartType } from "@/types/cart";
 
 interface CartGridProps {
   carts: CartType[] | null;
-  quantityOnChange: (id: string, quantity: number) => void;
-  deleteProduct: (id: string) => void;
 }
 
-function CartGrid({ carts, quantityOnChange, deleteProduct }: CartGridProps) {
+function CartGrid({ carts }: CartGridProps) {
   return (
     <Wrapper>
       {carts &&
@@ -36,8 +34,6 @@ function CartGrid({ carts, quantityOnChange, deleteProduct }: CartGridProps) {
               discountByPercent={cart.product.discountByPercent}
               slug={linkProduct}
               category={category}
-              quantityOnChange={quantityOnChange}
-              deleteProduct={deleteProduct}
               stockLeft={stockLeft}
             />
           );

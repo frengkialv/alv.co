@@ -15,10 +15,6 @@ export const CrumbWrapper = styled.li`
   display: inline;
 `;
 
-export const CrumbLinkWrapper = styled.div`
-  display: flex;
-`;
-
 export const CrumbLink = styled.a`
   display: flex;
   align-items: center;

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Icon from "@/components/Icon";
 import { QUERIES, WEIGHT } from "@/constants";
 import { MainWrapperContext } from "@/components/Provider/MainWrapperProvider";
-import Image from "next/image";
 
 export function PromoIcon() {
   const { width } = React.useContext(MainWrapperContext);
@@ -109,7 +108,12 @@ export const InnerWrapper = styled.div`
   border-radius: 20px;
   border: 1px solid var(--color-gray-200);
   position: sticky;
-  top: 130px;
+  top: 85px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    position: relative;
+    top: unset;
+  }
 
   @media ${QUERIES.phoneAndSmaller} {
     padding: 16px;

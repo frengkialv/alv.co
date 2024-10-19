@@ -94,7 +94,7 @@ function LoginPage() {
             <PasswordInputWrapper>
               <Input
                 id={`${id}-password`}
-                placeholder="must have at least 6 characters"
+                placeholder="must have at least 8 characters"
                 type={showPassword ? "text" : "password"}
                 style={{ marginTop: 0 }}
                 value={password}

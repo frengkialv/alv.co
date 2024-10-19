@@ -92,25 +92,12 @@ export const ProductNamePhone = styled(Link)`
   }
 `;
 
-export const DeleteButtonDekstop = styled.div`
-  display: revert;
-
-  @media ${QUERIES.phoneAndSmaller} {
-    display: none;
-  }
-`;
-
-export const DeleteButtonMobile = styled.div`
-  display: none;
-
-  @media ${QUERIES.phoneAndSmaller} {
-    display: revert;
-  }
-`;
-
 export const EntityWrapper = styled.div`
+  flex: 1;
   display: flex;
+  flex-direction: column;
   gap: 2px;
+  justify-content: center;
   align-items: baseline;
 `;
 
@@ -187,76 +174,4 @@ export const BottomContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const QuantitiOrderButtonDekstopWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1.5px solid #bfc9d9;
-  border-radius: 60px;
-
-  &:hover {
-    border-color: var(--color-black);
-  }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    display: none;
-  }
-`;
-
-export const SubtractionButton = styled.button`
-  padding: 10px;
-  padding-left: 14px;
-  color: var(--color-black);
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-`;
-
-export const QuantitiInput = styled.input`
-  font-weight: ${WEIGHT.medium};
-  text-align: center;
-  font-size: ${14 / 16}rem;
-  width: 30px;
-  padding: 8px 0;
-  color: var(--color-black);
-  background-color: transparent;
-  border: none;
-  outline: none;
-  user-select: none;
-
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    appearance: none;
-    margin: 0;
-  }
-
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    appearance: none;
-    margin: 0;
-  }
-
-  &:focus {
-    border: none;
-    outline: none;
-  }
-
-  @media ${QUERIES.phoneAndSmaller} {
-    width: 15px;
-    font-size: ${12 / 16}rem;
-  }
-`;
-
-export const AdditionButton = styled.button`
-  padding: 10px;
-  padding-right: 14px;
-  color: var(--color-black);
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
 `;

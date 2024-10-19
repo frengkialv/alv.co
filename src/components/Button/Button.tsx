@@ -77,6 +77,7 @@ const Wrapper = styled.button<{
   display: flex;
   gap: 8px;
   justify-content: center;
+  align-items: center;
   width: ${(props) => (props.$grow ? "100%" : undefined)};
   border-radius: 60px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};

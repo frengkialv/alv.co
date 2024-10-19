@@ -18,9 +18,11 @@ import {
 } from "@/utils";
 
 export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
+  const router = useRouter();
+
   return (
     <BadgeNotification badgeNumber={badgeNumber}>
-      <UnstyledButton>
+      <UnstyledButton onClick={() => router.push("/cart")}>
         <Icon id="shopping-cart" strokeWidth={2.5} size={22} />
       </UnstyledButton>
     </BadgeNotification>
