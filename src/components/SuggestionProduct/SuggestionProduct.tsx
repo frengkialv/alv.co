@@ -15,7 +15,7 @@ interface Props {
   title: string;
 }
 
-function SuggestionProduct({ data, title }: Props) {
+async function SuggestionProduct({ data, title }: Props) {
   return (
     <Wrapper>
       <SpacerNewArrival />

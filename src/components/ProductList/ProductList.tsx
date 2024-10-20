@@ -30,7 +30,7 @@ function ProductList({
   const linkProduct = `/detail/${categoryProduct}/${slug.replaceAll(" ", "+")}`;
 
   return (
-    <ProductListWrapper slug={linkProduct}>
+    <ProductListWrapper href={linkProduct}>
       <div
         style={{
           position: "relative",

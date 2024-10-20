@@ -13,18 +13,6 @@ interface PriceProps {
   lineDecoration: string | undefined;
 }
 
-export const ProductListWrapper = ({
-  slug,
-  children,
-}: {
-  slug: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <ProductListWrapperStyle href={slug}>{children}</ProductListWrapperStyle>
-  );
-};
-
 export const Price = ({ children, color, lineDecoration }: PriceProps) => {
   return (
     <PriceStyle style={{ color: color, textDecoration: lineDecoration }}>
@@ -44,7 +32,7 @@ export const RatingDuplicate = ({ rating }: { rating: number }) => {
   );
 };
 
-const ProductListWrapperStyle = styled(Link)`
+export const ProductListWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   text-decoration: none;
