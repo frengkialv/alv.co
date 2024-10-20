@@ -48,10 +48,10 @@ function NavigationContent() {
                 <AccessoriesLogo />
                 Accessories
               </ListItem>
-              <ListItem href="/sport">
+              {/* <ListItem href="/sport">
                 <SportLogo />
                 Sport
-              </ListItem>
+              </ListItem> */}
             </ListItemWrapper>
 
             <Arrow />

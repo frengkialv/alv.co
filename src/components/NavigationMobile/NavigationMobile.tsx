@@ -56,10 +56,10 @@ function FillerContentAccordion({
         <AccessoriesLogo />
         Accessories
       </LinkWrapper>
-      <LinkWrapper href="/sport" onClick={() => onOpenChange(false)}>
+      {/* <LinkWrapper href="/sport" onClick={() => onOpenChange(false)}>
         <SportLogo />
         Sport
-      </LinkWrapper>
+      </LinkWrapper> */}
     </FillerContentWrapper>
   );
 }
