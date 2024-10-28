@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDiscountPrice, formatPrice } from "@/utils";
+import { formatDiscountPrice, formatPrice, truncateString } from "@/utils";
 import {
   AlertStock,
   BottomContent,
@@ -50,23 +50,6 @@ function CartList({
   slug,
   category,
 }: CartList) {
-  const truncateString = (str: string) => {
-    if (str.length <= 30) return str;
-
-    // Get the first 30 characters
-    let truncated = str.substring(0, 30);
-
-    // Find the last space to avoid cutting off a word
-    let lastSpaceIndex = truncated.lastIndexOf(" ");
-
-    // If there's a space, truncate at the last word
-    if (lastSpaceIndex > -1) {
-      truncated = truncated.substring(0, lastSpaceIndex);
-    }
-
-    return truncated;
-  };
-
   return (
     <Row>
       <ImageWrapper href={slug}>
@@ -82,7 +65,7 @@ function CartList({
         <ProductNameWrapper>
           <ProductNameDekstop href={slug}>{name}</ProductNameDekstop>
           <ProductNamePhone href={slug}>
-            {truncateString(name)}
+            {truncateString(name, 30)}
           </ProductNamePhone>
 
           <DeleteCartButton id={id} />

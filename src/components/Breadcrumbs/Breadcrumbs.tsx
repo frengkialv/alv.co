@@ -26,7 +26,13 @@ function Crumb({
       {!isCurrentPage && (
         <CrumbLink href={href}>
           {children}
-          <Icon id="chevron-right" size={16} strokeWidth={1.5} />
+          <div
+            style={{
+              minWidth: "15px",
+            }}
+          >
+            <Icon id="chevron-right" size={16} strokeWidth={1.5} />
+          </div>
         </CrumbLink>
       )}
 

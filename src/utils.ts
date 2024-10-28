@@ -49,3 +49,20 @@ export function capitalizeFirstLetter(str: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize the first letter of each word
     .join(" "); // Join the words back together
 }
+
+export function truncateString(str: string, truncateLength: number) {
+  if (str.length <= truncateLength) return str;
+
+  // Get the first 30 characters
+  let truncated = str.substring(0, truncateLength);
+
+  // Find the last space to avoid cutting off a word
+  let lastSpaceIndex = truncated.lastIndexOf(" ");
+
+  // If there's a space, truncate at the last word
+  if (lastSpaceIndex > -1) {
+    truncated = truncated.substring(0, lastSpaceIndex);
+  }
+
+  return truncated;
+}

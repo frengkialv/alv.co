@@ -49,5 +49,10 @@ export const CrumbText = styled.span`
 
   @media ${QUERIES.phoneAndSmaller} {
     font-size: ${13 / 16}rem;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 260px;
   }
 `;
