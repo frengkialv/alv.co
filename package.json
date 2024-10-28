@@ -34,6 +34,7 @@
     "react-dom": "^18",
     "react-feather": "^2.0.10",
     "react-multi-carousel": "^2.8.5",
+    "sharp": "^0.33.5",
     "styled-components": "^6.1.12"
   },
   "devDependencies": {
