@@ -148,7 +148,7 @@ function RegisterPage() {
 
             <ButtonWrapper>
               <Button grow={true} size="medium" type="submit">
-                LOG IN
+                SIGN IN
               </Button>
             </ButtonWrapper>
 
