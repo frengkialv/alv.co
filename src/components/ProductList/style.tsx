@@ -2,10 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import Rating, { RatingSize } from "../Rating";
 import { QUERIES } from "@/constants";
 import { MainWrapperContext } from "../Provider/MainWrapperProvider";
-import Rating, { RatingSize } from "../Rating";
-import Image from "next/image";
 
 interface PriceProps {
   children: React.ReactNode;
@@ -41,14 +40,6 @@ export const ProductListWrapper = styled(Link)`
 
 export const ImageWrapper = styled.div`
   margin-bottom: 16px;
-`;
-
-export const ImagePrimitive = styled(Image)`
-  width: 100%;
-  aspect-ratio: 0.9 / 1;
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
 `;
 
 export const Row = styled.div`

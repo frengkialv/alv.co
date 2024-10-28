@@ -4,12 +4,13 @@ import { ProductImageType } from "@/types/productImage";
 import {
   ImageDisplay,
   ImageItem,
-  ImagePrimitive,
+  // ImagePrimitive,
   ImageSelect,
   ImageShowcase,
   RowImageDisplay,
   Wrapper,
 } from "./style";
+import ImagePrimitive from "../ImagePrimitive";
 
 interface Props {
   images: ProductImageType[];
@@ -25,12 +26,11 @@ function ProductImage({ images, category }: Props) {
             <ImageItem key={image.id}>
               <ImageLink id={image.imageIndex}>
                 <ImagePrimitive
-                  src={`data:image/jpeg;base64,${image.imgSrc}`}
                   alt="product image"
-                  width={80}
-                  height={80}
-                  unoptimized
-                  $category={category}
+                  src={image.imgSrc}
+                  width={500}
+                  height={500}
+                  categoryProduct={category}
                 />
               </ImageLink>
             </ImageItem>
@@ -44,12 +44,11 @@ function ProductImage({ images, category }: Props) {
             return (
               <RowImageDisplay key={image.id}>
                 <ImagePrimitive
-                  src={`data:image/jpeg;base64,${image.imgSrc}`}
-                  alt=""
-                  width={100}
-                  height={110}
-                  unoptimized
-                  $category={category}
+                  alt="product image"
+                  src={image.imgSrc}
+                  width={500}
+                  height={500}
+                  categoryProduct={category}
                 />
               </RowImageDisplay>
             );

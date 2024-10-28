@@ -6,7 +6,6 @@ import {
   DetailWrapper,
   DiscountFlag,
   EntityWrapper,
-  ImagePrimitive,
   ImageWrapper,
   PriceWrapper,
   ProductAttributesWrapper,
@@ -22,6 +21,7 @@ import {
 import SelectQTYMobile from "../SelectQTYMobile";
 import QuantityOrderButtonDesktop from "../SharedButtons/QuantityOrderButtonDesktop";
 import DeleteCartButton from "../SharedButtons/DeleteCartButton";
+import ImagePrimitive from "../ImagePrimitive";
 
 interface CartList {
   id: string;
@@ -72,11 +72,10 @@ function CartList({
       <ImageWrapper href={slug}>
         <ImagePrimitive
           alt={name || ""}
-          src={`data:image/jpeg;base64,${imgUrl}`}
-          width={125}
-          height={125}
-          unoptimized
-          $category={category}
+          src={imgUrl}
+          width={500}
+          height={600}
+          categoryProduct={category}
         />
       </ImageWrapper>
       <DetailWrapper>

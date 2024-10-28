@@ -16,6 +16,7 @@ import {
   Title,
 } from "./style";
 import { ProductGridProps } from "@/types/product";
+import ImagePrimitive from "../ImagePrimitive";
 
 function MainProductList({
   slug,
@@ -32,36 +33,13 @@ function MainProductList({
   return (
     <ProductListWrapper slug={linkProduct}>
       <ImageWrapper>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            borderRadius: "20px",
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            alt={name || ""}
-            src={`data:image/jpeg;base64,${imgSrc}`}
-            width={200}
-            height={200}
-            unoptimized
-            style={{
-              width: "100%",
-              aspectRatio: "0.8 / 1",
-              maxWidth: "100%",
-              height: "auto",
-              objectFit: "cover",
-              objectPosition:
-                categoryProduct === "t-shirts"
-                  ? "top center"
-                  : categoryProduct === "shoes"
-                  ? "center 30%"
-                  : "center 70%",
-            }}
-          />
-        </div>
+        <ImagePrimitive
+          alt={name || ""}
+          src={imgSrc}
+          width={500}
+          height={600}
+          categoryProduct={categoryProduct}
+        />
       </ImageWrapper>
 
       <Row>

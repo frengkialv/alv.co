@@ -1,5 +1,14 @@
 // import withPlaiceholder from "@plaiceholder/next";
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ik.imagekit.io",
+        port: "",
+      },
+    ],
+  },
   compiler: {
     styledComponents: true,
   },

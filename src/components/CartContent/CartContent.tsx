@@ -16,6 +16,7 @@ import {
   formatPrice,
   formatTotalPriceCart,
 } from "@/utils";
+import ImagePrimitive from "../ImagePrimitive";
 
 export function CartIconTrigger({ badgeNumber }: { badgeNumber: number }) {
   const router = useRouter();
@@ -74,13 +75,12 @@ function ListCart({ carts }: { carts: CartType[] }) {
           return (
             <List key={cart.id} href={linkProduct}>
               <ImageWrapper>
-                <ImageList
-                  src={`data:image/jpeg;base64,${imageSrc}`}
-                  alt=""
-                  quality={100}
-                  fill
-                  priority
-                  $category={category}
+                <ImagePrimitive
+                  alt={""}
+                  src={imageSrc}
+                  width={500}
+                  height={600}
+                  categoryProduct={category}
                 />
               </ImageWrapper>
 

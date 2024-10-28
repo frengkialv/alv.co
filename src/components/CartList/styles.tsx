@@ -29,26 +29,11 @@ export const ImageWrapper = styled(Link)`
   overflow: hidden;
 `;
 
-export const ImagePrimitive = styled(Image)<{ $category: string }>`
-  aspect-ratio: 0.7 / 1;
-  height: auto;
-  width: 100%;
-  object-fit: cover;
-  object-position: ${(props) =>
-    props.$category === "t-shirts"
-      ? "top center"
-      : props.$category === "shoes"
-      ? "center 70%"
-      : "center 90%"};
-`;
-
 export const DetailWrapper = styled.div`
   flex: 6;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   gap: 20px;
-  /* height: auto; */
 `;
 
 export const ProductNameWrapper = styled.div`

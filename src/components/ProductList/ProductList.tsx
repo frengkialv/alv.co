@@ -1,7 +1,6 @@
 import React from "react";
 import {
   DiscountFlag,
-  ImagePrimitive,
   Name,
   Price,
   PriceDiscount,
@@ -15,7 +14,7 @@ import {
 } from "./style";
 import { formatDiscountPrice } from "@/utils";
 import { ProductGridProps } from "@/types/product";
-import Image from "next/image";
+import ImagePrimitive from "../ImagePrimitive";
 
 function ProductList({
   slug,
@@ -31,32 +30,16 @@ function ProductList({
 
   return (
     <ProductListWrapper href={linkProduct}>
-      <div
+      <ImagePrimitive
+        alt={name || ""}
+        src={imgSrc}
+        width={500}
+        height={600}
+        categoryProduct={categoryProduct}
         style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          borderRadius: "20px",
-          overflow: "hidden",
           marginBottom: "16px",
         }}
-      >
-        <ImagePrimitive
-          alt={name || ""}
-          src={`data:image/jpeg;base64,${imgSrc}`}
-          width={200}
-          height={200}
-          unoptimized
-          style={{
-            objectPosition:
-              categoryProduct === "t-shirts"
-                ? "top center"
-                : categoryProduct === "shoes"
-                ? "center 30%"
-                : "center 70%",
-          }}
-        />
-      </div>
+      />
 
       <Row>
         <Title>{title}</Title>
