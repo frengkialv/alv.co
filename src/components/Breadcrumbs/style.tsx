@@ -53,6 +53,6 @@ export const CrumbText = styled.span`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 260px;
+    max-width: 220px;
   }
 `;
