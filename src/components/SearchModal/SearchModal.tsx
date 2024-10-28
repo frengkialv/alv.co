@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import UnstyledButton from "../UnstyledButton";
 import SearchInput from "../SearchInput";
-import { WEIGHT } from "@/constants";
+import { QUERIES, WEIGHT } from "@/constants";
 import { HeaderContext } from "../Provider/HeaderProvider";
 import { BrandType } from "@/types/brand";
 import { ProductsType } from "@/types/product";
@@ -52,7 +52,6 @@ function SearchModal() {
     } catch (error) {
       console.log("🚀 ~ fetchProductAndBrand ~ error:", error);
     } finally {
-      console.log("======= Masuk Finally ==========");
       setLoading(false);
     }
   };
@@ -135,20 +134,13 @@ function SearchModal() {
                           >
                             <ImagePrimitive
                               alt=""
-                              src={`data:image/jpeg;base64,${imgUrl}`}
+                              src={imgUrl}
                               width={50}
                               height={40}
                               unoptimized
                             />
                             <DetailProductWrapper>
-                              <span
-                                style={{
-                                  color: "#737373",
-                                  textAlign: "start",
-                                }}
-                              >
-                                {product.name}
-                              </span>
+                              <ProductName>{product.name}</ProductName>
 
                               <div style={{ display: "flex", gap: "12px" }}>
                                 <PriceWrapper>{price}</PriceWrapper>
@@ -275,6 +267,20 @@ const ImagePrimitive = styled(Image)`
 const DetailProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ProductName = styled.span`
+  display: block;
+  color: #737373;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    text-align: start;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    max-width: 70vw;
+  }
 `;
 
 const PriceWrapper = styled.span`

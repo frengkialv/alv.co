@@ -3,6 +3,7 @@ import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import Image from "next/image";
+import Icon from "../Icon";
 import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/navigation";
 import { QUERIES, WEIGHT } from "@/constants";
@@ -10,7 +11,6 @@ import { getProductAndBrandByQuery } from "@/services/product.services";
 import { ProductsType } from "@/types/product";
 import { BrandType } from "@/types/brand";
 import { formatDiscountPrice, formatPrice } from "@/utils";
-import Icon from "../Icon";
 import { useDebounce } from "@/hooks/useDebounce";
 
 interface Props {
@@ -182,12 +182,12 @@ function SearchInputDropdown({
                                 }}
                               >
                                 <ImagePrimitive
-                                  alt=""
-                                  src={`data:image/jpeg;base64,${imgUrl}`}
-                                  width={40}
-                                  height={40}
-                                  unoptimized
+                                  alt={""}
+                                  src={imgUrl}
+                                  width={50}
+                                  height={50}
                                 />
+
                                 <DetailProductWrapper>
                                   <span
                                     style={{

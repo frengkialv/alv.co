@@ -7,7 +7,7 @@ interface IKImageProps extends React.HTMLProps<HTMLDivElement> {
   src: string;
   width?: number;
   height?: number;
-  categoryProduct: string;
+  categoryProduct?: string;
 }
 
 function ImagePrimitive({
@@ -18,6 +18,16 @@ function ImagePrimitive({
   categoryProduct,
   ...delegated
 }: IKImageProps) {
+  let objectPosition = "center";
+
+  if (categoryProduct === "t-shirts") {
+    objectPosition += " top";
+  } else if (categoryProduct === "shoes") {
+    objectPosition += " 30%";
+  } else if (categoryProduct === "accessories") {
+    objectPosition += " 70%";
+  }
+
   return (
     <Wrapper {...delegated}>
       <ImageComponent
@@ -28,12 +38,7 @@ function ImagePrimitive({
         priority
         unoptimized
         style={{
-          objectPosition:
-            categoryProduct === "t-shirts"
-              ? "top center"
-              : categoryProduct === "shoes"
-              ? "center 30%"
-              : "center 70%",
+          objectPosition,
         }}
       />
     </Wrapper>
